@@ -148,12 +148,12 @@ export class UserRoleComponent {
         if (res && res.length > 0) {
           // this.reportList = res || [];
           // this.filteredReportList = [...this.reportList];
-          const allowedBranchIds = this.branches.map((b: any) => b.id);
+          const allowedBranchIds = this.branches.map((b: any) => Number(b.id));
 
           const allReports = res || [];
 
           this.reportList = allReports.filter((item: any) => {
-            const branchId = item.branch?.id || item.branch_id;
+            const branchId = Number(item.branch_id || item.id); // ✅ FIX
             return allowedBranchIds.includes(branchId);
           });
 

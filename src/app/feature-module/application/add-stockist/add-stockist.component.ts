@@ -59,7 +59,7 @@ export class AddStockistComponent {
       this.loadTotalCollection();
     }, 100);
   }
-  
+
   @HostListener('document:click', ['$event'])
   closeDropdown(event: Event) {
     const target = event.target as HTMLElement;
@@ -106,43 +106,61 @@ export class AddStockistComponent {
   }
 
   searchCollection() {
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const userId = currentUser?.id;
+
+    if (!userId) {
+      this.toast.typeError('User not found. Please login again.');
+      return;
+    }
+
     if (!this.selectedBranchId && !this.fromDate && !this.toDate) {
       this.toast.typeError('Please select at least one filter');
       return;
     }
+
     if ((this.fromDate && !this.toDate) || (!this.fromDate && this.toDate)) {
       this.toast.typeError('Please select both From and To date');
       return;
     }
+
     const payload: any = {};
-    if (this.selectedBranchId) {
-      payload.branch_id = this.selectedBranchId;
-    }
+
+    if (this.selectedBranchId) payload.branch_id = this.selectedBranchId;
     if (this.fromDate && this.toDate) {
       payload.from_date = this.fromDate;
       payload.to_date = this.toDate;
     }
-    this.url.searchTotalCollection(payload).subscribe({
-      next: (res) => {
+
+    // ✅ FIXED: Pass userId
+    this.url.searchTotalCollection(userId, payload).subscribe({
+      next: (res: any) => {
         if (res.status) {
-          // 🔥 Secure the search results!
-          const allowedBranchIds = this.branches.map((b: any) => b.id);
-          const allData = res.data || [];
+
+          // 🔐 Branch security filter
+          const allowedBranchIds = this.branches.map((b: any) => Number(b.id));
+          const allData = res?.data || [];
+
           this.salesData = allData.filter((sale: any) => {
-            const branchId = sale.branch?.id || sale.branch_id;
+            const branchId = Number(sale.branch?.id || sale.branch_id);
             return allowedBranchIds.includes(branchId);
           });
+
           this.summary = res.summary || {};
           this.filteredSalesData = [...this.salesData];
           this.pageIndex = 0;
           this.updatePaginatedSales();
+
           if (this.salesData.length === 0) {
             this.toast.typeWarning('No records found for your assigned branches');
           }
+
         } else {
           this.summary = null;
           this.salesData = [];
           this.filteredSalesData = [];
+          this.paginatedSalesData = [];
         }
       },
       error: () => {
@@ -166,13 +184,13 @@ export class AddStockistComponent {
         if (res.status) {
 
           // 🔐 Get user's allowed branches
-          const allowedBranchIds = this.branches.map((b: any) => b.id);
+          const allowedBranchIds = this.branches.map((b: any) => Number(b.id));
 
           const allData = res.data || [];
 
           // 🔒 Branch-wise security filter
           this.salesData = allData.filter((sale: any) => {
-            const branchId = sale.branch?.id || sale.branch_id;
+            const branchId = Number(sale.branch?.id || sale.branch_id);
             return allowedBranchIds.includes(branchId);
           });
 

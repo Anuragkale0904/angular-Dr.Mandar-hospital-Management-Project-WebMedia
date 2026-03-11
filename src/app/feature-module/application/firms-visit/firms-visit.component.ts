@@ -108,8 +108,8 @@ export class FirmsVisitComponent {
 
 
   searchStock() {
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    const userId = userData?.id;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const userId = currentUser?.id;
 
     if (!userId) {
       this.toast.typeError('User not found. Please login again.');
@@ -132,7 +132,7 @@ export class FirmsVisitComponent {
     // ✅ FIXED ORDER
     this.url.searchAvailableStock(userId, payload).subscribe({
       next: (res) => {
-        this.stockList = res || [];
+        this.stockList = res?.data || [];
         this.filteredStockList = [...this.stockList];
         this.pageIndex = 0;
         this.updatePaginatedStock();

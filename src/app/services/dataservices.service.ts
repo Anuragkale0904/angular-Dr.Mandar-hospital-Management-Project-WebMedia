@@ -108,7 +108,7 @@ export class DataservicesService {
       `${this.serverUrl}medicine-inward/getAll/${userId}`
     );
   }
-  
+
   addMedicineInward(inward: any): Observable<any> {
     return this.http.post(this.serverUrl + 'medicine-inwards/store', inward)
   }
@@ -415,9 +415,9 @@ export class DataservicesService {
   }
 
 
-  searchTotalCollection(payload: any) {
+  searchTotalCollection(userId: number, payload: any) {
     return this.http.post<any>(
-      this.serverUrl + 'medicine-sales/total-collection/search',
+      `${this.serverUrl}medicine-sales/total-collection/search/${userId}`,
       payload
     );
   }
