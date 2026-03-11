@@ -1,0 +1,470 @@
+<div class="signature-invoice">
+  <div class="page-header">
+    <div class="content-page-header">
+      <h5>Target Type</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="edit-card">
+        <div class="card-body">
+
+          <div class="form-group-item border-0 p-0">
+            <div class="row">
+
+              <div class="col-lg-12">
+                <div class="form-group-bank">
+
+                  <div>
+                    <!-- Nav Tabs -->
+                    <ul class="nav nav-pills" id="pills-tab1" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <span class="custom_radio me-4 mb-0 active" id="employee-tab" data-bs-toggle="tab"
+                          data-bs-target="#employee" role="tab" aria-controls="employee" aria-selected="true">
+                          <input type="radio" class="form-control" name="payment" />
+                          <span class="checkmark"></span> Employee Wise
+                        </span>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <span class="custom_radio me-4 mb-0 " id="HQ-tab" data-bs-toggle="tab" data-bs-target="#HQ"
+                          role="tab" aria-controls="HQ" aria-selected="false">
+                          <input type="radio" class="form-control" name="payment" />
+                          <span class="checkmark"></span> HQ Wise
+                        </span>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <span class="custom_radio me-4 mb-0" id="Product-tab" data-bs-toggle="tab"
+                          data-bs-target="#Product" role="tab" aria-controls="Product" aria-selected="false">
+                          <input type="radio" class="form-control" name="payment" />
+                          <span class="checkmark"></span> Product Wise
+                        </span>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <span class="custom_radio me-2 mb-0" id="Doctor-tab" data-bs-toggle="tab"
+                          data-bs-target="#Doctor" role="tab" aria-controls="Doctor" aria-selected="false">
+                          <input type="radio" class="form-control" name="payment" />
+                          <span class="checkmark"></span> Doctor Wise
+                        </span>
+                      </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                      <!-- employee -->
+                      <div class="tab-pane fade show active" id="employee" role="tabpanel"
+                        aria-labelledby="employee-tab">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group-item border-0 mb-0">
+                              <div class="row align-item-center">
+
+
+                                <!-- Employee Name -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="employeeName">Employee Name*</label>
+                                    <select id="employeeName" class="form-control">
+                                      <option>Select Employee</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Frequency -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="frequency">Frequency*</label>
+                                    <select id="frequency" class="form-control">
+                                      <option>Select Frequency</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- POB Value -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="pobValue">POB Value</label>
+                                    <input type="text" id="pobValue" class="form-control"
+                                      placeholder="Enter POB Value" />
+                                  </div>
+                                </div>
+
+                                <!-- Secondary Value -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="secondaryValue">Secondary Value</label>
+                                    <input type="text" id="secondaryValue" class="form-control"
+                                      placeholder="Enter Secondary Value" />
+                                  </div>
+                                </div>
+
+                                <!-- No of DR Visit -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="drVisit">No Of DR. Visit</label>
+                                    <input type="number" id="drVisit" class="form-control"
+                                      placeholder="Enter No. of Visits" />
+                                  </div>
+                                </div>
+
+                                <!-- No of Chemist Visit -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="chemistVisit">No Of Chemist Visit</label>
+                                    <input type="number" id="chemistVisit" class="form-control"
+                                      placeholder="Enter Chemist Visits" />
+                                  </div>
+                                </div>
+
+                                <!-- No Of New Chemist Addition -->
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="newChemist">No Of New Chemist Addition</label>
+                                    <input type="number" id="newChemist" class="form-control"
+                                      placeholder="Enter New Additions" />
+                                  </div>
+                                </div>
+
+                                <!-- No Of New Doctor Addition -->
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="newDoctor">No Of New Doctor Addition</label>
+                                    <input type="number" id="newDoctor" class="form-control"
+                                      placeholder="Enter New Doctors" />
+                                  </div>
+                                </div>
+
+                                <!-- Primary Sales Value -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="primarySales">Primary Sales Value</label>
+                                    <input type="text" id="primarySales" class="form-control"
+                                      placeholder="Enter Sales Value" />
+                                  </div>
+                                </div>
+
+
+                                <div class="col-lg-1 col-md-1 col-sm-12">
+                                  <form class="add-customer-btns text-end pt-4">
+
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Save</button>
+                                  </form>
+                                </div>
+
+
+
+                              </div>
+                            </div>
+
+
+
+
+                          </div>
+                        </div>
+                        <!-- <div class="input-block mb-0">
+                          <label for="SignatureImage">Signature Image</label>
+                          <div class="input-block service-upload service-upload-info mb-0">
+                            <span><img src="assets/img/invoice-signature.png" alt="signature" /></span>
+                            <input type="file" multiple="" id="image_sign" />
+                            <div id="frames"></div>
+                            @for (f of files; track f) {
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [file]="f" [removable]="true"
+                              (removed)="onRemove(f)">
+                            </ngx-dropzone-image-preview>
+                            }
+                          </div>
+                        </div> -->
+                      </div>
+                      <!-- HQ -->
+                      <div class="tab-pane fade" id="HQ" role="tabpanel" aria-labelledby="HQ-tab">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group-item border-0 mb-0">
+                              <div class="row align-item-center">
+
+
+                                <!-- Division -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="division">Division*</label>
+                                    <select id="division" class="form-control">
+                                      <option>Select Division</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Zone -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="zone">Zone</label>
+                                    <select id="zone" class="form-control">
+                                      <option>Select Zone</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- City -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="city">City*</label>
+                                    <select id="city" class="form-control">
+                                      <option>Select City</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Employee Name -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="employeeName">Employee Name</label>
+                                    <select id="employeeName" class="form-control">
+                                      <option>Select Employee</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Frequency -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="frequency">Frequency*</label>
+                                    <select id="frequency" class="form-control">
+                                      <option>Select Frequency</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- POB Value -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="pobValue">POB Value</label>
+                                    <input type="text" id="pobValue" class="form-control"
+                                      placeholder="Enter POB Value" />
+                                  </div>
+                                </div>
+
+                                <!-- Secondary Value -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="secondaryValue">Secondary Value</label>
+                                    <input type="text" id="secondaryValue" class="form-control"
+                                      placeholder="Enter Secondary Value" />
+                                  </div>
+                                </div>
+
+                                <!-- No of DR Visit -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="drVisit">No Of DR. Visit</label>
+                                    <input type="number" id="drVisit" class="form-control"
+                                      placeholder="Enter No. of Visits" />
+                                  </div>
+                                </div>
+
+                                <!-- No of Chemist Visit -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="chemistVisit">No Of Chemist Visit</label>
+                                    <input type="number" id="chemistVisit" class="form-control"
+                                      placeholder="Enter Chemist Visits" />
+                                  </div>
+                                </div>
+
+                                <!-- No Of New Chemist Addition -->
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="newChemist">No Of New Chemist Addition</label>
+                                    <input type="number" id="newChemist" class="form-control"
+                                      placeholder="Enter New Additions" />
+                                  </div>
+                                </div>
+
+                                <!-- No Of New Doctor Addition -->
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="newDoctor">No Of New Doctor Addition</label>
+                                    <input type="number" id="newDoctor" class="form-control"
+                                      placeholder="Enter New Doctors" />
+                                  </div>
+                                </div>
+
+                                <!-- Primary Sales Value -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="primarySales">Primary Sales Value</label>
+                                    <input type="text" id="primarySales" class="form-control"
+                                      placeholder="Enter Sales Value" />
+                                  </div>
+                                </div>
+
+
+                                <div class="col-lg-1 col-md-1 col-sm-12">
+                                  <form class="add-customer-btns text-end pt-4">
+
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Save</button>
+                                  </form>
+                                </div>
+
+
+
+                              </div>
+                            </div>
+
+
+
+
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <!-- Product Wise -->
+                      <div class="tab-pane fade" id="Product" role="tabpanel" aria-labelledby="Product-tab">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group-item border-0 mb-0">
+                              <div class="row align-item-center">
+
+                                <!-- Employee Name -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="productEmp">Employee Name*</label>
+                                    <select id="productEmp" class="form-control">
+                                      <option>Select Employee</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Product Group -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="productGroup">Product Group*</label>
+                                    <select id="productGroup" class="form-control">
+                                      <option>Select Group</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Product Name -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="productName">Product Name*</label>
+                                    <select id="productName" class="form-control">
+                                      <option>All Product</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Frequency -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="productFreq">Frequency*</label>
+                                    <select id="productFreq" class="form-control">
+                                      <option>Select Frequency</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Product Quantity -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="productQty">Product Quantity</label>
+                                    <input type="number" id="productQty" class="form-control"
+                                      placeholder="Enter Quantity" />
+                                  </div>
+                                </div>
+
+                                <!-- Product Value -->
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="productValue">Product Value</label>
+                                    <input type="text" id="productValue" class="form-control"
+                                      placeholder="Enter Value" />
+                                  </div>
+                                </div>
+
+                                <!-- Save Button -->
+                                <div class="col-lg-1 col-md-1 col-sm-12">
+                                  <form class="add-customer-btns text-end pt-4">
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Save</button>
+                                  </form>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Doctor Wise -->
+                      <div class="tab-pane fade" id="Doctor" role="tabpanel" aria-labelledby="Doctor-tab">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group-item border-0 mb-0">
+                              <div class="row align-item-center">
+
+                                <!-- Doctor Name -->
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="doctorName">Doctor Name*</label>
+                                    <select id="doctorName" class="form-control">
+                                      <option>Select Doctor</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- Frequency -->
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="doctorFreq">Frequency*</label>
+                                    <select id="doctorFreq" class="form-control">
+                                      <option>Select Frequency</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <!-- POB Value -->
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="doctorPOB">POB Value</label>
+                                    <input type="text" id="doctorPOB" class="form-control"
+                                      placeholder="Enter POB Value" />
+                                  </div>
+                                </div>
+
+                                <!-- Save Button -->
+                                <div class="col-lg-1 col-md-1 col-sm-12">
+                                  <form class="add-customer-btns text-end pt-4">
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Save</button>
+                                  </form>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="preview-boxs">
+            <a [routerLink]="routes.signaturepreviewinvoice">Preview Invoice</a>
+            <form class="add-customer-btns text-end">
+              <button type="reset" class="btn btn-primary cancel me-2">
+                Cancel
+              </button>
+              <button type="reset" class="btn btn-primary cancel me-2">
+                Save
+              </button>
+              <button type="submit" class="btn btn-primary">Save & Send</button>
+            </form>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->

@@ -1,0 +1,283 @@
+<!-- Page Wrapper -->
+<div class="card mb-0">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add Manager</h5>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group-item border-0 mb-0">
+          <div class="row align-item-center">
+
+            <!-- manager Name* -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Name">Name*</label>
+                <input type="text" class="form-control" placeholder="Enter Name*" />
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Email*</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Email" />
+              </div>
+            </div>
+            <!-- Mobile -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Mobile*</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Mobile" />
+              </div>
+            </div>
+
+            <!--Select City  -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="City">Select City*</label>
+                <mat-select [(ngModel)]="City" [ngModelOptions]="{ standalone: true }" class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Mumbai">Mumbai</mat-option>
+                  <mat-option value="Amravati">Amravati</mat-option>
+                  <mat-option value="Nagpur">Nagpur</mat-option>
+                  <mat-option value="Akola">Akola</mat-option>
+                  <mat-option value="Yavatmal">Yavatmal</mat-option>
+                  <mat-option value="Wardha">Wardha</mat-option>
+                  <mat-option value="Pune">Pune</mat-option>
+                </mat-select>
+              </div>
+            </div>
+            
+            <!-- Address* -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Address">Address*</label>
+                <input type="text" class="form-control" placeholder="Enter Address*" />
+              </div>
+            </div>
+
+            
+
+            <!-- Username -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Username*</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Username" />
+              </div>
+            </div>
+            <!-- Password -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Password*</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Password" />
+              </div>
+            </div>
+
+
+            
+
+
+
+            <!-- Submit Button -->
+            <div class="col-lg-1 col-md-1 col-sm-12">
+              <form class="add-customer-btns text-end pt-4">
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">ADD</button>
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- table -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-table">
+          <div class="card-body">
+            <div class="table-responsive">
+              <div class="table-scroll">
+                <div class="inventory-table">
+                  <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+                    <thead class="thead-light">
+                      <tr>
+                        <th mat-sort-header>Sr. No.</th>
+                        <th mat-sort-header>Name</th>
+                        <th mat-sort-header>Email</th>
+                        <th mat-sort-header>Mobile</th>
+                        <th mat-sort-header>City</th>
+                        <th mat-sort-header>Address</th>
+                        
+                        
+                        <th mat-sort-header>Username</th>
+                        <th mat-sort-header>Password</th>
+                        
+                        <th mat-sort-header>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>john.doe&#64;example.com</td>
+                        <td>9876543210</td>
+                        <td>Amravati</td>
+                        <td> </td>
+                        
+
+
+                        <td>john_doe</td>
+                        <td>password&#64;123</td>
+                        
+
+
+                        <td class="d-flex align-items-center">
+                          <a href="javascript:void(0);" class="btn-action-icon me-2" data-bs-toggle="modal"
+                            data-bs-target="#add_discount"><span><i class="feather icon-edit"></i></span></a>
+                          <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="modal"
+                            data-bs-target="#delete_discount"><span><i class="feather icon-trash-2"></i></span></a>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <app-custom-pagination></app-custom-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Tax & Discount Modal -->
+<div class="modal custom-modal fade" id="add_discount" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0 align-center">
+          <h4 class="mb-0">Add Manager</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+          <!-- manager Name* -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label for="Name">Name*</label>
+              <input type="text" class="form-control" placeholder="Enter Name*" />
+            </div>
+          </div>
+          <!-- Address* -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label for="Address">Address*</label>
+              <input type="text" class="form-control" placeholder="Enter Address*" />
+            </div>
+          </div>
+
+          <!-- Mobile -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label htmlFor="label">Mobile*</label>
+              <input id="label" type="text" class="form-control" placeholder="Enter Mobile" />
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label htmlFor="label">Email*</label>
+              <input id="label" type="text" class="form-control" placeholder="Enter Email" />
+            </div>
+          </div>
+
+          <!-- Username -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label htmlFor="label">Username*</label>
+              <input id="label" type="text" class="form-control" placeholder="Enter Username" />
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label htmlFor="label">Password*</label>
+              <input id="label" type="text" class="form-control" placeholder="Enter Password" />
+            </div>
+          </div>
+
+
+          <!--Select City  -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label for="City">Select City*</label>
+              <mat-select [(ngModel)]="City" [ngModelOptions]="{ standalone: true }" class="select custom-mat-select">
+                <mat-option value="Select">Select</mat-option>
+                <mat-option value="Mumbai">Mumbai</mat-option>
+                <mat-option value="Amravati">Amravati</mat-option>
+                <mat-option value="Nagpur">Nagpur</mat-option>
+                <mat-option value="Akola">Akola</mat-option>
+                <mat-option value="Yavatmal">Yavatmal</mat-option>
+                <mat-option value="Wardha">Wardha</mat-option>
+                <mat-option value="Pune">Pune</mat-option>
+              </mat-select>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+      <div class="modal-footer add-tax-btns">
+        <button type="reset" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">
+          Cancel
+        </button>
+        <button type="submit" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Tax & Discount Modal -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_discount" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 justify-content-center pb-0">
+        <div class="form-header modal-header-title text-center mb-0">
+          <h4 class="mb-2">Delete Medical</h4>
+          <p>Are you sure want to delete?</p>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Delete</a>
+            </div>
+            <div class="col-6">
+              <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->

@@ -1,0 +1,374 @@
+<!-- Page Wrapper -->
+<div class="card mb-0">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Doctor's Registration</h5>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group-item border-0 mb-0">
+          <!-- Basic Info -->
+          <div class="row align-item-center">
+
+            <div class="content-page-header">
+              <h6>Basic Information</h6>
+            </div>
+            <hr>
+            <!-- Prefix -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Prefix">Select Prefix*</label>
+                <mat-select [(ngModel)]="Prefix" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Dr">Dr</mat-option>
+                  <mat-option value="Mr">Mr</mat-option>
+                  <mat-option value="Mrs">Ms</mat-option>
+                  <mat-option value="Mr">Miss</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+            <!--Dr name* -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="doctor name">Doctor Name*</label>
+                <input type="text" class="form-control" placeholder="Enter Name*" />
+              </div>
+            </div>
+            <!-- Hospital Name* -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Hospital/Pharmacy Address">Hospital Name*</label>
+                <input type="text" class="form-control" placeholder="Enter Hospital Name*" />
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Gender">Select Gender*</label>
+                <mat-select [(ngModel)]="Gender" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Male">Male</mat-option>
+                  <mat-option value="Female">Female</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Mobile*</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Mobile" />
+              </div>
+            </div>
+            <!-- Email -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Email*</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Email" />
+              </div>
+            </div>
+
+            <!-- DOB -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="DOB">DOB*</label>
+                <input id="DOB" type="date" class="form-control" />
+              </div>
+            </div>
+
+            <!-- Maratial Status -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Maratial Status">Maratial Status*</label>
+                <mat-select [(ngModel)]="MaratialStatus" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Married">Married</mat-option>
+                  <mat-option value="Single">Single</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+            <!-- Anniversary -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="Anniversary">Anniversary*</label>
+                <input id="Anniversary" type="date" class="form-control" />
+              </div>
+            </div>
+            <!-- Qulification* -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Qulification">Qulification*</label>
+                <input type="text" class="form-control" placeholder="Enter Qulification*" />
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <!-- Address Information -->
+          <div class="row align-item-center">
+            <div class="content-page-header">
+              <h6>Address Information</h6>
+            </div>
+            <hr>
+
+            <!-- State -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="State">Select State*</label>
+                <mat-select [(ngModel)]="State" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Maharashtra">Maharashtra</mat-option>
+                  <mat-option value="Goa">Goa</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+            <!-- Select City  -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="City">Select City*</label>
+                <mat-select [(ngModel)]="City" [ngModelOptions]="{ standalone: true }" class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Mumbai">Mumbai</mat-option>
+                  <mat-option value="Amravati">Amravati</mat-option>
+                  <mat-option value="Nagpur">Nagpur</mat-option>
+                  <mat-option value="Akola">Akola</mat-option>
+                  <mat-option value="Yavatmal">Yavatmal</mat-option>
+                  <mat-option value="Wardha">Wardha</mat-option>
+                  <mat-option value="Pune">Pune</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+            <!-- Select Division -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Division">Select Division*</label>
+                <mat-select [(ngModel)]="Division" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Konkan">Konkan</mat-option>
+                  <mat-option value="Pune">Pune</mat-option>
+                  <mat-option value="Nashik">Nashik</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+            <!-- Zone -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Zone">Zone*</label>
+                <mat-select [(ngModel)]="Zone" [ngModelOptions]="{ standalone: true }" class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Zone 1">Zone 1</mat-option>
+                  <mat-option value="Zone 2">Zone 2</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+
+
+
+          </div>
+          <hr>
+
+          <!-- Work Information -->
+          <div class="row align-item-center">
+
+            <div class="content-page-header">
+              <h6>Work Information</h6>
+            </div>
+            <hr>
+
+            <!-- Speciality -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="Speciality">Speciality*</label>
+                <input id="Speciality" type="text" class="form-control" placeholder="Enter Speciality" />
+              </div>
+            </div>
+
+            <!-- Type -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Type">Select Type*</label>
+                <mat-select [(ngModel)]="Type" [ngModelOptions]="{ standalone: true }" class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Prescriber">Prescriber</mat-option>
+                  <mat-option value="NonPrescriber">Non Prescriber</mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+
+
+
+            <!-- Category -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Category">Select Category*</label>
+                <mat-select [(ngModel)]="Category" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="A">A</mat-option>
+                  <mat-option value="B">B</mat-option>
+                  <mat-option value="C">C</mat-option>
+
+                </mat-select>
+              </div>
+            </div>
+
+            <!--  Approzimated Business -->
+            <div class="col-lg-3 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Business">Select Approzimated Business*</label>
+                <mat-select [(ngModel)]="Business" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+
+                  <mat-option value="1000-3000">1000-3000</mat-option>
+                  <mat-option value="3000-5000">3000-5000</mat-option>
+                  <mat-option value="5000-more">5000-more</mat-option>
+
+                </mat-select>
+              </div>
+            </div>
+
+
+
+            <!-- chemist Name -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="chemist">Chemist Name*</label>
+                <input id="chemist" type="text" class="form-control" placeholder="Enter Chemist Name" />
+              </div>
+            </div>
+            <!-- Add button -->
+            <div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 30px;">
+              <a href="javascript:void(0);" class="btn btn-primary btn-action-icon me-2">
+                <span><i class="feather icon-plus-circle"></i></span>
+              </a>
+            </div>
+
+
+            <!-- stockist Name -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="stockist">Stockist Name*</label>
+                <input id="stockist" type="text" class="form-control" placeholder="Enter Stockist Name" />
+
+              </div>
+            </div>
+
+            <!-- Add button -->
+            <div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 30px;">
+              <a href="javascript:void(0);" class="btn btn-primary btn-action-icon me-2">
+                <span><i class="feather icon-plus-circle"></i></span>
+              </a>
+            </div>
+
+            <!--  Scheme -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Scheme">Scheme*</label>
+                <mat-select [(ngModel)]="Scheme" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+
+                  <mat-option value="10+0">10 + 0 Free</mat-option>
+                  <mat-option value="10+1">10 + 1 Free</mat-option>
+                  <mat-option value="10+2">10 + 2 Free</mat-option>
+                  <mat-option value="10+3">10 + 3 Free</mat-option>
+                  <mat-option value="10+4">10 + 4 Free</mat-option>
+                  <mat-option value="10+5">10 + 5 Free</mat-option>
+                  <mat-option value="10+6">10 + 6 Free</mat-option>
+                  <mat-option value="10+7">10 + 7 Free</mat-option>
+                  <mat-option value="10+8">10 + 8 Free</mat-option>
+                  <mat-option value="10+9">10 + 9 Free</mat-option>
+                  <mat-option value="10+10">10 + 10 Free</mat-option>
+
+                </mat-select>
+              </div>
+            </div>
+
+            <!--  Activity -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Activity">Activity*</label>
+                <mat-select [(ngModel)]="Activity" [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select">
+                  <mat-option value="Select">Select</mat-option>
+
+                  <mat-option value="10%">10%</mat-option>
+                  <mat-option value="20%">20%</mat-option>
+                  <mat-option value="30%">30%</mat-option>
+                  <mat-option value="40%">40%</mat-option>
+                  <mat-option value="50%">50%</mat-option>
+                  <mat-option value="60%">60%</mat-option>
+                  <mat-option value="70%">70%</mat-option>
+                  <mat-option value="80%">80%</mat-option>
+                  <mat-option value="90%">90%</mat-option>
+                  <mat-option value="100%">100%</mat-option>
+
+                </mat-select>
+              </div>
+            </div>
+            <!-- Registration number -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="Registration number">Registration number*</label>
+                <input id="Registration number" type="number" class="form-control"
+                  placeholder="Enter Registration number" />
+              </div>
+            </div>
+
+            <!-- Geotagging -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="geotag">Geotagging*</label>
+                <input id="geotag" type="text" class="form-control" placeholder="Geotagging disabled"  disabled/>
+              </div>
+            </div>
+
+            
+
+
+          </div>
+          <hr>
+          <!-- Submit button -->
+          <!-- <div class="d-flex justify-content-center">
+              <div class="col-lg-1 col-md-4 col-sm-12 d-flex justify-content-center">
+                <form class="add-customer-btns text-end pt-4">
+  
+                  <button type="submit" class="btn btn-primary" style="margin-top: 5px;">ADD</button>
+                </form>
+              </div>
+             </div> -->
+
+          <div class="add-customer-btns text-end">
+            <a [routerLink]="routes.doctorlist" class="btn customer-btn-cancel">Cancel</a>
+            <a [routerLink]="routes.doctorlist" class="btn customer-btn-save">Add Doctor</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

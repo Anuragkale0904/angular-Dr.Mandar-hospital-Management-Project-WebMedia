@@ -1,0 +1,388 @@
+<!-- Page Wrapper -->
+<div class="card mb-0">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add Headquater</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group-item border-0 mb-0">
+          <div class="row align-item-center">
+
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Headquater">Headquater Name*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Headquater Name"
+                  />
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Zone">Zone*</label>
+                  <mat-select
+                    [(ngModel)]="Zone"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select"
+                    >
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Zone 1">Zone 1</mat-option>
+                    <mat-option value="Zone 2"
+                      >Zone 2</mat-option
+                      >
+                      <mat-option value="Zone 3">Zone 3</mat-option>
+                      <mat-option value="Zone 4">Zone 4</mat-option>
+                     
+                    </mat-select>
+                  </div>
+                </div>
+  
+                <div class="col-lg-2 col-md-6 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label for="City">City</label>
+                    <mat-select
+                      [(ngModel)]="City"
+                      [ngModelOptions]="{ standalone: true }"
+                      class="select custom-mat-select"
+                      >
+                      <mat-option value="Select">Select</mat-option>
+                      <mat-option value="Mumbai">Mumbai</mat-option>
+                      <mat-option value="Amravati"
+                        >Amravati</mat-option
+                        >
+                        <mat-option value="Nagpur">Nagpur</mat-option>
+                        <mat-option value="Akola">Akola</mat-option>
+                        <mat-option value="Yavatmal">Yavatmal</mat-option>
+                        <mat-option value="Wardha">Wardha</mat-option>
+                        <mat-option value="Pune">Pune</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+              
+                  <div class="col-lg-2 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Address">Address*</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Address"
+                        />
+                      </div>
+                    </div>
+                  
+
+                   
+                        <div class="col-lg-1 col-md-1 col-sm-12">
+                          <form class="add-customer-btns text-end pt-4">
+                        
+                            <button type="submit" class="btn btn-primary" style="margin-top: 5px;">ADD</button>
+                          </form>
+                          </div>
+                     
+
+                    
+                    </div>
+                  </div>
+
+
+
+
+
+
+                   <!-- table -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card-table">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                                                  <div class="table-scroll">
+                                                    <div class="inventory-table">
+                                                      <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+                                                        <thead class="thead-light">
+                                                          <tr>
+                                <th mat-sort-header="sr.nr">Sr. No.</th>
+                                <th mat-sort-header="Comapany">Company Name</th>
+                                <th mat-sort-header="zone">Zone</th>
+                                <th mat-sort-header="city">City</th>
+                                <th mat-sort-header="unit">Address</th>                           
+                                
+                                <th mat-sort-header="action">Action</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          
+                                                            <tr>
+                                                              <td>1.</td>
+                                  <td>ABC</td>
+                               
+                                  <td>Zone 1</td>
+                                  <td>Mumbai</td>
+                                  <td> lane2, andheriwest,Mumbai</td>
+                                  <td class="d-flex align-items-center">
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="btn-action-icon me-2"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#add_discount"
+                                      ><span><i class="feather icon-edit"></i></span
+                                    ></a>
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="btn-action-icon"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#delete_discount"
+                                      ><span><i class="feather icon-trash-2"></i></span
+                                    ></a>
+                                  </td>
+                                                            </tr>
+                                                          
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <app-custom-pagination></app-custom-pagination>
+                                              </div>
+                </div>
+              </div>
+            </div>
+               
+               
+                        
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Page Wrapper -->
+
+                  <!-- Add Tax & Discount Modal -->
+                  <div class="modal custom-modal fade" id="add_discount" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header border-0 pb-0">
+                          <div
+                            class="form-header modal-header-title text-start mb-0 align-center"
+                            >
+                            <h4 class="mb-0">Headquater</h4>
+                          </div>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                              <div class="input-block mb-3">
+                                <label for="Headquater">Headquater Name*</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Enter Headquater Name"
+                                  />
+                                </div>
+                              </div>
+                
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input-block mb-3">
+                                  <label for="Zone">Zone*</label>
+                                  <mat-select
+                                    [(ngModel)]="Zone"
+                                    [ngModelOptions]="{ standalone: true }"
+                                    class="select custom-mat-select"
+                                    >
+                                    <mat-option value="Select">Select</mat-option>
+                                    <mat-option value="Zone 1">Zone 1</mat-option>
+                                    <mat-option value="Zone 2"
+                                      >Zone 2</mat-option
+                                      >
+                                      <mat-option value="Zone 3">Zone 3</mat-option>
+                                      <mat-option value="Zone 4">Zone 4</mat-option>
+                                     
+                                    </mat-select>
+                                  </div>
+                                </div>
+                  
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="City">City</label>
+                                    <mat-select
+                                      [(ngModel)]="City"
+                                      [ngModelOptions]="{ standalone: true }"
+                                      class="select custom-mat-select"
+                                      >
+                                      <mat-option value="Select">Select</mat-option>
+                                      <mat-option value="Mumbai">Mumbai</mat-option>
+                                      <mat-option value="Amravati"
+                                        >Amravati</mat-option
+                                        >
+                                        <mat-option value="Nagpur">Nagpur</mat-option>
+                                        <mat-option value="Akola">Akola</mat-option>
+                                        <mat-option value="Yavatmal">Yavatmal</mat-option>
+                                        <mat-option value="Wardha">Wardha</mat-option>
+                                        <mat-option value="Pune">Pune</mat-option>
+                                      </mat-select>
+                                    </div>
+                                  </div>
+                              
+                                  <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="input-block mb-3">
+                                      <label for="Address">Address*</label>
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Enter Address"
+                                        />
+                                      </div>
+                                    </div>
+                        <div class="modal-footer add-tax-btns">
+                          <button
+                            type="reset"
+                            data-bs-dismiss="modal"
+                            class="btn btn-back cancel-btn me-2"
+                            >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            data-bs-dismiss="modal"
+                            class="btn btn-primary paid-continue-btn"
+                            >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Add Tax & Discount Modal -->
+
+                  <!-- Delete Items Modal -->
+                  <div class="modal custom-modal fade" id="delete_discount" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header border-0 justify-content-center pb-0">
+                          <div class="form-header modal-header-title text-center mb-0">
+                            <h4 class="mb-2">Delete Product / Services</h4>
+                            <p>Are you sure want to delete?</p>
+                          </div>
+                        </div>
+                        <div class="modal-body">
+                          <div class="modal-btn delete-action">
+                            <div class="row">
+                              <div class="col-6">
+                                <a
+                                  href="javascript:void(0);"
+                                  data-bs-dismiss="modal"
+                                  class="btn btn-primary paid-continue-btn"
+                                  >Delete</a
+                                  >
+                                </div>
+                                <div class="col-6">
+                                  <a
+                                    href="javascript:void(0);"
+                                    data-bs-dismiss="modal"
+                                    class="btn btn-primary paid-cancel-btn"
+                                    >Cancel</a
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /Delete Items Modal -->
+
+                      <!-- Add Bank Details Modal -->
+                      <div class="modal custom-modal fade" id="bank_details" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered modal-md">
+                          <div class="modal-content">
+                            <div class="modal-header border-0 pb-0">
+                              <div class="form-header modal-header-title text-start mb-0">
+                                <h4 class="mb-0">Add Bank Details</h4>
+                              </div>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                  <div class="input-block mb-3">
+                                    <label for="bank">Bank Name <span class="text-danger">*</span></label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Enter Bank Name"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 col-md-12">
+                                    <div class="input-block mb-3">
+                                      <label for="Number">Account Number <span class="text-danger">*</span></label>
+                                      <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Enter Account Number"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                      <div class="input-block mb-3">
+                                        <label for="Holder"
+                                          >Account Holder Name <span class="text-danger">*</span></label
+                                          >
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Enter Account Holder Name"
+                                            />
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                          <div class="input-block mb-3">
+                                            <label for="Branch">Branch Name <span class="text-danger">*</span></label>
+                                            <input
+                                              type="text"
+                                              class="form-control"
+                                              placeholder="Enter Branch Name"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-12 col-md-12">
+                                            <div class="input-block mb-0">
+                                              <label for="Ifsc">IFSC Code <span class="text-danger">*</span></label>
+                                              <input
+                                                type="number"
+                                                class="form-control"
+                                                placeholder="Enter IFSC COde"
+                                                />
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2"
+                                            >Cancel</a
+                                            >
+                                            <a
+                                              href="javascript:void(0);"
+                                              data-bs-dismiss="modal"
+                                              class="btn btn-primary paid-continue-btn"
+                                              >Save</a
+                                              >
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- /Add Bank Details Modal -->

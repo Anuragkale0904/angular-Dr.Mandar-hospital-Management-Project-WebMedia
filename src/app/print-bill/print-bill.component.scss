@@ -1,0 +1,198 @@
+/* ========== GLOBAL COMPACT SETTINGS ========== */
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10.5px;
+    /* slightly smaller but readable */
+    margin: 0;
+    padding: 0;
+}
+
+.a4-page {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 6mm;
+    /* reduced */
+    box-sizing: border-box;
+}
+
+/* ========== BILL CONTAINER ========== */
+
+.bill-container {
+    width: 100%;
+    padding: 4px;
+    /* reduced */
+    box-sizing: border-box;
+}
+
+/* ========== HEADER ========== */
+
+.header-table {
+    width: 100%;
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+.header-table td {
+    border: 1px solid #000;
+    padding: 0;
+}
+
+.header-logo {
+    width: 100%;
+    max-height: 80px;
+    /* control logo height */
+    object-fit: contain;
+    display: block;
+}
+
+.bill-title {
+    text-align: center;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ========== DETAILS TABLE ========== */
+
+.details-table {
+    width: 100%;
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+.details-table td {
+    border: 1px solid #000;
+    padding: 2px 4px;
+    /* reduced */
+}
+
+/* ========== ITEMS TABLE ========== */
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    margin-top: 3px;
+    /* reduced */
+}
+
+.items-table th,
+.items-table td {
+    border: 1px solid #000;
+    padding: 2px 3px;
+    /* reduced */
+    text-align: center;
+    font-size: 10px;
+    /* tighter */
+}
+
+.items-table th {
+    font-weight: bold;
+}
+
+.text-left {
+    text-align: left;
+}
+
+/* ========== TOTAL SECTION ========== */
+
+.bottom-section {
+    width: 100%;
+    margin-top: 4px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-wrapper {
+    width: 240px;
+    /* reduced */
+}
+
+.total-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+.total-table td {
+    border: 1px solid #000;
+    padding: 3px 6px;
+    /* reduced */
+    font-size: 10px;
+}
+
+.total-table tr:last-child td {
+    font-weight: bold;
+}
+
+/* ========== FOOTER ========== */
+
+.footer {
+    border: 1px solid #000;
+    margin-top: 5px;
+    padding: 4px 6px;
+    /* reduced */
+}
+
+.footer p {
+    margin: 2px 0;
+    font-size: 9.5px;
+}
+
+.signature {
+    text-align: right;
+    margin-top: 12px;
+    /* reduced */
+}
+
+/* ========== DIVIDER ========== */
+
+.divider {
+    border-top: 1px dashed #000;
+    /* thinner */
+    margin: 8px 0;
+    /* reduced */
+}
+
+/* ========== PRINT SAFE VERSION ========== */
+
+@media print {
+
+    @page {
+        size: A4 portrait;
+        margin: 5mm;
+        /* small margin, not zero */
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .a4-page {
+        padding: 0;
+    }
+
+    .bill-container {
+        page-break-inside: avoid;
+    }
+
+    .divider {
+        page-break-after: avoid;
+    }
+}
+
+@media print {
+
+    body {
+        margin: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+}

@@ -1,0 +1,194 @@
+<!-- Page Wrapper -->
+<style>
+  .card .newcard {
+
+    padding: 0px !important;
+  }
+</style>
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- <div class="page-header">
+      <div class="content-page-header">
+        <h5>Reports</h5>
+
+      </div>
+    </div> -->
+    <!-- <hr> -->
+    <!-- Pending Approval Request Header -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group-item border-0 mb-0">
+          <div class="row mb-3">
+            <!-- Work Report -->
+            <div class="col-lg-3 col-md-6 col-sm-12 p-0">
+              <p style="text-align: center;">📈Work Report</p>
+              <hr style="border: 1px solid lightgray; margin-top: 4px; ">
+
+              <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="text-align:center; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+                    <h6 >
+                      <!--  -->
+                      <a [routerLink]="routes.callrecord" style="color: black;">Call Report</a>
+                    </h6>
+                  </div>
+
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    Report showing doctor's <strong class="text-success">closed</strong>,
+                    <strong class="text-warning">skipped</strong> and
+                    <strong class="text-primary">open</strong>
+                    calls by a particular employee during a period.
+                  </div>
+                </div>
+              </div>
+
+             <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="text-align:center;border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    <h6>
+                      <!--  -->
+                      <a [routerLink]="routes.hospitalcallrecord" style="color: black;">Hospital Call Report</a>
+                    </h6>
+                  </div>
+                  
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    Report showing 
+                    <strong class="text-success">OT</strong> and 
+                    <strong class="text-warning">purchase</strong> with 
+                    <strong class="text-primary">POB</strong> call completed by particular employee during a period.
+                   
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 📈Productivity & Business Reports -->
+            <div class="col-lg-3 col-md-6 col-sm-12 p-0">
+              <p style="text-align: center;">📈Productivity & Business Reports</p>
+              <hr style="width: 100%; border: 1px solid lightgray; margin-top: 4px;">
+              <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    <h6>
+                      <a [routerLink]="routes.target" style="color: black;">Monthly Cycle Summary Report</a>
+                    </h6>
+                  </div>
+
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    This report gives the information of monthly cycle summary against the client.
+                  </div>
+                </div>
+              </div>
+
+             <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    <h6>
+                      <a [routerLink]="routes.target" style="color: black;">Employee Month & Productivity Report</a>
+                    </h6>
+                  </div>
+                  
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    Report showing the working details of the employee in a month.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- 📈Logs,Attendance & Quiz Reports -->
+            <div class="col-lg-3 col-md-6 col-sm-12 p-0">
+              <p style="text-align: center;">📈Logs,Attendance & Quiz Reports</p>
+              <hr style="width: 100%; border: 1px solid lightgray; margin-top: 4px;">
+              <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    <h6>
+                      <a [routerLink]="routes.target" style="color: black;">Track Report</a>
+                    </h6>
+                  </div>
+
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    Report showing point by point location of an employee during workhours, for a specific period.
+                  </div>
+                </div>
+              </div>
+
+             <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    <h6>
+                      <a [routerLink]="routes.target" style="color: black;">Last Sync Location Tracker</a>
+                    </h6>
+                  </div>
+                  
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    Report showing live tracking detail of employees.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Expense,Leave & Tour Plan Reports -->
+            <div class="col-lg-3 col-md-6 col-sm-12 p-0">
+              <p style="text-align: center;">📈Expense,Leave & Tour Plan Reports</p>
+              <hr style="width: 100%; border: 1px solid lightgray; margin-top: 4px;">
+              <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    <h6>
+                      <a [routerLink]="routes.target" style="color: black;">Expense Report</a>
+                    </h6>
+                  </div>
+
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    A report showing the information of the 
+                    <strong class="text-success">total</strong> and 
+                    <strong class="text-warning">approved amount</strong> of the 
+                    <strong class="text-primary">employee</strong> during a month.
+                    
+                  </div>
+                </div>
+              </div>
+
+             <div class="col mb-3">
+
+                <div style="border-radius: 20px; overflow: hidden;" class="shadow">
+                  <div class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                    <h6>
+                      <a [routerLink]="routes.target" style="color: black;">Employee Expense Report</a>
+                    </h6>
+                  </div>
+                  
+                  <div class="card-body bg-light"
+                    style="padding-bottom: 1.25rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                    A report showing the information about <strong >expense of employee of every month. (For e.g., DA + TA + Other).</strong>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->

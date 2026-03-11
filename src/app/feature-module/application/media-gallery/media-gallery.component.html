@@ -1,0 +1,231 @@
+<div class="card mb-0">
+  <div class="card-body pb-2">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header" style="margin: 0 0 10px 0;">
+        <h6>Sales Return History</h6>
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="form-group-item">
+      <div class="d-flex justify-content-center">
+        <form (ngSubmit)="searchSalesReturn()">
+          <div class="d-flex flex-wrap align-items-end gap-3 justify-content-center">
+
+            <!-- Hospital / Branch -->
+            <div>
+              <label class="form-label fw-bold mb-1">
+                Select Hospital / Branch <span class="text-danger">*</span>
+              </label>
+              <div class="dropdown position-relative" style="min-width:220px;">
+                <!-- Selected Display -->
+                <div class="form-control form-control-sm" (click)="openBranchDropdown()" style="cursor:pointer;">
+                  {{ selectedBranchName || 'Select Hospital / Branch' }}
+                </div>
+                <!-- Dropdown Panel -->
+                <div *ngIf="isBranchDropdownOpen" class="dropdown-menu show w-100 p-2"
+                  style="max-height:250px; overflow-y:auto;">
+                  <!-- Search -->
+                  <input type="text" class="form-control form-control-sm mb-2" placeholder="Search Branch..."
+                    [(ngModel)]="branchSearch" (input)="filterBranches()" />
+                  <!-- List -->
+                  <div *ngFor="let branch of filteredBranches" class="dropdown-item" (click)="selectBranch(branch)"
+                    style="cursor:pointer;">
+                    {{ branch.branch_name }}
+                  </div>
+                  <div *ngIf="filteredBranches.length === 0" class="text-muted small px-2">
+                    No branches found
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- From Date -->
+            <div>
+              <label class="form-label fw-bold mb-1">
+                From Date <span class="text-danger">*</span>
+              </label>
+              <input type="date" class="form-control form-control-sm" style="min-width:180px" [(ngModel)]="fromDate"
+                name="fromDate">
+            </div>
+
+            <!-- To Date -->
+            <div>
+              <label class="form-label fw-bold mb-1">
+                To Date <span class="text-danger">*</span>
+              </label>
+              <input type="date" class="form-control form-control-sm" style="min-width:180px" [(ngModel)]="toDate"
+                name="toDate">
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
+              <div class="input-block">
+                <!-- invisible label keeps height equal -->
+                <label class="d-block invisible">Action</label>
+                <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center"
+                  style="height: 31px; width: 90px;">
+                  <i class="fa fa-search me-1"></i> Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 pt-1 pb-2">
+        <div class="table-responsive">
+          <div class="col-12 d-flex justify-content-end">
+            <div class="d-flex justify-content-end mb-1 p-0">
+              <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+                placeholder="Search" (input)="searchTable($event)">
+            </div>
+          </div>
+          <table class="datatable table table-stripped">
+            <thead>
+              <tr>
+                <th>Sr.No</th>
+                <th>Hospital/Branch</th>
+                <th>Bill No </th>
+                <th>Sub Total</th>
+                <th>GST</th>
+                <th>Grand Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of paginatedSaleReturnList; let i = index">
+                <td> {{ pageIndex * pageSize + i + 1 }} </td>
+                <!-- Hospital/Branch -->
+                <td>{{ item.branch_name || 'N/A' }}</td>
+                <!-- Bill No -->
+                <td>{{ item.bill_no || 'N/A' }}</td>
+                <!-- Sub Total -->
+                <td>{{ item.sub_total | number:'1.2-2' }}</td>
+                <!-- GST -->
+                <td>{{ item.gst | number:'1.2-2' }}</td>
+                <!-- Grand Total -->
+                <td>{{ item.grand_total | number:'1.2-2' }}</td>
+                <td>
+                  <i class="fas fa-info-circle fa-lg me-2 text-info" style="cursor:pointer"
+                    (click)="openInfoModal(item)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                  </i>
+                  <i class="far fa-edit fa-lg text-primary me-2" style="cursor:pointer"
+                    (click)="editReturn(item.return_id)">
+                  </i>
+                  <i class="far fa-trash-alt fa-lg text-danger" style="cursor:pointer"
+                    (click)="deleteReturn(item.return_id)">
+                  </i>
+                </td>
+              </tr>
+              <tr *ngIf="filteredSaleReturnList.length === 0">
+                <td colspan="7" class="text-center text-muted">
+                  No sales return history found
+                </td>
+              </tr>
+            </tbody>
+
+
+          </table>
+        </div>
+        <mat-paginator [length]="filteredSaleReturnList.length" [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize"
+          [pageIndex]="pageIndex" (page)="onSaleReturnPageChange($event)" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO MODAL -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Sales Return Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- ITEM DETAILS TABLE -->
+        <h6 class="mb-3">Item Details</h6>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table custom-fluid-table mb-0">
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th> Medicine</th>
+                  <th>Batch</th>
+                  <th>Available Quantity</th>
+                  <th>Quantity</th>
+                  <th>Expiry</th>
+                  <th>MRP</th>
+                  <th>GST%</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of selectedSaleItems; let i = index">
+                  <td>{{ i + 1 }}</td>
+
+                  <td>{{ item.medicine_name }}</td>
+
+                  <td>{{ item.batch_no }}</td>
+
+                  <td>{{ item.sold_qty }}</td>
+
+                  <td>{{ item.return_qty }}</td>
+
+                  <td>{{ item.expiry_date | date:'MM/yyyy' }}</td>
+
+                  <td>{{ item.mrp }}</td>
+
+                  <td>{{ item.gst }}%</td>
+
+                  <td>{{ item.return_total | number:'1.2-2' }}</td>
+                </tr>
+
+                <tr *ngIf="selectedSaleItems.length === 0">
+                  <td colspan="9" class="text-center text-muted">
+                    No items found
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Medicnes</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0)" class="btn btn-primary paid-continue-btn" (click)="confirmDelete()">
+                Delete
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="#" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Delete Items Modal -->

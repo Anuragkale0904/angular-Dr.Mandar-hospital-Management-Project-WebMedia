@@ -1,0 +1,144 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header" style="margin: 0 0 15px 0;">
+        <h6>Available Stock Report</h6>
+        <div class="col-lg-6 col-md-3 col-sm-12">
+          <div class="add-customer-btns text-end">
+            <a href="javascript:void(0)" class="btn customer-btn-save" (click)="exportStockPDF()">
+              Export as PDF
+            </a>
+            <a href="javascript:void(0)" class="btn customer-btn-save" (click)="exportStockExcel()">
+              Export as Excel
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="row">
+      <div class="col-md-12">
+        <form action="#">
+          <div class="form-group-item">
+            <div class="row align-items-end">
+              <!-- Branch -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>
+                    Select Hospital/Branch <span class="text-danger">*</span>
+                  </label>
+                  <div class="dropdown">
+
+                    <!-- Selected Display -->
+                    <div class="form-control form-control-sm" (click)="openBranchDropdown()" style="cursor:pointer;">
+                      {{ selectedBranchName || 'Select Hospital / Branch' }}
+                    </div>
+
+                    <!-- Dropdown Panel -->
+                    <div *ngIf="isBranchDropdownOpen" class="dropdown-menu show w-100 p-2"
+                      style="max-height:250px; overflow-y:auto;">
+
+                      <!-- Search -->
+                      <input type="text" class="form-control form-control-sm mb-2" placeholder="Search Branch..."
+                        [(ngModel)]="branchSearch" name="branchSearch" (input)="filterBranches()"
+                        (click)="$event.stopPropagation()" />
+
+                      <!-- Branch List -->
+                      <div *ngFor="let branch of filteredBranches" class="dropdown-item" (click)="selectBranch(branch)"
+                        style="cursor:pointer;">
+                        {{ branch.branch_name }}
+                      </div>
+
+                      <div *ngIf="filteredBranches.length === 0" class="text-muted small px-2">
+                        No branches found
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>From Date<span class="text-danger">*</span></label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="fromDate" name="fromDate">
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>To Date<span class="text-danger">*</span></label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="toDate" name="toDate">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>&nbsp;</label> <!-- keeps same height as other labels -->
+
+                  <div class="d-flex gap-2">
+                    <button type="button"
+                      class="btn btn-primary btn-sm d-flex align-items-center justify-content-center"
+                      style="height: 31px; width: 90px;" (click)="searchStock()">
+                      <i class="fa fa-search me-1"></i> Search
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-body pt-1 pb-1">
+          <div class="table-responsive">
+            <div class="d-flex justify-content-end mb-1 p-0">
+              <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+                placeholder="Search" [(ngModel)]="searchText" (input)="applySearch()">
+            </div>
+
+            <table class="datatable table table-stripped">
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Medicine</th>
+                  <th>Quantity</th>
+                  <th>Available Qty</th>
+                  <th>Amount</th>
+                  <!-- <th>Action</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of paginatedStockList; let i = index">
+                  <td>
+                    {{ pageIndex * pageSize + i + 1 }}
+                  </td>
+                  <td>{{ item.medicine_name }}</td>
+                  <td>{{ item.inward_qty }}</td>
+                  <td>{{ item.available_qty }}</td>
+                  <td>{{ item.amount }}</td>
+                  <!-- <td>-</td> -->
+                </tr>
+
+                <tr *ngIf="filteredStockList.length === 0">
+                  <td colspan="6" class="text-center text-muted">
+                    No Data Found
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+          <mat-paginator [length]="filteredStockList.length" [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize"
+            [pageIndex]="pageIndex" (page)="onPageChange($event)" showFirstLastButtons>
+          </mat-paginator>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>

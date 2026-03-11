@@ -1,0 +1,53 @@
+<!-- Page Wrapper -->
+<div class="card mb-0">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add TDS</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group-item border-0 mb-0">
+          <div class="row align-item-center">
+
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Date</label>
+                <input id="label" type="text" class="datetimepicker form-control" placeholder="Select Date" bsDatepicker
+                  [bsConfig]="{ adaptivePosition: true }" [(bsValue)]="myDateValue">
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Invoice">TDS(%)*</label>
+                <input type="number" class="form-control" placeholder="5" />
+              </div>
+            </div>
+
+
+
+            <div class="col-lg-1 col-md-1 col-sm-12">
+              <form class="add-customer-btns text-end pt-4">
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Update</button>
+              </form>
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,380 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header">
+        <h6>User Management</h6>
+      </div>
+      <!-- /Page Header -->
+      <div class="row">
+        <div class="col-md-12">
+          <form (ngSubmit)="saveUser()" #userForm="ngForm">
+            <div class="row">
+
+              <!--Hospital/branch-->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3 dropdown" (click)="$event.stopPropagation()">
+                  <label>Hospital/Branch <span class="text-danger">*</span></label>
+
+                  <input type="text" class="form-control dropdown-toggle" [value]="selectedBranchNames"
+                    placeholder="Select Hospital/Branch" readonly (click)="openBranchDropdown()"
+                    data-bs-toggle="dropdown" />
+
+                  <div class="dropdown-menu w-100 p-2" [class.show]="isBranchDropdownOpen">
+                    <input type="text" class="form-control mb-2" [(ngModel)]="branchSearch" name="branchSearch"
+                      (input)="filterBranches()" placeholder="Search Branch" />
+
+                    <div class="dropdown-item d-flex align-items-center" *ngFor="let b of filteredBranchList"
+                      (click)="toggleBranch($event, b)" style="cursor: pointer;">
+                      <input type="checkbox" class="form-check-input me-2 mt-0"
+                        [checked]="selectedBranchIds.includes(b.id)" style="pointer-events: none;" /> <span
+                        class="mb-0">{{ b.branch_name }}</span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- Username -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>
+                    Username <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" placeholder="Enter Username" [(ngModel)]="username"
+                    name="branchUsername" #branchUsername="ngModel" required minlength="4" maxlength="20"
+                    pattern="^(?![._])(?!.*[._]{2})[a-z0-9._]+(?<![._])$" (input)="sanitizeUsername($event)" />
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>
+                    Password <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" placeholder="Enter 4 Digit Password" [(ngModel)]="password"
+                    name="branchPassword" #branchPassword="ngModel" required minlength="4" maxlength="4"
+                    pattern="^[0-9]{4}$" inputmode="numeric" (keypress)="allowDigitsOnly($event)"
+                    (input)="sanitizePassword($event)" />
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Rights Section -->
+            <div class="row mt-2 assign-rights">
+              <div class="col-12">
+                <label class="fw-semibold mb-2">Assign Rights</label>
+
+                <div class="row">
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'dashboard'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="dashboard">Dashboard</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'add_branch'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="medicine">Add Branch</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'add_medicine_type'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="supplier">Add Medicine Type</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'add_medicine'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="purchase">Add Medicine</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'medicine_inward'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="sales">Medicine Inward</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'medicine_issue'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="stock">Medicine Issue</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'medicine_received'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="expiry">Medicine Received</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'stock_transfer'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="customer">Medicine Stock Transfer</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'sale'" (change)="onRightChange($event)">
+                      <label class="form-check-label" for="user">Sale</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'sale_history'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="branch">Sale History</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'sale_return'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="expense">Sale Return</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'sale_return_history'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="income">Sale Return History</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'total_collection'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="gst">Total Collection</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'branch_wise'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="daily">Hospital Branch Wise</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'inventory_report'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="profit">Inventory Report</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'stock_report'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="settings">Available Stock Report</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'user_management'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="backup">User Management</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" [value]="'logout'"
+                        (change)="onRightChange($event)">
+                      <label class="form-check-label" for="logout">Logout</label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row mt-3">
+              <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary px-4">
+                  <i class="fa fa-save me-1"></i> Save
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <!-- TABLE -->
+      <div class="table-responsive mt-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Branch</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th>Rights</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of userList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{item.branch_name}}</td>
+              <td>{{ item.username }}</td>
+              <td>{{ item.plain_password }}</td>
+              <td>{{ item.rights }}</td>
+              <td>
+                <i class="far fa-edit fa-lg text-primary me-2" style="cursor:pointer" (click)="openEditModal(item.id)">
+                </i>
+                <i class="far fa-trash-alt fa-lg text-danger" style="cursor:pointer" (click)="openDeleteModal(item.id)">
+                </i>
+              </td>
+            </tr>
+
+            <!-- No data -->
+            <tr *ngIf="userList.length === 0">
+              <td colspan="8" class="text-center text-muted">No Data Found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= USER MODAL ================= -->
+<div class="modal fade" id="userModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body compact-modal">
+        <h5 class="modal-title">Update User</h5>
+        <br />
+        <!-- <button type="button" class="btn-close btn-close-white" (click)="closeModal()"> -->
+        <!-- </button> -->
+        <div class="row">
+
+          <div class="col-md-4 mb-3">
+            <div class="input-block dropdown" (click)="$event.stopPropagation()">
+              <label class="form-label fw-semibold">Hospital/Branch <span class="text-danger">*</span></label>
+
+              <input type="text" class="form-control dropdown-toggle" [value]="selectedBranchNames"
+                placeholder="Select Hospital/Branch" readonly (click)="openBranchDropdown()"
+                data-bs-toggle="dropdown" />
+
+              <div class="dropdown-menu w-100 p-2" [class.show]="isBranchDropdownOpen">
+                <input type="text" class="form-control mb-2" [(ngModel)]="branchSearch" name="modalBranchSearch"
+                  (input)="filterBranches()" placeholder="Search Branch" />
+
+                <div class="dropdown-item d-flex align-items-center" *ngFor="let b of filteredBranchList"
+                  (click)="toggleBranch($event, b)" style="cursor: pointer;">
+                  <input type="checkbox" class="form-check-input me-2 mt-0" [checked]="selectedBranchIds.includes(b.id)"
+                    style="pointer-events: none;" />
+                  <span class="mb-0">{{ b.branch_name }}</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Username -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Username</label>
+            <input type="text" class="form-control" [(ngModel)]="username">
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Password</label>
+            <input type="text" class="form-control" [(ngModel)]="password">
+          </div>
+
+        </div>
+
+        <!-- Rights -->
+        <div class="row">
+          <div class="col-md-4 mb-2" *ngFor="let right of [
+              'dashboard','add_branch','add_medicine_type',
+              'add_medicine','medicine_inward','medicine_issue',
+              'medicine_received','stock_transfer','sale',
+              'sale_history','sale_return','sale_return_history',
+              'total_collection','branch_wise','inventory_report',
+              'stock_report','user_management','logout'
+              ]">
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [value]="right" [checked]="selectedRights.includes(right)"
+                (change)="onRightChange($event)">
+              <label class="form-check-label">
+                {{ right.replace('_',' ') | titlecase }}
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+
+        <button class="btn btn-primary" (click)="saveUser()">
+          {{ isEditMode ? 'Update' : 'Save' }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Hospital / Branch</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0)" class="btn btn-primary paid-continue-btn" (click)="confirmDelete()">
+                Delete
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="javascript:void(0)" class="btn btn-primary paid-cancel-btn" (click)="closeDeleteModal()">
+                Cancel
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->

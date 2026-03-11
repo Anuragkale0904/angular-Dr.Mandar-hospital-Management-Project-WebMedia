@@ -1,0 +1,184 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add Medicine</h5>
+        <!-- <div
+									style="text-align: right;color: rgb(20, 38, 235);font-weight: bold;font-size: large;">
+									<label>Supervisor ID: : B123</label>
+								</div> -->
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="row">
+      <div class="col-md-12">
+        <form (ngSubmit)="addMedicine()">
+          <div class="row justify-content-center align-items-end g-3">
+            <!-- Select Type -->
+            <div class="col-lg-2 col-md-4 col-sm-12">
+              <div class="input-block mb-3">
+                <label class="form-label">
+                  Select Type <span class="text-danger">*</span>
+                </label>
+
+                <select class="form-control custom-select" [(ngModel)]="medicine_type_id" name="medicine_type_id">
+                  <option [ngValue]="null">Select Type</option>
+
+                  <option *ngFor="let type of medicineTypes" [ngValue]="type.id">
+                    {{ type.name }}
+                  </option>
+                </select>
+
+              </div>
+            </div>
+
+            <!-- Medicine Name -->
+            <div class="col-lg-2 col-md-4 col-sm-12">
+              <div class="input-block mb-3">
+                <label class="form-label">
+                  Medicine Name <span class="text-danger">*</span>
+                </label>
+                <input type="text" class="form-control" placeholder="Enter Medicine Name" [(ngModel)]="name" name="name"
+                  required />
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="col-lg-2 col-md-3 col-sm-12 d-flex">
+              <div class="input-block mb-3">
+                <button type="submit" class="btn btn-primary w-90" style="height: 38px" [disabled]="isLoading">
+                  <i class="fa fa-save me-1"></i>
+                  {{ editMode ? "Update" : "Submit" }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-2">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+          <div class="d-flex justify-content-end mb-sm-1 p-0">
+            <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+              placeholder="Search" [(ngModel)]="searchText" (input)="applyFilter()">
+          </div>
+          <div class="table-responsive">
+            <table class="datatable table table-striped text-center">
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Type</th>
+                  <th>Medicine Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let medicine of paginatedMedicines; let i = index">
+                  <td>
+                    {{ pageIndex * pageSize + i + 1 }}
+                  </td>
+                  <td>{{ medicine.type?.name || "-" }}</td>
+                  <td>{{ medicine.name }}</td>
+                  <td>
+                    <i class="far fa-edit fa-lg text-primary me-2" role="button" (click)="openEditModal(medicine)">
+                    </i>
+
+                    <i class="far fa-trash-alt fa-lg text-danger" role="button" data-bs-toggle="modal"
+                      data-bs-target="#delete_modal" (click)="openDeleteModal(medicine.id)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <mat-paginator [length]="filteredMedicines.length" [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize"
+            [pageIndex]="pageIndex" (page)="onPageChange($event)" showFirstLastButtons>
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Medicnes</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0)" class="btn btn-primary paid-continue-btn" (click)="confirmDelete()">
+                Delete
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="#" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->
+
+<!-- Compact Edit Medicine Modal -->
+<div class="modal fade" id="edit_modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content shadow-sm">
+      <div class="modal-body p-3">
+
+        <!-- Header -->
+        <div class="text-center mb-2">
+          <h6 class="mb-0 fw-semibold">Edit Medicine</h6>
+        </div>
+
+        <!-- Select Type -->
+        <div class="mb-2">
+          <div class="input-block">
+            <label class="form-label small mb-1">
+              Select Type <span class="text-danger">*</span>
+            </label>
+            <select class="form-control form-control-sm" [(ngModel)]="edit_medicine_type_id"
+              name="edit_medicine_type_id">
+
+              <option [ngValue]="null">Select Type</option>
+              <option *ngFor="let type of medicineTypes" [ngValue]="type.id">
+                {{ type.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Medicine Name -->
+        <div class="mb-3">
+          <div class="input-block">
+            <label class="form-label small mb-1">
+              Medicine Name <span class="text-danger">*</span>
+            </label>
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="edit_name" name="edit_name"
+              placeholder="Enter Medicine Name">
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-primary btn-sm flex-fill" (click)="updateMedicine()">
+            Update
+          </button>
+
+          <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" data-bs-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit Medicine Modal -->

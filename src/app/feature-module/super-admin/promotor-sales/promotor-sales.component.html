@@ -1,0 +1,330 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header" style="margin: 0 0 15px 0;">
+        <h6>Medicine Sale</h6>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row g-3 form-spacing-tight">
+      <div class="col-md-12">
+        <form>
+          <div class="row g-3 form-spacing-tight">
+
+            <!-- Bill Number -->
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <label class="form-label">
+                Bill No <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="medicineSale.bill_no" name="bill_no"
+                readonly>
+            </div>
+
+            <div class="col-lg-2 col-md-4 col-sm-6" (click)="$event.stopPropagation()">
+              <label>Select Hospital/Branch</label>
+              <input type="text" class="form-control form-control-sm dropdown-toggle" [value]="selectedBranchName"
+                placeholder="Hospital/Branch" readonly (click)="openBranchDropdown()" />
+              <div class="dropdown-menu w-100 p-2" [class.show]="isBranchDropdownOpen">
+                <!-- Search input -->
+                <input type="text" class="form-control form-control-sm mb-2" [(ngModel)]="branchSearch"
+                  (input)="filterBranches()" placeholder="Search branch" />
+                <!-- Branch options -->
+                <div class="dropdown-item" *ngFor="let branch of filteredBranches" (click)="selectBranch(branch)">
+                  {{ branch.branch_name }}
+                </div>
+                <div *ngIf="filteredBranches.length === 0" class="dropdown-item text-muted">
+                  No branches found
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Bill Date -->
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <label>Bill Date <span class="text-danger">*</span></label>
+              <input type="date" class="form-control form-control-sm" [(ngModel)]="medicineSale.bill_date"
+                name="billDate">
+            </div>
+
+            <!-- UHID -->
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <label class="form-label">UHID <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" placeholder=" UHID"
+                [(ngModel)]="medicineSale.uhid" name="uhid">
+            </div>
+
+            <!-- Patient Name -->
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <label class="form-label">Patient Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" placeholder=" Patient Name"
+                [(ngModel)]="medicineSale.patient_name" name="patientName">
+            </div>
+
+            <!-- Gender / Age -->
+            <div class="col-lg-2 col-md-4 col-sm-4">
+              <label class="form-label">Gender / Age <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" placeholder="M / 25"
+                [(ngModel)]="medicineSale.gender_age" name="genderAge">
+            </div>
+
+            <!-- Mobile -->
+            <div class="col-lg-2 col-md-4 col-sm-4">
+              <label class="form-label">Mobile No <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" placeholder=" Mobile No"
+                [(ngModel)]="medicineSale.mobile_no" name="mobile">
+            </div>
+
+            <!-- City -->
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <label class="form-label">City <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm" placeholder=" City"
+                [(ngModel)]="medicineSale.city" name="city">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-sm-12">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-sm mb-0 medicine-sale-table" id="medicineTable">
+              <thead>
+                <tr>
+                  <th> Medicine</th>
+                  <th>Batch</th>
+                  <th>Available Qty</th>
+                  <th>Quantity</th>
+                  <th>Expiry</th>
+                  <th>MRP</th>
+                  <th>GST%</th>
+                  <th>Total</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="input-row" *ngFor="let row of items; let i = index">
+                  <td style="position: relative; min-width: 220px;">
+                    <div class="dropdown" (click)="$event.stopPropagation()">
+
+                      <!-- Input -->
+                      <input type="text" class="form-control form-control-sm dropdown-toggle"
+                        [value]="row.searchMedicine" placeholder="Search medicine" readonly
+                        (click)="openMedicineDropdown(row)" />
+
+                      <!-- Dropdown -->
+                      <div class="dropdown-menu w-100 p-2" [class.show]="row.isMedicineDropdownOpen">
+
+                        <!-- Search -->
+                        <input type="text" class="form-control form-control-sm mb-2" [(ngModel)]="row.medicineSearch"
+                          (input)="filterMedicines(row)" placeholder="Search Medicine" />
+
+                        <!-- List -->
+                        <div class="dropdown-item" *ngFor="let med of row.filteredMedicines"
+                          (click)="selectMedicine(med, row)">
+                          {{ med.name }}
+                        </div>
+
+                        <div *ngIf="row.filteredMedicines?.length === 0" class="dropdown-item text-muted">
+                          No medicines found
+                        </div>
+
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- Batch (select box) -->
+                  <td style="position: relative; min-width: 160px;">
+                    <div class="dropdown" (click)="$event.stopPropagation()">
+
+                      <!-- Input -->
+                      <input type="text" class="form-control form-control-sm dropdown-toggle" [value]="row.searchBatch"
+                        placeholder="Select Batch" readonly (click)="openBatchDropdown(row)" />
+
+                      <!-- Dropdown -->
+                      <div class="dropdown-menu w-100 p-2" [class.show]="row.isBatchDropdownOpen">
+
+                        <!-- Search -->
+                        <input type="text" class="form-control form-control-sm mb-2" [(ngModel)]="row.batchSearch"
+                          (input)="filterBatches(row)" placeholder="Search Batch" />
+
+                        <!-- List -->
+                        <div class="dropdown-item" *ngFor="let b of row.filteredBatches" (click)="selectBatch(b, row)">
+                          {{ b.batch_no }}
+                        </div>
+
+                        <div *ngIf="row.filteredBatches?.length === 0" class="dropdown-item text-muted">
+                          No batches found
+                        </div>
+
+                      </div>
+                    </div>
+                  </td>
+
+
+
+
+
+
+
+                  <!-- Available Qty -->
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [value]="row.available_qty" readonly />
+                  </td>
+
+                  <!-- Quantity -->
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="row.quantity"
+                      (input)="calculateRowTotal(row)" />
+                  </td>
+
+                  <!-- Expiry -->
+                  <td>
+                    <input type="date" class="form-control form-control-sm" [value]="row.expiry_date" readonly />
+                  </td>
+
+                  <!-- MRP -->
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="row.mrp"
+                      (input)="calculateRowTotal(row)" />
+                  </td>
+
+                  <!-- GST -->
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="row.gst" readonly />
+                  </td>
+
+                  <!-- Total -->
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [value]="row.total" readonly />
+                  </td>
+
+                  <!-- Action -->
+                  <td class="text-center">
+
+                    <!-- ADD ICON : ONLY INPUT ROW -->
+                    <i *ngIf="i === 0" class="fas fa-plus-circle text-success action-icon" title="Add"
+                      (click)="addRowFromInput()">
+                    </i>
+
+                    <!-- DELETE ICON : SAVED ROWS -->
+                    <i *ngIf="i > 0" class="far fa-trash-alt text-danger action-icon" title="Delete"
+                      (click)="removeRow(i)">
+                    </i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row mt-1">
+      <div class="col-12 d-flex justify-content-end">
+        <div class="summary-wrapper">
+          <table class="table table-bordered table-sm align-middle mb-0 w-100 ultra-compact">
+
+            <tbody>
+              <!-- Sub Total -->
+              <tr>
+                <th class="w-50">Sub Total</th>
+                <td>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="medicineSale.sub_total"
+                    name="subTotal" readonly>
+                </td>
+              </tr>
+
+              <tr>
+                <th>Discount</th>
+
+                <td>
+                  <!-- Percentage -->
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <input type="radio" value="percent" [(ngModel)]="medicineSale.discount_type" name="discountType"
+                      (change)="onDiscountTypeChange()" />
+                    %
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="discount_percent"
+                      [disabled]="medicineSale.discount_type !== 'percent'" (input)="calculateTotals()" />
+                  </div>
+
+                  <!-- Amount -->
+                  <div class="d-flex align-items-center gap-2">
+                    <input type="radio" value="amount" [(ngModel)]="medicineSale.discount_type" name="discountType"
+                      (change)="onDiscountTypeChange()" />
+                    ₹
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="discount_amount"
+                      [disabled]="medicineSale.discount_type !== 'amount'" (input)="calculateTotals()" />
+                  </div>
+                </td>
+              </tr>
+
+              <!-- GST -->
+              <tr>
+                <th>GST</th>
+                <td>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="medicineSale.gst_total" readonly>
+                </td>
+              </tr>
+
+              <!-- Grand Total -->
+              <tr>
+                <th>Grand Total</th>
+                <td>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="medicineSale.grand_total"
+                    readonly>
+                </td>
+              </tr>
+
+              <!-- Mode of Payment -->
+              <tr>
+                <th>Mode of Payment</th>
+                <td>
+                  <select class="form-control form-control-sm" [(ngModel)]="medicineSale.payment_mode"
+                    name="paymentMode">
+                    <option value="CASH">Cash</option>
+                    <option value="ONLINE">Online</option>
+                    <option value="CARD">Card</option>
+                    <option value="UPI">UPI</option>
+                    <option value="NET_BANKING">Net Banking</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- Cash Received -->
+              <tr>
+                <th>Cash Received</th>
+                <td>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="medicineSale.cash_received"
+                    (input)="onCashReceivedChange()">
+                </td>
+              </tr>
+
+              <!-- Remaining -->
+              <tr>
+                <th>Remaining</th>
+                <td>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="medicineSale.remaining" readonly>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT BUTTON ROW -->
+    <div class="row mt-0 justify-content-end">
+      <div class="col-auto">
+        <button type="button" class="btn btn-primary btn-sm px-4" (click)="submitSale()">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

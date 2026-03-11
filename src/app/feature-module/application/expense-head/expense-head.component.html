@@ -1,0 +1,125 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Expense Head</h5>
+        <hr>
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Basic Details -->
+        <form action="#" [formGroup]="phoneForm">
+
+          <!-- Allowance -->
+          <div class="form-group-item">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="title">Title*</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="MonthlyCap">Monthly Cap
+                  </label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Editable">Is Editable</label>
+                  <div class="mt-2">
+                    <input type="checkbox"> Yes
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <form class="add-customer-btns">
+                  <button type="submit" class="btn btn-primary " style="margin-top: 25px;">ADD</button>
+                </form>
+              </div>
+              <hr>
+              <!-- search also add this line while dynamic   "(input)="applyFilter($event)"" -->
+              <div class="d-flex justify-content-end mb-3">
+                <input type="text" class="form-control w-auto" placeholder="Search..." />
+              </div>
+
+              <!-- table -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="card-table">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <div class="table-scroll">
+                          <div class="inventory-table">
+                            <table matSort (matSortChange)="sortData($event)"
+                              class="table table-center table-hover datatable">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th mat-sort-header="Sr. No.">Sr. No.</th>
+                                  <th mat-sort-header="head">Head</th>
+                                  <th mat-sort-header="MonthlyCap">Monthly Cap</th>
+                                  <th mat-sort-header="Editable">Editable</th>
+                                  <th mat-sort-header="Status">Status</th>
+                                  <th mat-sort-header="action">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                <tr>
+                                  <td>1.</td>
+                                  <td>DA</td>
+                                  <td></td>
+
+                                  <td>
+                                    <span class="badge bg-warning">Yes</span>
+                                  </td>
+                                  <td>
+                                    <span [ngClass]="{
+                                          'bg-success-light': 'Active',
+                                          'bg-danger-light': 'Deactive'
+                                        }" class="badge badge-pill bg-success-light">Active</span>
+                                  </td>
+                                  <td class="d-flex align-items-center">
+                                    <a href="javascript:void(0);" class="btn-action-icon me-2" data-bs-toggle="modal"
+                                      data-bs-target="#add_discount"><span><i class="feather icon-edit"></i></span></a>
+                                    <!-- <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="modal"
+                                        data-bs-target="#delete_discount"><span><i
+                                            class="feather icon-trash-2"></i></span></a> -->
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <app-custom-pagination></app-custom-pagination>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+          <!-- <div class="add-customer-btns text-end">
+            <a [routerLink]="routes.employeelist" class="btn customer-btn-cancel">Cancel</a>
+            <a [routerLink]="routes.employeelist" class="btn customer-btn-save">Add Employee</a>
+          </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

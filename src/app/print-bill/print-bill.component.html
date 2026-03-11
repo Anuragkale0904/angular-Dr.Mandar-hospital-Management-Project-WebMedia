@@ -1,0 +1,206 @@
+<div  class="a4-page">
+
+    <!-- ================= COPY 1 ================= -->
+    <div class="bill-container">
+
+        <!-- HEADER BOX -->
+        <table class="header-table">
+            <tr>
+                <td class="header-content">
+                    <img src="assets/img/logo_DR.png" class="header-logo">
+                </td>
+            </tr>
+        </table>
+
+        <h3 class="bill-title">PHARMACY BILL</h3>
+
+        <!-- PATIENT DETAILS TABLE -->
+        <table class="details-table">
+            <tr>
+                <td><b>Name :</b> {{ sale?.patient_name }}</td>
+                <td><b>Age/Gender :</b> {{ sale?.gender_age }}</td>
+                <td><b>Bill Date :</b> {{ sale?.bill_date | date:'dd/MM/yyyy' }}</td>
+            </tr>
+            <tr>
+                <td><b>Address :</b> {{ sale?.city }}</td>
+                <td><b>Bill No :</b> {{ sale?.bill_no }}</td>
+                <td><b>Contact :</b> {{ sale?.mobile_no || '-' }}</td>
+            </tr>
+            <tr>
+                <td><b>UHID No :</b> {{ sale?.uhid }}</td>
+                <td colspan="2"><b>Refd. By :</b> {{ sale?.doctor_name }}</td>
+            </tr>
+        </table>
+
+        <!-- ITEMS TABLE -->
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Item Name</th>
+                    <th>Batch</th>
+                    <th>EXP</th>
+                    <th>QTY</th>
+                    <th>MRP</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td class="text-left">{{ item.medicine_name }}</td>
+                    <td>{{ item.batch_no }}</td>
+                    <td>{{ item.expiry_date | date:'MM/yy' }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.mrp }}</td>
+                    <td>{{ item.quantity * item.mrp }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- TOTAL SECTION -->
+        <div class="bottom-section">
+            <div class="total-wrapper">
+                <table class="total-table">
+                    <tr>
+                        <td>Total Amount</td>
+                        <td>{{ sale?.sub_total }}</td>
+                    </tr>
+                    <tr *ngIf="sale?.discount_value > 0">
+                        <td>Discount</td>
+                        <td>- {{ sale?.discount_value }}</td>
+                    </tr>
+                    <tr>
+                        <td>GST</td>
+                        <td>{{ sale?.gst_total }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Grand Total</b></td>
+                        <td><b>{{ sale?.grand_total }}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Payment Mode</td>
+                        <td>{{ sale?.payment_mode }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p class="note">
+                NOTE: Medicines once sold will not be taken back.
+            </p>
+            <div class="signature">
+                <p><b>Signature</b></p>
+                <p>PARANJPE EYE CLINICS & SURGERY CENTER</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ======== DIVIDER ======== -->
+    <div class="divider"></div>
+
+    <!-- ================= COPY 2 ================= -->
+    <div class="bill-container">
+
+        <!-- 🔁 EXACT SAME BILL AGAIN -->
+
+        <!-- HEADER BOX -->
+        <table class="header-table">
+            <tr>
+                <td class="header-content">
+                    <img src="assets/img/logo_DR.png" class="header-logo">
+                </td>
+            </tr>
+        </table>
+
+        <h3 class="bill-title">PHARMACY BILL</h3>
+
+        <!-- PATIENT DETAILS TABLE -->
+        <table class="details-table">
+            <tr>
+                <td><b>Name :</b> {{ sale?.patient_name }}</td>
+                <td><b>Age/Gender :</b> {{ sale?.gender_age }}</td>
+                <td><b>Bill Date :</b> {{ sale?.bill_date | date:'dd/MM/yyyy' }}</td>
+            </tr>
+            <tr>
+                <td><b>Address :</b> {{ sale?.city }}</td>
+                <td><b>Bill No :</b> {{ sale?.bill_no }}</td>
+                <td><b>Contact :</b> {{ sale?.mobile_no || '-' }}</td>
+            </tr>
+            <tr>
+                <td><b>UHID No :</b> {{ sale?.uhid }}</td>
+                <td colspan="2"><b>Refd. By :</b> {{ sale?.doctor_name }}</td>
+            </tr>
+        </table>
+
+        <!-- ITEMS TABLE -->
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Item Name</th>
+                    <th>Batch</th>
+                    <th>EXP</th>
+                    <th>QTY</th>
+                    <th>MRP</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td class="text-left">{{ item.medicine_name }}</td>
+                    <td>{{ item.batch_no }}</td>
+                    <td>{{ item.expiry_date | date:'MM/yy' }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.mrp }}</td>
+                    <td>{{ item.quantity * item.mrp }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- TOTAL SECTION -->
+        <div class="bottom-section">
+            <div class="total-wrapper">
+                <table class="total-table">
+                    <tr>
+                        <td>Total Amount</td>
+                        <td>{{ sale?.sub_total }}</td>
+                    </tr>
+                    <tr *ngIf="sale?.discount_value > 0">
+                        <td>Discount</td>
+                        <td>- {{ sale?.discount_value }}</td>
+                    </tr>
+                    <tr>
+                        <td>GST</td>
+                        <td>{{ sale?.gst_total }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Grand Total</b></td>
+                        <td><b>{{ sale?.grand_total }}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Payment Mode</td>
+                        <td>{{ sale?.payment_mode }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p class="note">
+                NOTE: Medicines once sold will not be taken back.
+            </p>
+            <div class="signature">
+                <p><b>Signature</b></p>
+                <p>PARANJPE EYE CLINICS & SURGERY CENTER</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>

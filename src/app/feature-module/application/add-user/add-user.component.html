@@ -1,0 +1,214 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header">
+        <h6>Add Hospital/Branch</h6>
+      </div>
+      <!-- /Page Header -->
+      <div class="row">
+        <div class="col-md-12">
+          <form action="#">
+            <div class="row align-items-end">
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>Branch Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Branch Name" [(ngModel)]="branch_name"
+                    name="branchName" (input)="capitalize()" />
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>Address <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Address" [(ngModel)]="address"
+                    name="branchAddress" />
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>
+                    Contact Person Name
+                    <span class="text-danger">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" placeholder="Enter Contact Person"
+                    [(ngModel)]="contact_person_name" name="branchContactPerson" #branchContactPerson="ngModel" required
+                    minlength="3" maxlength="50" pattern="^[A-Za-z]+(?:[ .-][A-Za-z]+)*$"
+                    (input)="sanitizeName($event)" />
+
+                  <small class="text-danger" *ngIf="branchContactPerson.invalid && branchContactPerson.touched">
+
+                    <span *ngIf="branchContactPerson.errors?.['required']">
+                      Contact person name is required.
+                    </span>
+
+                    <span *ngIf="branchContactPerson.errors?.['pattern']">
+                      Only letters, spaces, dot (.) and hyphen (-) are allowed.
+                    </span>
+
+                    <span *ngIf="branchContactPerson.errors?.['minlength']">
+                      Minimum 3 characters required.
+                    </span>
+
+                    <span *ngIf="branchContactPerson.errors?.['maxlength']">
+                      Maximum 50 characters allowed.
+                    </span>
+
+                  </small>
+                </div>
+              </div>
+
+
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>Mobile No <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Mobile No" [(ngModel)]="mobile_no"
+                    name="branchMobileNo" maxlength="10" (keypress)="numbersOnly($event)" />
+                </div>
+              </div>
+
+              <div class="col-12 d-flex justify-content-end mt-2">
+                <div class="input-block mb-3">
+                  <button type="button" (click)="addBranch()" class="btn btn-primary w-90">
+                    <i class="fa fa-save"></i>
+                    {{ editMode ? "Update" : "Submit" }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- TABLE -->
+      <div class="table-responsive mt-4">
+        <div class="d-flex justify-content-end mb-sm-1 p-0">
+          <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+            placeholder="Search" [(ngModel)]="searchText" (input)="applySearch()">
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Branch</th>
+              <th>Address</th>
+              <th>Contact</th>
+              <th>Mobile</th>
+              <!-- <th>Username</th>
+              <th>Password</th> -->
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of paginatedBranches; let i = index">
+              <td>
+                {{ pageIndex * pageSize + i + 1 }}
+              </td>
+              <td>{{ item.branch_name }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.contact_person_name }}</td>
+              <td>{{ item.mobile_no }}</td>
+              <!-- <td>{{ item.username }}</td>
+              <td>{{ item.plain_password }}</td> -->
+              <td>
+                <i class="far fa-edit fa-lg text-primary me-2" (click)="openEditModal(item)" style="cursor:pointer"></i>
+                <i class="far fa-trash-alt fa-lg text-danger" (click)="openDeleteModal(item)"></i>
+              </td>
+            </tr>
+
+            <!-- No data -->
+            <tr *ngIf="branch.length === 0">
+              <td colspan="8" class="text-center text-muted">No Data Found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <mat-paginator [length]="filteredBranches.length" [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize"
+        [pageIndex]="pageIndex" (page)="onPageChange($event)" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Hospital / Branch</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0)" class="btn btn-primary paid-continue-btn" (click)="confirmDelete()">
+                Delete
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="#" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->
+
+<!-- Edit Branch Modal -->
+<div class="modal custom-modal fade" id="edit_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <div class="form-header">
+          <h3>Edit Hospital / Branch</h3>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-4 mb-3">
+            <label>Branch Name</label>
+            <input type="text" class="form-control" [(ngModel)]="branch_name" name="editBranchName" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label>Address</label>
+            <input type="text" class="form-control" [(ngModel)]="address" name="editAddress" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label>Contact Person</label>
+            <input type="text" class="form-control" [(ngModel)]="contact_person_name" name="editContact" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label>Mobile</label>
+            <input type="text" class="form-control" [(ngModel)]="mobile_no" name="editMobile" />
+          </div>
+
+          <!-- <div class="col-md-4 mb-3">
+            <label>Username</label>
+            <input type="text" class="form-control" [(ngModel)]="username" name="editUsername" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label>Password</label>
+            <input type="text" class="form-control" [(ngModel)]="password" name="editPassword" />
+          </div> -->
+
+        </div>
+        <div class="modal-btn text-end">
+          <button class="btn btn-primary me-2" (click)="updateBranch()">
+            Update
+          </button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

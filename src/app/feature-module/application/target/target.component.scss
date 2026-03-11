@@ -1,0 +1,84 @@
+.float-left .btn-group {
+    margin-right: 5px;
+}
+
+.text-right .d-md-inline-block {
+    margin-right: 5px;
+}
+
+.margin-right {
+    margin-right: 5px;
+}
+
+.billing-summary {
+    border-collapse: collapse;
+    border: 1px solid #dcdcdc;
+    background-color: #f5f6f8;
+}
+
+.billing-summary td {
+    border: 1px solid #dcdcdc;
+    padding: 10px 12px;
+    vertical-align: middle;
+}
+
+.left-cell {
+    width: 45%;
+    background-color: #eceff3;
+    /* grey left column like image */
+    font-weight: 500;
+}
+
+.right-cell {
+    width: 55%;
+    background-color: #f8f9fb;
+}
+
+.summary-input {
+    text-align: right;
+    /* numbers right aligned */
+    height: 32px;
+    font-size: 13px;
+    background-color: #ffffff;
+}
+
+.billing-summary {
+    border-collapse: collapse;
+    border: 1px solid #e2e2e2;
+    background-color: #ffffff;
+}
+
+.billing-summary td {
+    border: 1px solid #e2e2e2;
+    padding: 6px 10px;
+    /* 🔥 compact padding */
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+.left-cell {
+    width: 45%;
+    background-color: #ffffff;
+    /* 🔥 now white */
+    font-weight: 500;
+}
+
+.right-cell {
+    width: 55%;
+    background-color: #ffffff;
+    /* keep white */
+}
+
+.summary-input {
+    text-align: right;
+    height: 28px;
+    /* 🔥 smaller height */
+    font-size: 13px;
+    padding: 2px 8px;
+}
+.left-cell {
+  width: 45%;
+  background-color: #ffffff;
+  font-weight: 500;
+  color: #000000;   /* 🔥 force pure black */
+}

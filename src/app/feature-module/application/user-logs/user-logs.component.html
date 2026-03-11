@@ -1,0 +1,138 @@
+<div class="card mb-0">
+  <div class="card-body pt-2 pb-2">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header" style="margin:0 0 15px 0">
+        <h6>Inventory Report</h6>
+        <div class="col-lg-6 col-md-3 col-sm-12">
+          <div class="add-customer-btns text-end">
+
+            <a href="javascript:void(0)" class="btn customer-btn-save" (click)="exportInventoryPDF()">
+              Export as PDF
+            </a>
+            <a href="javascript:void(0)" class="btn customer-btn-save" (click)="exportInventoryExcel()">
+              Export as Excel
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /Page Header -->
+    <div class="row">
+      <div class="col-md-12">
+        <form (ngSubmit)="searchInventory()">
+
+          <div class="form-group-item">
+
+            <div class="row align-items-end">
+
+              <!-- Branch -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block position-relative">
+                  <label>
+                    Select Hospital / Branch <span class="text-danger">*</span>
+                  </label>
+                  <div class="dropdown">
+                    <!-- Selected Display -->
+                    <div class="form-control form-control-sm" (click)="openBranchDropdown()" style="cursor:pointer;">
+                      {{ selectedBranchName || 'Select Hospital / Branch' }}
+                    </div>
+                    <!-- Dropdown Panel -->
+                    <div *ngIf="isBranchDropdownOpen" class="dropdown-menu show w-100 p-2"
+                      style="max-height:250px; overflow-y:auto;">
+                      <input type="text" class="form-control form-control-sm mb-2" placeholder="Search Branch..."
+                        [(ngModel)]="branchSearch" name="branchSearch" (input)="filterBranches()"
+                        (click)="$event.stopPropagation()" />
+
+                      <div *ngFor="let branch of filteredBranches" class="dropdown-item" (click)="selectBranch(branch)"
+                        style="cursor:pointer;">
+                        {{ branch.branch_name }}
+                      </div>
+                      <div *ngIf="filteredBranches.length === 0" class="text-muted small px-2">
+                        No branches found
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- From Date -->
+              <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="input-block">
+                  <label>From Date <span class="text-danger">*</span></label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="fromDate" name="fromDate">
+                </div>
+              </div>
+
+              <!-- To Date -->
+              <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="input-block">
+                  <label>To Date <span class="text-danger">*</span></label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="toDate" name="toDate">
+                </div>
+              </div>
+
+              <!-- Search Button -->
+              <div class="col-lg-2 col-md-12 col-sm-12">
+                <div class="input-block">
+                  <label class="d-block">&nbsp;</label>
+                  <button type="button" (click)="searchInventory()" class="btn btn-primary btn-sm w-100">
+                    <i class="fa fa-search me-1"></i> Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-body pt-0 pb-2">
+          <div class="table-responsive">
+            <div class="d-flex justify-content-end mt-0 mb-0 p-0">
+              <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+                placeholder="Search" [(ngModel)]="searchText" (input)="applySearch()">
+            </div>
+            <table class="datatable table table-stripped mt-0 mb-0">
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Medicine</th>
+                  <th>Type</th>
+                  <th>Batch No</th>
+                  <th>Expiry Date</th>
+                  <th>Quantity</th>
+                  <th>MRP</th>
+                  <th>GST%</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of paginatedInventoryList; let i = index">
+                  <td>{{ pageIndex * pageSize + i + 1 }}</td>
+                  <td>{{ item.medicine?.name }}</td>
+                  <td>{{ item.type?.name }}</td>
+                  <td>{{ item.batch_no }}</td>
+                  <td>{{ item.expiry_date | date:'dd-MM-yyyy' }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.mrp }}</td>
+                  <td>{{ item.gst }}%</td>
+                </tr>
+                <!-- No Data Message -->
+                <tr *ngIf="filteredInventoryList.length === 0">
+                  <td colspan="9" class="text-center">No Data Found</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <mat-paginator [length]="filteredInventoryList.length" [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize"
+            [pageIndex]="pageIndex" (page)="onPageChange($event)" showFirstLastButtons>
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

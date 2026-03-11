@@ -1,0 +1,432 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Hospital Call Record</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()" (keydown.enter)="openContent()" tabindex="0" matTooltip="Filter"
+            href="javascript:void(0);" class="btn btn-filters w-auto popup-toggle"><span class="me-2"><img
+                src="assets/img/icons/filter-icon.svg" alt="filter" /></span>Filter
+          </a>
+        </li>
+        <!-- <li>
+          <a
+            class="btn-filters"
+            matTooltip="Settings"
+            href="javascript:void(0);"
+            ><span><i class="feather icon-settings"></i></span>
+          </a>
+        </li> -->
+        <li>
+          <a class="btn btn-primary" href="javascript:void(0);"><i
+              class="fa fa-plus-circle me-2" aria-hidden="true"></i>
+            Excel</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Table -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="table-scroll">
+            <table matSort (matSortChange)="sortData($event)" class="table table-stripped table-hover datatable">
+              <thead class="thead-light">
+                <tr>
+                  <th mat-sort-header="sno">S.NO</th>
+                  <th mat-sort-header="status">Status</th>
+                  <th mat-sort-header="visitDate">Visit Date</th>
+                  <th mat-sort-header="checkInTime">Check-In Time</th>
+                  <th mat-sort-header="closeVisitTime">Close Visit Time</th>
+                  <th mat-sort-header="hospitalId">Hospital Id</th>
+                  <th mat-sort-header="hospitalName">Hospital Name</th>
+                  <th mat-sort-header="employeeName">Employee Name</th>
+                  <th mat-sort-header="contactNumber">Contact Number</th>
+                  <th mat-sort-header="city">City</th>
+                  <th mat-sort-header="state">State</th>
+                  <th mat-sort-header="visitAddress">Visit Address</th>
+                  <th mat-sort-header="hospitalAddress">Hospital Address</th>
+                  <th mat-sort-header="remark">Remark</th>
+                  <th mat-sort-header="order">Order (yes/no)</th>
+                  <th mat-sort-header="detailsOfOrder">Details of Order</th>
+                  <th mat-sort-header="totalOrderValue">Total Order Value</th>
+                  <th mat-sort-header="inchargeType">Incharge Type</th>
+                  <th mat-sort-header="contactPerson">Contact Person</th>
+                  <th mat-sort-header="workingWith">Working With</th>
+                  <th mat-sort-header="attachment">Attachment</th>
+                </tr>
+                
+              </thead>
+              <tbody>
+
+
+                <tr>
+                  <td>1</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                
+
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <app-custom-pagination></app-custom-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Table -->
+
+<!-- Add Asset -->
+<div class="toggle-sidebar" [ngClass]="{ 'open-filter': toggleData === true }">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <a href="javascript:void(0);" (click)="openContent()" (keydown.enter)="openContent()" tabindex="0"
+        class="sidebar-closes"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <div class="row gy-2 gx-2">
+
+          <div class="row">
+            <!-- Zone -->
+            <div class="col-md-12 mb-2">
+              <label class="form-label">Zone</label>
+              <select class="form-select">
+                <option selected>All Zone</option>
+                <option>Maharashtra</option>
+                <option>Goa</option>
+                <option>Other</option>
+              </select>
+            </div>
+          
+            <!-- Division -->
+            <div class="col-md-12 mb-2">
+              <label class="form-label">Division</label>
+              <select class="form-select">
+                <option disabled selected>Select Division</option>
+                <option>Main</option>
+                <option>Cosmocutis</option>
+              </select>
+            </div>
+          
+            <!-- Employee -->
+            <div class="col-md-12 mb-2">
+              <label class="form-label">Employee</label>
+              <select class="form-select">
+                <option disabled selected>Select Employee</option>
+                <option>EMP1</option>
+                <option>EMP2</option>
+              </select>
+            </div>
+          
+            <!-- Status -->
+            <div class="col-md-12 mb-2">
+              <label class="form-label">Status</label>
+              <select class="form-select">
+                <option selected>All</option>
+                <option>Active</option>
+                <option>Closed</option>
+              </select>
+            </div>
+          
+            <!-- Incharge -->
+            <div class="col-md-12 mb-2">
+              <label class="form-label">Incharge</label>
+              <select class="form-select">
+                <option disabled selected>Select Incharge</option>
+                <option>Incharge 1</option>
+                <option>Incharge 2</option>
+              </select>
+            </div>
+          
+            <!-- From Date -->
+            <div class="col-md-6 mb-2">
+              <input type="text" class="form-control" bsDatepicker placeholder="From Date" />
+            </div>
+          
+            <!-- To Date -->
+            <div class="col-md-6 mb-2">
+              <input type="text" class="form-control" bsDatepicker placeholder="To Date" />
+            </div>
+          
+            <!-- Buttons -->
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary w-100" (click)="openContent()">Go</button>
+            </div>
+            
+          </div>
+          
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--/Add Asset -->
+
+<!-- Add Expenses Modal -->
+<div class="modal custom-modal modal-lg fade" id="add_expenses" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Add Expenses</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="border-0 pb-0">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Expense ">Expense ID</label>
+                      <input type="text" class="form-control" placeholder="Enter Expense ID" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Reference">Reference</label>
+                      <input type="text" class="form-control" placeholder="Enter Reference No" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Amount">Amount </label>
+                      <input type="number" class="form-control" placeholder="Enter Amount" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="PaymentMode">Payment Mode</label>
+                      <mat-select [(ngModel)]="mode" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="payment">Select Payment Mode</mat-option>
+                        <mat-option value="paid">Cash</mat-option>
+                        <mat-option value="pending">Cheque</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Expense">Expense Date </label>
+                      <input type="date" class="form-control datetimepicker" placeholder="Select Expense Date" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Status">Payment Status</label>
+                      <mat-select [(ngModel)]="payment" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="none">Select Payment Status</mat-option>
+                        <mat-option value="paid">Paid</mat-option>
+                        <mat-option value="pending">Pending</mat-option>
+                        <mat-option value="ccancelled">Cancelled</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 description-box">
+                    <div class="input-block mb-3" id="summernote_container">
+                      <label for="Description" class="form-control-label">Description</label>
+                      <textarea class="summernote form-control" placeholder="Type your message"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12">
+                    <div class="input-block">
+                      <label for="Attachment">Attachment</label>
+                      <ngx-dropzone (change)="onSelect($event)" class="service-upload">
+                        <ngx-dropzone-label class="drop-browse align-center">
+                          <span><img src="assets/img/icons/drop-icon.svg" alt="upload" /></span>
+                          <div class="d-flex">
+                            Drop your files here or<span class="text-primary ms-1">browse</span>
+                          </div>
+
+                          <span class="text-muted">Maximum size: 50MB</span>
+                        </ngx-dropzone-label>
+                        @for (f of files; track f) {
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [file]="f" [removable]="true"
+                          (removed)="onRemove(f)">
+                        </ngx-dropzone-image-preview>
+                        }
+                      </ngx-dropzone>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Add Expenses</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Expenses Modal -->
+
+<!-- Edit Expenses Modal -->
+<div class="modal custom-modal modal-lg fade" id="edit_expenses" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Edit Expenses</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="border-0 pb-0">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Expense">Expense ID</label>
+                      <input type="text" class="form-control" placeholder="Enter Expense ID" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Reference">Reference</label>
+                      <input type="text" class="form-control" placeholder="Enter Reference No" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Amount">Amount </label>
+                      <input type="number" class="form-control" placeholder="Enter Amount" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Payment">Payment Mode</label>
+                      <mat-select [(ngModel)]="mode" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="payment">Select Payment Mode</mat-option>
+                        <mat-option value="paid">Cash</mat-option>
+                        <mat-option value="pending">Cheque</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Expense">Expense Date </label>
+                      <input type="text" class="form-control datetimepicker" placeholder="Select Expense Date" />
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Payment">Payment Status</label>
+                      <mat-select [(ngModel)]="payment" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="none">Select Payment Status</mat-option>
+                        <mat-option value="paid">Paid</mat-option>
+                        <mat-option value="pending">Pending</mat-option>
+                        <mat-option value="ccancelled">Cancelled</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 description-box">
+                    <div class="input-block mb-3" id="summernote_container2">
+                      <label for="Description" class="form-control-label">Description</label>
+                      <textarea class="summernote form-control" placeholder="Type your message"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12">
+                    <div class="input-block">
+                      <label for="Attachment">Attachment</label>
+                      <ngx-dropzone (change)="onSelect($event)" class="service-upload">
+                        <ngx-dropzone-label class="drop-browse align-center">
+                          <span><img src="assets/img/icons/drop-icon.svg" alt="upload" /></span>
+                          <div class="d-flex">
+                            Drop your files here or<span class="text-primary ms-1">browse</span>
+                          </div>
+
+                          <span class="text-muted">Maximum size: 50MB</span>
+                        </ngx-dropzone-label>
+                        @for (f of files; track f) {
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [file]="f" [removable]="true"
+                          (removed)="onRemove(f)">
+                        </ngx-dropzone-image-preview>
+                        }
+                      </ngx-dropzone>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Update</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit Expenses Modal -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Expenses</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <button type="reset" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-continue-btn">
+                Delete
+              </button>
+            </div>
+            <div class="col-6">
+              <button type="submit" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-cancel-btn">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->

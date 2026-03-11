@@ -1,0 +1,124 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header">
+        <h6>Medicine Received</h6>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!--DATA TABLE-->
+    <div class="col-sm-12">
+      <!-- <div class="card"> -->
+      <div class="card-body pt-1 pb-1">
+        <div class="col-12 d-flex justify-content-end">
+          <div class="d-flex justify-content-end mb-1 p-0">
+            <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+              placeholder="Search" (input)="searchReceived($event)">
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive mt-1">
+        <table class="table table-striped w-100" id="transferFormTable">
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Date of Received</th>
+              <th> Issue From</th>
+              <th>Issue To</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of paginatedReceivedList; let i = index">
+              <td>{{ pageIndex * pageSize + i + 1 }}</td>
+              <td>{{ row.issue_date | date:'dd-MM-yyyy' }}</td>
+              <td>{{ row.from_branch?.branch_name }}</td>
+              <td>{{ row.to_branch?.branch_name }}</td>
+              <td>
+                <i class="fas fa-info-circle fa-lg me-2 text-info" style="cursor:pointer"
+                  (click)="viewReceivedItems(row.id)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                </i>
+              </td>
+            </tr>
+            <tr *ngIf="receivedList.length === 0">
+              <td colspan="5" class="text-center text-muted">
+                No Received Medicines Found
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <mat-paginator [length]="filteredReceivedList.length" [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize"
+        [pageIndex]="pageIndex" (page)="onPageChange($event)" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<!-- Info Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Issue Medicines</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered align-middle text-center info-table mb-0">
+            <thead class="modal-table-header">
+              <tr>
+                <th style="width: 15%;">Type</th>
+                <th style="width: 20%;">Medicine Name</th>
+                <th style="width: 10%;">Quantity</th>
+                <th style="width: 15%;">Received Qty</th>
+                <th style="width: 15%;">Remaining Qty</th>
+                <th style="width: 10%;">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of receivedItems">
+
+                <td>{{ item.medicine_type }}</td>
+                <td class="text-start">{{ item.medicine_name }}</td>
+                <td>{{ item.issue_qty }}</td>
+
+                <!-- Received Qty -->
+                <td>
+                  <input type="number" class="form-control form-control-sm text-center" [(ngModel)]="item.received_qty"
+                    [disabled]="item.status == 1" (input)="limitQty(item)">
+                </td>
+
+                <!-- Remaining -->
+                <td>
+                  <span class="badge" [ngClass]="{
+                'bg-success': getRemainingQty(item) === 0,
+                'bg-warning text-dark': getRemainingQty(item) > 0
+              }">
+                    {{ getRemainingQty(item) }}
+                  </span>
+                </td>
+
+                <!-- Approve -->
+                <td>
+                  <button class="btn btn-success btn-sm" [disabled]="item.status == 1" (click)="approveRow(item)">
+                    <i class="fa fa-check"></i>
+                  </button>
+                </td>
+              </tr>
+
+              <tr *ngIf="receivedItems.length === 0">
+                <td colspan="6" class="text-center text-muted">
+                  No Items Found
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

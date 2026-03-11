@@ -1,0 +1,53 @@
+.float-left .btn-group {
+    margin-right: 5px;
+}
+.text-right .d-md-inline-block {
+    margin-right: 5px;
+}
+.margin-right {
+    margin-right: 5px;
+}
+.custom-select-wrapper {
+  position: relative;
+}
+
+.custom-select-input {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.custom-select-dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: #f7f7f9;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  z-index: 1050;
+}
+
+.custom-search-box {
+  margin-bottom: 14px;
+}
+
+.custom-search-box input {
+  border-radius: 10px;
+}
+
+.custom-options-list {
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.custom-option-item {
+  padding: 8px 4px;
+  font-size: 14px;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.custom-option-item:hover {
+  color: #000;
+}

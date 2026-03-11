@@ -1,0 +1,280 @@
+/* ===========================
+   DATATABLE ALIGNMENT FIX
+=========================== */
+
+#medicineInwardTable {
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-spacing: 0;
+}
+
+/* Prevent header text wrapping */
+#medicineInwardTable th,
+#medicineInwardTable td {
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+/* Column widths (IMPORTANT) */
+#medicineInwardTable th:nth-child(1),
+#medicineInwardTable td:nth-child(1) {
+  width: 70px;
+}
+
+#medicineInwardTable th:nth-child(2),
+#medicineInwardTable td:nth-child(2) {
+  width: 120px;
+}
+
+#medicineInwardTable th:nth-child(3),
+#medicineInwardTable td:nth-child(3) {
+  width: 140px;
+}
+
+#medicineInwardTable th:nth-child(4),
+#medicineInwardTable td:nth-child(4) {
+  width: 120px;
+}
+
+#medicineInwardTable th:nth-child(5),
+#medicineInwardTable td:nth-child(5) {
+  width: 110px;
+}
+
+#medicineInwardTable th:nth-child(6),
+#medicineInwardTable td:nth-child(6) {
+  width: 120px;
+}
+
+#medicineInwardTable th:nth-child(7),
+#medicineInwardTable td:nth-child(7) {
+  width: 90px;
+}
+
+#medicineInwardTable th:nth-child(8),
+#medicineInwardTable td:nth-child(8) {
+  width: 90px;
+}
+
+#medicineInwardTable th:nth-child(9),
+#medicineInwardTable td:nth-child(9) {
+  width: 80px;
+}
+
+#medicineInwardTable th:nth-child(10),
+#medicineInwardTable td:nth-child(10) {
+  width: 160px;
+}
+
+/* 
+#medicineInwardTable th:nth-child(11),
+#medicineInwardTable td:nth-child(11) { width: 170px; } */
+
+
+/* ===== STICKY ACTION COLUMN – FINAL WORKING ===== */
+
+#medicineInwardTable th:last-child,
+#medicineInwardTable td:last-child {
+  position: sticky;
+  right: 0;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #fff;
+  /* 🔥 REQUIRED */
+  z-index: 5;
+  border-left: 1px solid #dee2e6;
+}
+
+/* Header above body */
+#medicineInwardTable thead th:last-child {
+  z-index: 6;
+  background-color: #f8f9fa;
+}
+
+/* Icons */
+#medicineInwardTable td:last-child i {
+  margin: 0 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+
+/* ===============================
+   DATATABLE STICKY ACTION FIX
+================================ */
+
+/* Required for scrollX */
+#medicineInwardTable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+
+/* #medicineInwardTable th:nth-child(12),
+#medicineInwardTable td:nth-child(12) {  /* Action */
+/* width: 120px;
+  min-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+} */
+/* ===============================
+   STICKY ACTION COLUMN (HEADER + BODY)
+================================ */
+
+#medicineInwardTable th:last-child,
+#medicineInwardTable td:last-child {
+  position: sticky;
+  right: 0;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #ffffff;
+  /* 🔥 REQUIRED */
+  border-left: 1px solid #dee2e6;
+}
+
+/* BODY */
+#medicineInwardTable td:last-child {
+  z-index: 5;
+}
+
+/* HEADER (MUST BE ABOVE BODY) */
+#medicineInwardTable thead th:last-child {
+  z-index: 10;
+  background-color: #f8f9fa;
+  /* solid header bg */
+}
+
+/* Icon spacing */
+#medicineInwardTable td:nth-child(12) i {
+  margin: 0 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+// /* Datatable footer alignment */
+// .dataTables_info {
+//   float: left;
+//   padding-top: 8px;
+// }
+
+// .dataTables_paginate {
+//   float: right;
+//   padding-top: 8px;
+// }
+
+// .dataTables_wrapper .row:last-child {
+//   margin-top: 10px;
+// }
+
+/* ===============================
+   DATATABLE STICKY ACTION COLUMN
+   (BODY + HEADER – FINAL)
+================================ */
+
+/* BODY (scroll body table) */
+#medicineInwardTable td:last-child {
+  position: sticky;
+  right: 0;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #ffffff;
+  border-left: 1px solid #dee2e6;
+  z-index: 5;
+}
+
+// /* HEADER (DataTables cloned header table) */
+.dataTables_scrollHead thead th:last-child {
+  position: sticky;
+  right: 0;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #f8f9fa;
+  /* REQUIRED */
+  border-left: 1px solid #dee2e6;
+  z-index: 20;
+  /* MUST be higher than body */
+}
+
+// /* Ensure sticky works */
+// .dataTables_scrollHead,
+// .dataTables_scrollBody {
+//   overflow: visible !important;
+// }
+
+/* MATCH ACTION HEADER WITH TABLE HEADER THEME */
+.dataTables_scrollHead thead th:last-child {
+  position: sticky;
+  right: 0;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e6e7ff;
+  /* ✅ MATCHED HEADER COLOR */
+  border-left: 1px solid #d0d3ff;
+  z-index: 20;
+}
+
+::ng-deep .mat-mdc-form-field {
+  height: 40px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: 40px !important;
+  align-items: center !important;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  min-height: 40px !important;
+}
+
+::ng-deep .mat-mdc-select-trigger {
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+}
+
+.custom-height {
+  height: 40px;
+}
+
+.custom-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 1000;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+}
+
+.dropdown-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+

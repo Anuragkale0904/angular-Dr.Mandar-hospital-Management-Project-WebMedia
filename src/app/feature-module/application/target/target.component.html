@@ -1,0 +1,172 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header" style="margin: 0 0 15px 0;">
+        <h6>Sales Return</h6>
+      </div>
+    </div>
+
+
+    <!-- /Page Header -->
+    <div class="form-group-item">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-9 col-md-10 col-sm-12">
+          <form>
+            <div class="row g-3 align-items-end justify-content-center">
+
+              <!-- Hospital / Branch -->
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <label class="form-label fw-bold text-dark">
+                  Select Hospital / Branch <span class="text-danger">*</span>
+                </label>
+                <div class="dropdown position-relative">
+                  <!-- Selected Display -->
+                  <div class="form-control form-control-sm" (click)="openBranchDropdown()" style="cursor:pointer;">
+                    {{ selectedBranchName || 'Select Hospital' }}
+                  </div>
+                  <!-- Dropdown Panel -->
+                  <div *ngIf="isBranchDropdownOpen" class="dropdown-menu show w-100 p-2"
+                    style="max-height:250px; overflow-y:auto;">
+                    <!-- Search Box -->
+                    <input type="text" class="form-control form-control-sm mb-2" placeholder="Search Branch..."
+                      [(ngModel)]="branchSearch" (input)="filterBranches()" />
+                    <!-- Branch List -->
+                    <div *ngFor="let branch of filteredBranches" class="dropdown-item" (click)="selectBranch(branch)"
+                      style="cursor:pointer;">
+                      {{ branch.branch_name }}
+                    </div>
+                    <div *ngIf="filteredBranches.length === 0" class="text-muted small px-2">
+                      No branches found
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Batch No -->
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <label class="form-label fw-bold text-dark">
+                  Bill No <span class="text-danger">*</span>
+                </label>
+                <input type="text" class="form-control form-control-sm" placeholder="Bill No" [(ngModel)]="billNo"
+                  name="billNo" />
+              </div>
+
+              <!-- Search Button -->
+              <div class="col-lg-2 col-md-3 col-sm-12">
+                <div class="input-block">
+                  <!-- invisible label keeps height equal -->
+                  <label class="d-block invisible">Action</label>
+                  <button type="button" (click)="searchSale()"
+                    class="btn btn-primary btn-sm d-flex align-items-center justify-content-center"
+                    style="height:31px;width:90px;">
+                    <i class="fa fa-search me-1"></i> Search
+                  </button>
+
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 pt-1 pb-2">
+        <div class="table-responsive">
+          <!-- <div class="col-12 d-flex justify-content-end">
+
+            <div class="d-flex justify-content-end mb-1 p-0">
+              <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+                placeholder="Search">
+            </div>
+          </div> -->
+          <table class="datatable table table-stripped">
+            <thead>
+              <tr>
+                <th>Sr.No</th>
+                <th>Medicine</th>
+                <th>Batch</th>
+                <th>Available Qty</th>
+                <th>Qty</th>
+                <th>Expiry</th>
+                <th>MRP</th>
+                <th>GST%</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of saleItems; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.medicine_name }}</td>
+                <td>{{ item.batch_no }}</td>
+                <td>{{ item.available_qty }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.expiry_date }}</td>
+                <td>{{ item.mrp }}</td>
+                <td>{{ item.gst }}</td>
+                <td>{{ item.total }}</td>
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="deleteRow(i)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+
+
+          </table>
+        </div>
+      </div>
+
+      <div class="row mt-4 justify-content-end">
+        <div class="col-lg-4 col-md-6">
+
+          <table class="billing-summary w-100">
+            <tbody>
+
+              <tr>
+                <td class="left-cell">Sub Total</td>
+                <td class="right-cell">
+                  <input type="number" class="form-control form-control-sm fw-bold summary-input" [value]="subTotal"
+                    readonly>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="left-cell">GST</td>
+                <td class="right-cell">
+                  <input type="number" class="form-control form-control-sm fw-bold summary-input" [value]="gstTotal"
+                    readonly>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="left-cell fw-bold">Grand Total</td>
+                <td class="right-cell">
+                  <input type="text" class="form-control form-control-sm fw-bold summary-input" [value]="grandTotal"
+                    readonly>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <!-- SUBMIT BUTTON ROW -->
+          <div class="row mt-0 justify-content-end">
+            <div class="col-auto">
+              <button type="button" class="btn btn-primary btn-sm px-4" (click)="submitReturn()">
+                Submit
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

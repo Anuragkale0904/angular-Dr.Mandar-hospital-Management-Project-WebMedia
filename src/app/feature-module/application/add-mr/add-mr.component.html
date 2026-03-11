@@ -1,0 +1,757 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add Employee</h5>
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Basic Details -->
+        <form action="#" [formGroup]="phoneForm">
+          <div class="form-group-item">
+            <h5 class="form-title">Basic Details</h5>
+            <div class="profile-picture">
+              <div class="upload-profile">
+                <div class="profile-img">
+                  <img id="blah" class="avatar" src="assets/img/profiles/avatar-14.jpg" alt="profile-img">
+                </div>
+                <div class="add-profile">
+                  <h5>Upload a New Photo</h5>
+                  <span>Profile-pic.jpg</span>
+                </div>
+              </div>
+              <div class="img-upload">
+                <label class="btn btn-upload">
+                  Upload <input type="file">
+                </label>
+                <a class="btn btn-remove">Remove</a>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Employee Code -->
+              <!-- <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Code">Employee Code <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Employee Code">
+                </div>
+              </div> -->
+              <!-- Employee Name -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Name">Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+              </div>
+              <!-- Gender -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Gender">Select Gender*</label>
+                  <mat-select [(ngModel)]="Gender" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Male">Male</mat-option>
+                    <mat-option value="Female">Female</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <!-- Work Type -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="WorkType">Select Work Type*</label>
+                  <mat-select [(ngModel)]="WorkType" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Office">Office</mat-option>
+                    <mat-option value="OnField">On Field</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <!-- DOB -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="DOB">DOB*</label>
+                  <input id="DOB" type="date" class="form-control" />
+                </div>
+              </div>
+              <!-- Maratial Status -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Maratial Status">Maratial Status*</label>
+                  <mat-select [(ngModel)]="MaratialStatus" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Married">Married</mat-option>
+                    <mat-option value="Single">Single</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Anniversary -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="Anniversary">Anniversary*</label>
+                  <input id="Anniversary" type="date" class="form-control" />
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Email">Email <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" placeholder="Enter Email Address">
+                </div>
+              </div>
+
+              <!-- phone -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Phone"> Contact Number <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Contact Number">
+                </div>
+              </div>
+
+              <!-- Alternative phone -->
+              <!-- <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Phone">Alternate Contact Number </label>
+                  <input type="text" class="form-control" placeholder="Alternate Contact Number">
+                </div>
+              </div> -->
+            </div>
+          </div>
+          <!-- Contact Info -->
+          <div class="form-group-item">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="billing-btn mb-2">
+                  <h5 class="form-title">Current Address</h5>
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Name">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line1">Address Line 1</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 1">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line2">Address Line 2</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 2">
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="Country">Country</label>
+                      <input type="text" class="form-control" placeholder="Enter Country">
+                    </div>
+                    <div class="input-block mb-3">
+                      <label for="City">City</label>
+                      <input type="text" class="form-control" placeholder="Enter City">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="State">State</label>
+                      <input type="text" class="form-control" placeholder="Enter State">
+                    </div>
+                    <div class="input-block mb-3">
+                      <label for="Pincode">Pincode</label>
+                      <input type="text" class="form-control" placeholder="Enter Pincode">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <!-- HQ -->
+                    <div class="input-block mb-3">
+                      <label for="HQ">Select HQ*</label>
+                      <mat-select [(ngModel)]="HQ" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="Select">Select HQ</mat-option>
+                        <mat-option value="Konkan">Konkan</mat-option>
+                        <mat-option value="Pune">Pune</mat-option>
+                        <mat-option value="Nashik">Nashik</mat-option>
+                      </mat-select>
+                    </div>
+                    <!-- Division -->
+                    <div class="input-block mb-3">
+                      <label for="Division">Select Division*</label>
+                      <mat-select [(ngModel)]="Division" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="Select">Select</mat-option>
+                        <mat-option value="Konkan">Konkan</mat-option>
+                        <mat-option value="Pune">Pune</mat-option>
+                        <mat-option value="Nashik">Nashik</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+
+                  <!-- Zone -->
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="Zone">Zone*</label>
+                      <mat-select [(ngModel)]="Zone" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="Select">Select</mat-option>
+                        <mat-option value="Zone 1">Zone 1</mat-option>
+                        <mat-option value="Zone 2">Zone 2</mat-option>
+                        <mat-option value="Other">Other</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="billing-btn">
+                  <h5 class="form-title mb-0">Permanent Address</h5>
+                  <a href="javascript:void(0);" class="btn btn-primary">Copy from Current Address</a>
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Name">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line1">Address Line 1</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 1">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line2">Address Line 2</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 2">
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="Country">Country</label>
+                      <input type="text" class="form-control" placeholder="Enter Country">
+                    </div>
+                    <div class="input-block mb-3">
+                      <label for="City">City</label>
+                      <input type="text" class="form-control" placeholder="Enter City">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="State">State</label>
+                      <input type="text" class="form-control" placeholder="Enter State">
+                    </div>
+                    <div class="input-block mb-3">
+                      <label for="Pincode">Pincode</label>
+                      <input type="text" class="form-control" placeholder="Enter Pincode">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <!-- HQ -->
+                    <div class="input-block mb-3">
+                      <label for="HQ">Select HQ*</label>
+                      <mat-select [(ngModel)]="HQ" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="Select">Select HQ</mat-option>
+                        <mat-option value="Konkan">Konkan</mat-option>
+                        <mat-option value="Pune">Pune</mat-option>
+                        <mat-option value="Nashik">Nashik</mat-option>
+                      </mat-select>
+                    </div>
+                    <!-- Division -->
+                    <div class="input-block mb-3">
+                      <label for="Division">Select Division*</label>
+                      <mat-select [(ngModel)]="Division" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="Select">Select</mat-option>
+                        <mat-option value="Konkan">Konkan</mat-option>
+                        <mat-option value="Pune">Pune</mat-option>
+                        <mat-option value="Nashik">Nashik</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <!-- Zone -->
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="Zone">Zone*</label>
+                      <mat-select [(ngModel)]="Zone" [ngModelOptions]="{ standalone: true }"
+                        class="select custom-mat-select">
+                        <mat-option value="Select">Select</mat-option>
+                        <mat-option value="Zone 1">Zone 1</mat-option>
+                        <mat-option value="Zone 2">Zone 2</mat-option>
+                        <mat-option value="Other">Other</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Work Information -->
+          <div class="form-group-item">
+            <h5 class="form-title">Work Information</h5>
+
+            <div class="row">
+
+              <!-- Ex-Station -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="ExStation">Select Ex-Station*</label>
+                  <mat-select [(ngModel)]="ExStation" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Out-Station -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="OutStation">Select Out-Station*</label>
+                  <mat-select [(ngModel)]="OutStation" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Designation -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Designation">Select Designation*</label>
+                  <mat-select [(ngModel)]="Designation" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Assign To -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="AssignTo">Assign To</label>
+                  <mat-select [(ngModel)]="AssignTo" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Additional Supervisor -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="AdditionalSupervisor">Additional Supervisor</label>
+                  <mat-select [(ngModel)]="AdditionalSupervisor" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Date of Joining -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="DOJ">Date Of Joining*</label>
+                  <input id="DOJ" type="date" class="form-control" />
+                </div>
+              </div>
+
+              <!-- Asset -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="asset">Asset</label>
+                  <mat-select [(ngModel)]="asset" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="laptop">Laptop</mat-option>
+                    <mat-option value="tab">Tab</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <!-- asset id -->
+              <div class="col-lg-3 col-md-6 col-sm-12"> 
+                <div class="input-block mb-3">
+                  <label for="assetId">Asset ID <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="assetId" placeholder="Enter Asset ID">
+                </div>
+              </div>
+              <!-- description -->
+              <div class="col-lg-3 col-md-6 col-sm-12"> 
+                <div class="input-block mb-3">
+                  <label for="assetDescription">Asset Description</label>
+                  <input type="text" class="form-control" id="assetDescription" placeholder="Enter Description">
+                </div>
+              </div>
+              <!-- password -->
+              <div class="col-lg-3 col-md-6 col-sm-12"> 
+                <div class="input-block mb-3">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                </div>
+              </div>
+              <!-- Mail id -->
+              <div class="col-lg-3 col-md-6 col-sm-12"> 
+                <div class="input-block mb-3">
+                  <label for="mailId">Mail ID (Date of Birth)</label>
+                  <input type="email" class="form-control" id="mailId" placeholder="Enter Mail ID or DOB">
+                </div>
+              </div>
+
+
+
+              <!-- End Probation Date -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="EPD">End Probation Date*</label>
+                  <input id="EPD" type="date" class="form-control" />
+                </div>
+              </div>
+              <!-- End Confirmation Date -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="ECD">End Confirmation Date</label>
+                  <input id="ECD" type="date" class="form-control" />
+                </div>
+              </div>
+
+              <!-- Working Hours -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="WorkingHour">Working Hours</label>
+                  <input type="number" class="form-control" placeholder="8">
+                </div>
+              </div>
+
+              <!-- Accompanied Employee -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Phone">Accompanied Employee </label>
+                  <input type="text" class="form-control" placeholder="Enter Accompanied Employee">
+                </div>
+              </div>
+
+              <!-- Date Of Resignation -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="DOR">Date Of Resignation</label>
+                  <input id="DOR" type="date" class="form-control" />
+                </div>
+              </div>
+
+              <!-- Holiday Calender -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="HolidayCalender">Select Holiday Calender*</label>
+                  <mat-select [(ngModel)]="HolidayCalender" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="Maharashtra">Maharashtra</mat-option>
+                    <mat-option value="Goa">Goa</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12">
+                    <!-- Show In Transit -->
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span> Show In Transit
+                      </label>
+                    </div>
+                    <!-- Show Accompanied -->
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span> Show Accompanied
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Other Info -->
+          <div class="form-group-customer customer-additional-form">
+            <div class="row">
+              <h5 class="form-title">Other Information</h5>
+
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Qulification ">Employee Qulification</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee Qulification">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Aadhar">Aadhar Number</label>
+                  <input type="text" class="form-control" placeholder="Enter Aadhar Number">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="PAN">PAN Number</label>
+                  <input type="text" class="form-control" placeholder="Enter PAN Number">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="PF">PF Number</label>
+                  <input type="text" class="form-control" placeholder="Enter PF Number">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="ESIC">ESIC Number</label>
+                  <input type="text" class="form-control" placeholder="Enter ESIC Number">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Branch">PF UAN Number</label>
+                  <input type="text" class="form-control" placeholder="Enter PF UAN Number">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Driving">Driver's Licence Number</label>
+                  <input type="text" class="form-control" placeholder="Enter Driver's Licence Number">
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Expiry">Licence Expiry Date</label>
+                  <input type="date" class="form-control" placeholder="Licence Expiry Date">
+                </div>
+              </div>
+
+
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="BloodGroup">Blood Group</label>
+                  <mat-select [(ngModel)]="BloodGroup" [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="A+">A+</mat-option>
+                    <mat-option value="A-">A-</mat-option>
+                    <mat-option value="B+">B+</mat-option>
+                    <mat-option value="B-">B-</mat-option>
+                    <mat-option value="AB+">AB+</mat-option>
+                    <mat-option value="AB-">AB-</mat-option>
+                    <mat-option value="O+">O+</mat-option>
+                    <mat-option value="O-">O-</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Daily Allowance Information -->
+          <div class="form-group-item">
+            <h5 class="form-title">Daily Allowance Information</h5>
+            <div class="row">
+
+              <!-- DA_HO -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="DA_HO">DA_HO </label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+              </div>
+
+              <!-- DA_EX -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="DA_EX">DA_EX </label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+              </div>
+
+              <!-- DA_OUT -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="DA_OUT">DA_OUT </label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+              </div>
+
+              <!-- DA_RHO -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="DA_RHO">DA_RHO </label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+              </div>
+
+              <!-- DA_TRANSIT -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="DA_TRANSIT">DA_TRANSIT </label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+              </div>
+
+              <!-- DA_OTHER -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="DA_OTHER">DA_OTHER </label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Back Details -->
+          <div class="form-group-customer customer-additional-form">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group-item border-0 mb-0">
+                  <div class="row align-item-center">
+
+                    <h5 class="form-title">Bank Details</h5>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Account ">Account Holder Name</label>
+                        <input type="text" class="form-control" placeholder="Enter Account Holder Name">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Number">Account Number</label>
+                        <input type="text" class="form-control" placeholder="Enter Account Number">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="IFSC">IFSC</label>
+                        <input type="text" class="form-control" placeholder="Enter IFSC Code">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Benificiary">Benificiary ID</label>
+                        <input type="text" class="form-control" placeholder="Enter Benificiary ID">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Bank">Bank Name</label>
+                        <input type="text" class="form-control" placeholder="Enter Bank Name">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Branch">Branch</label>
+                        <input type="text" class="form-control" placeholder="Enter Branch Name">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Nominee">Nominee Name</label>
+                        <input type="text" class="form-control" placeholder="Enter Nominee Name">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Income">Annual Income</label>
+                        <input type="text" class="form-control" placeholder="Annual Income">
+                      </div>
+                    </div>
+                    <div class="col-lg-12 text-center pt-4">
+                      <form class="add-customer-btns">
+                        <button type="submit" class="btn btn-primary" style="margin-top: 5px;">ADD</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- table -->
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card-table">
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <div class="table-scroll">
+                            <div class="inventory-table">
+                              <table matSort (matSortChange)="sortData($event)"
+                                class="table table-center table-hover datatable">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th mat-sort-header="Sr. No.">Sr. No.</th>
+                                    <th mat-sort-header="AccountHolderName">Account Holder Name</th>
+                                    <th mat-sort-header="AccountNumber">Account Number</th>
+                                    <th mat-sort-header="IFSC">IFSC</th>
+                                    <th mat-sort-header="BenificiaryID">Benificiary ID</th>
+                                    <th mat-sort-header="BankName">Bank Name</th>
+                                    <th mat-sort-header="Branch">Branch</th>
+                                    <th mat-sort-header="NomineeName">Nominee Name</th>
+                                    <th mat-sort-header="Annual Income">Annual Income</th>
+                                    <th mat-sort-header="action">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+
+                                  <tr>
+                                    <td>1.</td>
+                                    <td>ABC</td>
+                                    <td>99xxxxxxx22</td>
+
+                                    <td>SBIN0003xx8</td>
+                                    <td>123456789</td>
+                                    <td>SBI</td>
+                                    <td>Amravati</td>
+                                    <td>XYZ</td>
+                                    <td>50000</td>
+                                    <td class="d-flex align-items-center">
+
+                                      <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="modal"
+                                        data-bs-target="#delete_discount"><span><i
+                                            class="feather icon-trash-2"></i></span></a>
+                                    </td>
+                                  </tr>
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                        <app-custom-pagination></app-custom-pagination>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="add-customer-btns text-end">
+            <a [routerLink]="routes.employeelist" class="btn customer-btn-cancel">Cancel</a>
+            <a [routerLink]="routes.employeelist" class="btn customer-btn-save">Add Employee</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

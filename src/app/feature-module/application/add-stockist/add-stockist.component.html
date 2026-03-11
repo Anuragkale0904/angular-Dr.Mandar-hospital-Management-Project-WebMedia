@@ -1,0 +1,158 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header" style="margin: 0 0 10px 0;">
+        <h6>Total Collection</h6>
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="form-group-item">
+      <div class="row">
+        <div class="col-md-12">
+          <form>
+            <div class="row align-items-end g-3">
+
+              <!-- Hospital -->
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-block">
+                  <label>
+                    Select Hospital / Branch <span class="text-danger">*</span>
+                  </label>
+                  <div class="dropdown position-relative">
+                    <!-- Selected Display -->
+                    <div class="form-control form-control-sm" (click)="openBranchDropdown()" style="cursor:pointer;">
+                      {{ selectedBranchName || 'Select Hospital' }}
+                    </div>
+                    <!-- Dropdown Panel -->
+                    <div *ngIf="isBranchDropdownOpen" class="dropdown-menu show w-100 p-2"
+                      style="max-height:250px; overflow-y:auto;">
+                      <!-- Search Box -->
+                      <input type="text" class="form-control form-control-sm mb-2" placeholder="Search Branch..."
+                        [(ngModel)]="branchSearch" (input)="filterBranches()" />
+                      <!-- Branch List -->
+                      <div *ngFor="let branch of filteredBranches" class="dropdown-item" (click)="selectBranch(branch)"
+                        style="cursor:pointer;">
+                        {{ branch.branch_name }}
+                      </div>
+                      <div *ngIf="filteredBranches.length === 0" class="text-muted small px-2">
+                        No branches found
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- From Date -->
+              <div class="col-lg-2 col-md-3 col-sm-12">
+                <div class="input-block">
+                  <label>From Date <span class="text-danger">*</span></label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="fromDate" name="fromDate">
+                </div>
+              </div>
+
+              <!-- To Date -->
+              <div class="col-lg-2 col-md-3 col-sm-12">
+                <div class="input-block">
+                  <label>To Date <span class="text-danger">*</span></label>
+                  <input type="date" class="form-control form-control-sm" [(ngModel)]="toDate" name="toDate">
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="col-lg-5 col-md-12 col-sm-12">
+                <div class="input-block">
+                  <!-- invisible label keeps vertical alignment -->
+                  <label class="d-block invisible">Actions</label>
+
+                  <div class="d-flex gap-2 flex-wrap">
+                    <button type="button" (click)="searchCollection()"
+                      class="btn btn-primary btn-sm d-flex align-items-center justify-content-center"
+                      style="height:31px;width:90px;">
+                      <i class="fa fa-search me-1"></i> Search
+                    </button>
+
+
+                    <a href="#" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center "
+                      style="height: 31px; width: 90px;">
+                      <i class="fa fa-print me-1"></i> Print
+                    </a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <div
+          class="summary-strip d-flex flex-wrap justify-content-between align-items-center px-3 py-2 border rounded bg-light">
+
+          <span><strong>Total:</strong> ₹{{ summary.total | number:'1.2-2' }}</span>
+          <span><strong>Cash:</strong> ₹{{ summary.cash | number:'1.2-2' }}</span>
+          <span><strong>Credit:</strong> ₹{{ summary.credit | number:'1.2-2' }}</span>
+          <span><strong>Online:</strong> ₹{{ summary.online | number:'1.2-2' }}</span>
+          <span class="text-danger">
+            <strong>Discount:</strong> ₹{{ summary.discount | number:'1.2-2' }}
+          </span>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 pt-1 pb-2">
+        <div class="table-responsive">
+          <div class="d-flex justify-content-end mb-0 p-0">
+            <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
+              placeholder="Search" [(ngModel)]="searchText" (input)="applySearch()">
+          </div>
+
+          <table class="datatable table table-stripped">
+            <thead>
+              <tr>
+                <th>Sr.No</th>
+                <th>Bill No </th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Bill Date</th>
+                <!-- <th>Action</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sale of paginatedSalesData; let i = index">
+                <td>
+                  {{ pageIndex * pageSize + i + 1 }}
+                </td>
+                <td>{{ sale.bill_no }}</td>
+                <td>{{ sale.patient_name }}</td>
+                <td>{{ sale.grand_total }}</td>
+                <td>{{ sale.bill_date | date:'dd-MM-yyyy' }}</td>
+                <!-- <td>
+                  <i class="far fa-edit fa-lg text-primary me-2"></i>
+                  <i class="far fa-trash-alt fa-lg text-danger"></i>
+                </td> -->
+              </tr>
+
+              <tr *ngIf="filteredSalesData.length === 0">
+                <td colspan="6" class="text-center text-muted">
+                  No records found
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+        <mat-paginator [length]="filteredSalesData.length" [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize"
+          [pageIndex]="pageIndex" (page)="onPageChange($event)" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

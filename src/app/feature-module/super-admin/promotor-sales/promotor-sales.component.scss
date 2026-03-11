@@ -1,0 +1,240 @@
+/* ===== Global Label Styling ===== */
+label {
+    color: #000;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* ===== Table Styling ===== */
+.table-responsive {
+    overflow: visible !important;
+    /* allow dropdowns to escape */
+}
+
+#medicineTable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#medicineTable th,
+#medicineTable td {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#medicineTable input,
+#medicineTable select {
+    min-width: 0;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* ===== Medicine Sale Table ===== */
+.medicine-sale-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.medicine-sale-table th,
+.medicine-sale-table td {
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.medicine-sale-table th {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.medicine-sale-table th:nth-child(1),
+.medicine-sale-table td:nth-child(1) {
+    width: 20%;
+}
+
+/* Medicine */
+.medicine-sale-table th:nth-child(2),
+.medicine-sale-table td:nth-child(2) {
+    width: 14%;
+}
+
+/* Batch */
+.medicine-sale-table th:nth-child(3),
+.medicine-sale-table td:nth-child(3),
+.medicine-sale-table th:nth-child(4),
+.medicine-sale-table td:nth-child(4) {
+    width: 10%;
+}
+
+/* Qty */
+.medicine-sale-table th:nth-child(5),
+.medicine-sale-table td:nth-child(5) {
+    width: 12%;
+}
+
+/* Expiry */
+.medicine-sale-table th:nth-child(6),
+.medicine-sale-table td:nth-child(6),
+.medicine-sale-table th:nth-child(7),
+.medicine-sale-table td:nth-child(7),
+.medicine-sale-table th:nth-child(8),
+.medicine-sale-table td:nth-child(8) {
+    width: 9%;
+}
+
+/* MRP, GST, Total */
+.medicine-sale-table th:nth-child(9),
+.medicine-sale-table td:nth-child(9) {
+    width: 6%;
+    text-align: center;
+}
+
+/* Action */
+
+.medicine-sale-table .form-control,
+.medicine-sale-table .form-select {
+    height: 32px;
+    font-size: 13px;
+    padding: 4px 6px;
+}
+
+/* ===== Summary Table Styling ===== */
+.ultra-compact th,
+.ultra-compact td {
+    padding: 4px 6px;
+    font-size: 13px;
+}
+
+.ultra-compact th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.summary-wrapper {
+    width: 100%;
+    max-width: 280px;
+    padding-right: 6px;
+}
+
+/* ===== Dropdown Styling ===== */
+.dropdown-menu {
+    font-size: 13px;
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    position: absolute;
+    /* relative to parent input */
+    z-index: 1050;
+}
+
+.dropdown-item {
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f3f5;
+}
+
+/* ===== Medicine Search Dropdown Overlay ===== */
+.medicine-dropdown {
+    position: fixed;
+    /* stay on screen even if table scrolls */
+    z-index: 9999;
+    max-height: 250px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    min-width: 220px;
+    /* will be adjusted dynamically */
+    font-size: 13px;
+    display: none;
+    /* hide by default */
+}
+
+.medicine-dropdown button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 6px 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.medicine-dropdown button:hover {
+    background-color: #f1f3f5;
+}
+
+
+/* ===== Action Icons ===== */
+.action-icon {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* ===== Responsive Fix ===== */
+@media (max-width: 992px) {
+    .medicine-sale-table {
+        min-width: 950px;
+    }
+}
+
+/* ===== Ensure parent relative for dropdown positioning ===== */
+.col-lg-2.col-md-4.col-sm-6,
+.col-lg-2.col-md-4.col-sm-4,
+.medicine-sale-table td {
+    position: relative;
+}
+
+.table-responsive {
+    overflow: visible !important;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 9999 !important;
+}
+
+/* Summary wrapper size */
+.summary-wrapper {
+    width: 320px;
+    /* adjust if needed */
+}
+
+/* Make table fully compact */
+.ultra-compact {
+    border-collapse: collapse !important;
+    font-size: 13px;
+}
+
+/* Equal borders everywhere */
+.ultra-compact th,
+.ultra-compact td {
+    border: 1px solid #dcdcdc !important;
+    padding: 4px 8px !important;
+    vertical-align: middle;
+}
+
+/* Remove Bootstrap extra spacing */
+.ultra-compact .form-control {
+    height: 28px !important;
+    padding: 2px 6px !important;
+    font-size: 13px;
+}
+
+/* Remove table margin */
+.ultra-compact {
+    margin-bottom: 0 !important;
+}
+
+/* Reduce radio spacing */
+.ultra-compact input[type="radio"] {
+    margin-right: 4px;
+}

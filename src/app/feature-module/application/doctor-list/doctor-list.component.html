@@ -1,0 +1,485 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Doctor List</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()" (keydown.enter)="openContent()" tabindex="0" matTooltip="Filter"
+            href="javascript:void(0);" class="btn btn-filters w-auto popup-toggle">
+            <span class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter" /></span>Filter
+          </a>
+        </li>
+        
+        <li>
+          <div class="dropdown dropdown-action" matTooltip="Download">
+            <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown" aria-expanded="false"><span><i
+                  class="feather icon-download"></i></span></a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <ul class="d-block">
+                <li>
+                  <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                      class="far fa-file-pdf me-2"></i>PDF</a>
+                </li>
+                <li>
+                  <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                      class="far fa-file-text me-2"></i>CVS</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="btn-filters" href="javascript:void(0);" matTooltip="Print"><span><i
+                class="feather icon-printer"></i></span>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-import" href="javascript:void(0);"><span><i
+                class="feather icon-check-square me-2"></i>Import
+              Customer</span></a>
+        </li>
+
+
+        <li>
+          <a class="btn btn-primary" [routerLink]="routes.adddoctor"><i class="fa fa-plus-circle me-2"
+              aria-hidden="true"></i>Add Doctor</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Doctor Name</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+
+
+<!-- Table -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="table-scroll">
+            <div class="inventory-table">
+              <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+                <thead class="thead-light">
+                  <tr>
+                    <th mat-sort-header>Sr. No.</th>
+                    <th mat-sort-header>ID</th>
+                    <th mat-sort-header>Doctor Add Date</th>
+                    <th mat-sort-header>Registration Number</th>
+                    <!-- <th mat-sort-header>Doctor Code</th> -->
+                    <th mat-sort-header>Doctor Name</th>
+                    <th mat-sort-header>City</th>
+                    <th mat-sort-header>Hospital Name</th>
+                    <th mat-sort-header>Employee Name</th>
+                    <th mat-sort-header>Immediate Senior</th>
+                    <th mat-sort-header>Contact Number</th>
+                    <th mat-sort-header>Speciality</th>
+                    <th mat-sort-header>Qulification</th>
+                    <th mat-sort-header>Division</th>
+                    <th mat-sort-header>Category</th>
+                    <th mat-sort-header>Zone</th>
+                    <th mat-sort-header>Email</th>
+                    <th mat-sort-header>Gender</th>
+                    <th mat-sort-header>DOB</th>
+                    <th mat-sort-header>Anniversary</th>
+                    <th mat-sort-header>Type</th>
+                    <th mat-sort-header>Firm</th>
+                    <th mat-sort-header>Approx Business</th>
+                    <th mat-sort-header>Country</th>
+                    <th mat-sort-header>Status</th>
+                    <th mat-sort-header>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>03-04-2025</td>
+                    <td></td>
+                    <!-- <td>MED001</td> -->
+                    <td>Dr N B Bansode</td>
+                    <td>Vaduj</td>
+                    <td>Sushruth Hospital</td>
+                    <td>Vishal Waghmare</td>
+                    <td>Pravin Shelke</td>
+                    <td>9876543210</td>
+                    <td>DERMA</td>
+                    <td>MBBS MD PHD VD</td>
+                    <td>Main</td>
+                    <td>C</td>
+                    <td>Maharashtra</td>
+                    <td></td>
+                    <td>Male</td>
+                    <td></td>
+                    <td></td>
+                    <td>NonPrescriber</td>
+                    <td></td>
+                    <td>1000-3000</td>
+                    <td>
+                      INDIA
+                    </td>
+                    <td>
+                      <span [ngClass]="{
+                          'bg-success-light': 'Active',
+                          'bg-danger-light': 'Deactive'
+                        }" class="badge badge-pill bg-success-light">Active</span>
+                    </td>
+                    <td class="d-flex align-items-center">
+                      
+                    
+                    <div class="dropdown dropdown-action">
+                      <a href="javascript:void(0);" class=" btn-action-icon " data-bs-toggle="dropdown"
+                        aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <ul>
+                            <li>
+                              <a class="dropdown-item" [routerLink] = ""><i class="far fa-edit me-2"></i>Edit</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#delete_modal"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" [routerLink] = ""><i class="far fa-eye me-2"></i>View</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" [routerLink] = ""><i
+                                class="fa-solid fa-power-off me-2"></i>Activate</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" [routerLink] = ""><i
+                                class="far fa-bell-slash me-2"></i>Deactivate</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <app-custom-pagination></app-custom-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Table -->
+
+<!-- Add Asset -->
+<div class="toggle-sidebar" [ngClass]="{'open-filter' : toggleData === true}">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <a href="javascript:void(0);" class="sidebar-closes" (click)="openContent()" (keydown.enter)="openContent()"
+        tabindex="0"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <!-- Doctor -->
+        <div class="accordion" id="accordionMain1">
+          <div class="card-header-new" id="headingOne">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Doctor Name
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+            <div class="card-body-chat">
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="checkBoxes1">
+                    <div class="form-custom">
+                      <input type="text" class="form-control" id="member_search1" placeholder="Search Doctor">
+                      <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                    </div>
+                    <div class="selectBox-cont">
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span> DR. ABC
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span>DR XYZ
+                      </label>
+                      <!-- <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span> Apple Series 5 Watch
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span> Amazon Echo Dot
+                      </label> -->
+
+                      <!-- View All -->
+
+                      <div class="view-content">
+                        <div class="viewall-One">
+                          <!-- @for (user of users1; track user) {
+                          <label class="custom_check w-100" [ngClass]="{ closed: !isCollapsed1, open: isCollapsed1 }">
+                            <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                            <span class="checkmark"></span> {{ user.name }}
+                          </label>
+                          } -->
+                        </div>
+                        <div class="view-all">
+                          <a (click)="toggleCollapse1()" href="javascript:void(0);" class="viewall-button-One"><span
+                              class="me-2">{{ isCollapsed1 ? "Close All" : "View All" }}</span><span><i class="fa"
+                                [ngClass]="!isCollapsed1 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                        </div>
+                      </div>
+                      <!-- /View All -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Doctor -->
+
+        <!-- Speciality -->
+        <div class="accordion" id="accordionMain2">
+          <div class="card-header-new" id="headingTwo">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Speciality
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+            <div class="card-body-chat">
+              <div id="checkBoxes3">
+                <div class="selectBox-cont">
+                  <div class="form-custom">
+                    <input type="text" class="form-control" id="member_search2" placeholder="Search Speciality">
+                    <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                  </div>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> DERMA
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> General Physician
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> IVF
+                  </label>
+                  <!-- <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> P125392
+                  </label> -->
+                  <!-- View All -->
+                  <div class="view-content">
+                    <div class="viewall-One">
+                      <!-- @for (user of users2; track user) {
+                      <label class="custom_check w-100" [ngClass]="{ closed: !isCollapsed2, open: isCollapsed2 }">
+                        <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                        <span class="checkmark"></span> {{ user.name }}
+                      </label>
+                      } -->
+                    </div>
+                    <div class="view-all">
+                      <a (click)="toggleCollapse2()" href="javascript:void(0);" class="viewall-button-One"><span
+                          class="me-2">{{ isCollapsed2 ? "Close All" : "View All" }}</span><span><i class="fa"
+                            [ngClass]="!isCollapsed2 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                    </div>
+                  </div>
+                  <!-- /View All -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Speciality -->
+
+        <!-- TYpe -->
+        <div class="accordion" id="accordionMain3">
+          <div class="card-header-new" id="headingThree">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                Select Type
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample3">
+            <div class="card-body-chat">
+              <div id="checkBoxes2">
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Prescriber
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> NonPrescriber
+                  </label>
+                  <!-- <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Hours
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Box
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Kilograms
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Meter
+                  </label> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Type -->
+
+        <!-- Category -->
+        <div class="accordion accordion-last" id="accordionMain4">
+          <div class="card-header-new" id="headingFour">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                Category
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample4">
+            <div class="card-body-chat">
+              <div id="checkBoxes4">
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> A
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> B
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> C
+                  </label>
+                  <!-- <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> Electronics
+                  </label> -->
+                  <!-- View All -->
+                  <div class="view-content">
+                    <div class="viewall-One">
+                      <!-- @for (user of users3; track user) {
+                      <label class="custom_check w-100" [ngClass]="{ closed: !isCollapsed3, open: isCollapsed3 }">
+                        <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                        <span class="checkmark"></span> {{ user.name }}
+                      </label>
+                      } -->
+                    </div>
+                    <div class="view-all">
+                      <a (click)="toggleCollapse3()" href="javascript:void(0);" class="viewall-button-One"><span
+                          class="me-2">{{ isCollapsed3 ? "Close All" : "View All" }}</span><span><i class="fa"
+                            [ngClass]="!isCollapsed3 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                    </div>
+                  </div>
+                  <!-- /View All -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Category -->
+
+        <div class="filter-buttons">
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+            Apply
+          </button>
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+            Reset
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!-- /Add Asset -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete </h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <button type="reset" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-continue-btn">
+                Delete
+              </button>
+            </div>
+            <div class="col-6">
+              <button type="submit" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-cancel-btn">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->
+
+
+

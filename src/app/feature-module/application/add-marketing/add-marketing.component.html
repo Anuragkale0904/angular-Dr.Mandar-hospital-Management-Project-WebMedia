@@ -1,0 +1,405 @@
+<!-- Page Wrapper -->
+<div class="card mb-0">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add Marketing</h5>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group-item border-0 mb-0">
+          <div class="row align-item-center">
+
+            <!--Select City  -->
+            <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="City">Select City*</label>
+                <mat-select
+                  [(ngModel)]="City"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select"
+                  >
+                  <mat-option value="Select">Select</mat-option>
+                  <mat-option value="Mumbai">Mumbai</mat-option>
+                  <mat-option value="Amravati"
+                    >Amravati</mat-option
+                    >
+                    <mat-option value="Nagpur">Nagpur</mat-option>
+                    <mat-option value="Akola">Akola</mat-option>
+                    <mat-option value="Yavatmal">Yavatmal</mat-option>
+                    <mat-option value="Wardha">Wardha</mat-option>
+                    <mat-option value="Pune">Pune</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Select Company -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Company">Select Company*</label>
+                  <mat-select
+                    [(ngModel)]="Company"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select"
+                    >
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="WebMedia">WebMedia</mat-option>
+                    <!-- Add Company  -->
+                    <!-- <mat-option value="Amravati"
+                      >Amravati</mat-option
+                      >
+                      <mat-option value="Nagpur">Nagpur</mat-option>
+                      <mat-option value="Akola">Akola</mat-option>
+                      <mat-option value="Yavatmal">Yavatmal</mat-option>
+                      <mat-option value="Wardha">Wardha</mat-option>
+                      <mat-option value="Pune">Pune</mat-option> -->
+                    </mat-select>
+                  </div>
+                </div>
+
+            <!-- Marketing Name -->
+                <div class="col-lg-2 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Marketing Name">Marketing Name*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Name"
+                  />
+                </div>
+              </div>
+              <!-- Mobile -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Mobile*</label>
+                  <input id="label" type="text" class="form-control" placeholder="Enter Mobile" />
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Email*</label>
+                  <input id="label" type="text" class="form-control" placeholder="Enter Email" />
+                </div>
+              </div>
+              <!-- Address -->
+              
+                <div class="col-lg-2 col-md-6 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label" >Address*</label>
+                    <input id="label" type="text" class="form-control" placeholder="Enter Address" />
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label" >Username*</label>
+                    <input id="label" type="text" class="form-control" placeholder="Enter Username"/>
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="col-lg-2 col-md-6 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label" >Password*</label>
+                    <input id="label" type="text" class="form-control" placeholder="Enter Password"/>
+                  </div>
+                </div>
+
+                <!-- PAN -->
+                <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">PAN</label>
+                  
+                    <input id="label" class="form-control" type="file" />
+                  
+                </div>
+              </div>
+
+              <!-- Aadhar Card -->
+              <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Aadhar Card</label>
+                  
+                    <input id="label" class="form-control" type="file" />
+                  
+                </div>
+              </div>
+
+
+              <div class="col-lg-1 col-md-1 col-sm-12">
+                <form class="add-customer-btns text-end pt-4">
+              
+                  <button type="submit" class="btn btn-primary" style="margin-top: 5px;">ADD</button>
+                </form>
+                </div>
+              
+                
+          </div>
+        </div>
+      </div>
+    </div>
+
+                    <!-- Second row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group-item">
+                                    <div class="card-table">
+                                      <div class="card-body">
+                                        <div class="table-responsive no-pagination">
+                                          <table
+                                            matSort
+                                            (matSortChange)="sortData($event)"
+                                            class="table table-center table-hover datatable"
+                                            >
+                                            <thead class="thead-light">
+                                              <tr>
+                                                <th mat-sort-header="Sr. No.">Sr. No.</th>
+                                                <th mat-sort-header="Select City">Select City</th>
+                                                <th mat-sort-header="Select Company">Select Company</th>
+                                                <th mat-sort-header="Marketing Name">Marketing Name</th>
+                                                <th mat-sort-header="Mobile">Mobile</th>
+                                                <th mat-sort-header="Email">Email</th>
+                                                <th mat-sort-header="Username">Username</th>
+                                                <th mat-sort-header="Password">Password</th>
+                                                <th mat-sort-header="PAN">PAN</th>
+                                                <th mat-sort-header="Aadhar Card">Aadhar Card</th>
+                                                <th mat-sort-header="action">Action</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <!-- @for (data of editcreditnotes; track data; let i = $index) { -->
+                                                <tr>
+                                                  <td>1.</td>
+                                                  <td>CHANDRAPUR, WARDHA, NAGPUR, GONDIA, BHANDARA</td>
+                                                  <td>ALLIES LIFESCIENCES, M.ERA, PURPLEAF HEALTHCARE, I CARE PHARMA;</td>
+                                                  <td>VAIBHAV</td>
+                                                  <td>7020346811</td>
+                                                  <td>umesh_07&#64;rediffmail.com</td>
+                                                  <!-- <td>NAGPUR</td> -->
+                                                  <td>umesh_07&#64;rediffmail.com</td>
+                                                  <td>7020346811</td>
+                                                  <td><img src="" alt="img"></td>
+                                                  <td><img src="" alt="img"></td>
+                                                  <td class="d-flex align-items-center">
+                                                    <a
+                                                      href="javascript:void(0);"
+                                                      class="btn-action-icon me-2"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#add_discount"
+                                                      ><span><i class="feather icon-edit"></i></span
+                                                    ></a>
+                                                    <a
+                                                      href="javascript:void(0);"
+                                                      class="btn-action-icon"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#delete_discount"
+                                                      ><span><i class="feather icon-trash-2"></i></span
+                                                    ></a>
+                                                  </td>
+                                                </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+            
+
+                  <!-- Add Tax & Discount Modal -->
+                  <div class="modal custom-modal fade" id="add_discount" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header border-0 pb-0">
+                          <div
+                            class="form-header modal-header-title text-start mb-0 align-center"
+                            >
+                            <h4 class="mb-0">Medical</h4>
+                          </div>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                           
+                            <!--Select City  -->
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="City">Select City*</label>
+                <mat-select
+                  [(ngModel)]="status"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select"
+                  >
+                  <mat-option value="Mumbai">Mumbai</mat-option>
+                  <mat-option value="Amravati"
+                    >Amravati</mat-option
+                    >
+                    <mat-option value="Nagpur">Nagpur</mat-option>
+                    <mat-option value="Akola">Akola</mat-option>
+                    <mat-option value="Yavatmal">Yavatmal</mat-option>
+                    <mat-option value="Wardha">Wardha</mat-option>
+                    <mat-option value="Pune">Pune</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <!-- Select Company -->
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Company">Select Company*</label>
+                  <mat-select
+                    [(ngModel)]="status"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="select custom-mat-select"
+                    >
+                    <mat-option value="WebMedia">WebMedia</mat-option>
+                    <!-- Add Company  -->
+                    <!-- <mat-option value="Amravati"
+                      >Amravati</mat-option
+                      >
+                      <mat-option value="Nagpur">Nagpur</mat-option>
+                      <mat-option value="Akola">Akola</mat-option>
+                      <mat-option value="Yavatmal">Yavatmal</mat-option>
+                      <mat-option value="Wardha">Wardha</mat-option>
+                      <mat-option value="Pune">Pune</mat-option> -->
+                    </mat-select>
+                  </div>
+                </div>
+
+            <!-- Marketing Name -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Marketing Name">Marketing Name*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Name"
+                  />
+                </div>
+              </div>
+              <!-- Mobile -->
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Mobile*</label>
+                  <input id="label" type="text" class="form-control" />
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Email*</label>
+                  <input id="label" type="text" class="form-control" />
+                </div>
+              </div>
+              <!-- Address -->
+              
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label" >Address*</label>
+                    <input id="label" type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label" >Username*</label>
+                    <input id="label" type="text" class="form-control" />
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label" >Password*</label>
+                    <input id="label" type="text" class="form-control" />
+                  </div>
+                </div>
+
+                <!-- PAN -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">PAN</label>
+                  
+                    <input id="label" class="form-control" type="file" />
+                  
+                </div>
+              </div>
+
+              <!-- Aadhar Card -->
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Aadhar Card</label>
+                  
+                    <input id="label" class="form-control" type="file" />
+                  
+                </div>
+              </div>
+                            
+                          </div>
+                        </div>
+                        <div class="modal-footer add-tax-btns">
+                          <button
+                            type="reset"
+                            data-bs-dismiss="modal"
+                            class="btn btn-back cancel-btn me-2"
+                            >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            data-bs-dismiss="modal"
+                            class="btn btn-primary paid-continue-btn"
+                            >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Add Tax & Discount Modal -->
+
+                  <!-- Delete Items Modal -->
+                  <div class="modal custom-modal fade" id="delete_discount" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header border-0 justify-content-center pb-0">
+                          <div class="form-header modal-header-title text-center mb-0">
+                            <h4 class="mb-2">Delete Medical</h4>
+                            <p>Are you sure want to delete?</p>
+                          </div>
+                        </div>
+                        <div class="modal-body">
+                          <div class="modal-btn delete-action">
+                            <div class="row">
+                              <div class="col-6">
+                                <a
+                                  href="javascript:void(0);"
+                                  data-bs-dismiss="modal"
+                                  class="btn btn-primary paid-continue-btn"
+                                  >Delete</a
+                                  >
+                                </div>
+                                <div class="col-6">
+                                  <a
+                                    href="javascript:void(0);"
+                                    data-bs-dismiss="modal"
+                                    class="btn btn-primary paid-cancel-btn"
+                                    >Cancel</a
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                   </div>
+                      <!-- /Delete Items Modal -->
+
