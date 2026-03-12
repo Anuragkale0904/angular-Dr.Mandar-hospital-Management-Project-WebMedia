@@ -489,12 +489,9 @@ export class MedicineMasterComponent implements OnInit {
   }
 
   openEditModal(id: number) {
-
     this.editId = id;
-
     this.url.getMedicineInwardById(id).subscribe({
       next: (res: any) => {
-
         this.edit_inward_date = res.inward_date;
         this.edit_branch_id = +res.branch_id;
         this.edit_medicine_type_id = res.medicine_type_id;

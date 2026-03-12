@@ -96,40 +96,51 @@ export class MediaGalleryComponent {
     return branch ? branch.branch_name : 'N/A';
   }
 
-  searchSalesReturn(): void {
-    // ❌ Nothing selected
+ searchSalesReturn(): void {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const userId = currentUser.id;
+
+    if (!userId) {
+      this.toast.typeError('User context not found. Please log in again.');
+      return;
+    }
+
     if (!this.selectedBranchId && !this.fromDate && !this.toDate) {
       this.toast.typeError('Please select Branch or Date range');
       return;
     }
-    // ❌ Only one date selected
+
     if ((this.fromDate && !this.toDate) || (!this.fromDate && this.toDate)) {
       this.toast.typeError('Please select both From Date and To Date');
       return;
     }
-    // ✅ Build payload dynamically
+
     const payload: any = {};
+
     if (this.selectedBranchId) {
       payload.branch_id = this.selectedBranchId;
     }
+
     if (this.fromDate && this.toDate) {
       payload.from_date = this.fromDate;
       payload.to_date = this.toDate;
     }
-    console.log('Search Payload:', payload);
-    this.url.searchSalesReturnHistory(payload).subscribe({
+
+    this.url.searchSalesReturnHistory(userId, payload).subscribe({
       next: (res: any[]) => {
-        // 🔥 Secure the search results!
-        const allowedBranchIds = this.branches.map((b: any) => b.id);
         const searchResults = res || [];
+
+        // 🔥 FIX: Extract allowed branch names from your loaded branches
+        const allowedBranchNames = this.branches.map((b: any) => b.branch_name);
+
         this.saleReturnList = searchResults.filter((item: any) => {
-          const branchId = item.branch?.id || item.branch_id;
-          return allowedBranchIds.includes(branchId);
+          return allowedBranchNames.includes(item.branch_name);
         });
+
         this.filteredSaleReturnList = [...this.saleReturnList];
         this.pageIndex = 0;
         this.updatePaginatedSaleReturn();
-        console.log('Filtered Search Result:', this.saleReturnList);
+
         if (!this.saleReturnList || this.saleReturnList.length === 0) {
           this.toast.typeWarning('No records found for your assigned branches');
         }
@@ -143,40 +154,32 @@ export class MediaGalleryComponent {
 
   //this is the get method for the loading the data in datatable 
   loadSaleReturnHistory(): void {
-
-    // ✅ Logged in user
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const userId = currentUser.id;
 
-    // ✅ Allowed branches
     const storedBranches = localStorage.getItem('userBranches');
     const userBranches = storedBranches ? JSON.parse(storedBranches) : [];
-    const allowedBranchIds = userBranches.map((b: any) => b.id);
 
-    // ✅ API call with userId
+    // 🔥 FIX: Map by branch_name instead of id
+    const allowedBranchNames = userBranches.map((b: any) => b.branch_name);
+
     this.url.getSaleReturnHistory(userId).subscribe({
       next: (res: any[]) => {
-
         const allReturns = res || [];
 
-        // 🔐 Branch-level security filter
+        // 🔐 Filter using branch_name
         this.saleReturnList = allReturns.filter((item: any) => {
-          const branchId =
-            item.branch?.id ||
-            item.branch_id;
-
-          return allowedBranchIds.includes(branchId);
+          // If the backend already secures the data, you might not even need this filter,
+          // but if you do, check against the name!
+          return allowedBranchNames.includes(item.branch_name);
         });
 
-        // 🔥 Table data
         this.filteredSaleReturnList = [...this.saleReturnList];
-
         this.pageIndex = 0;
         this.updatePaginatedSaleReturn();
 
         console.log('Sales Return History (secured):', this.saleReturnList);
       },
-
       error: (err: any) => {
         console.error('Error loading sale return history', err);
         this.toast.typeError('Failed to load sales return history');
@@ -200,37 +203,39 @@ export class MediaGalleryComponent {
     });
   }
 
-  searchSalesReturnHistory(): void {
-    const payload: any = {};
-    // ✅ Branch only
-    if (this.selectedBranchId) {
-      payload.branch_id = this.selectedBranchId;
-    }
-    // ✅ Date only OR Branch + Date
-    if (this.fromDate && this.toDate) {
-      payload.from_date = this.fromDate;
-      payload.to_date = this.toDate;
-    }
-    // ❌ Nothing selected
-    if (!payload.branch_id && !payload.from_date) {
-      this.toast.typeError('Please select Branch or Date range');
-      return;
-    }
-    console.log('Search Payload:', payload);
-    this.url.searchSalesReturnHistory(payload)
-      .subscribe({
-        next: (res: any[]) => {
-          this.saleReturnList = res || [];
-          if (this.saleReturnList.length === 0) {
-            this.toast.typeWarning('No records found');
-          }
-        },
-        error: (err) => {
-          console.error('Search error', err);
-          this.toast.typeError('Failed to fetch sales return history');
-        }
-      });
-  }
+  // searchSalesReturnHistory(): void {
+  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  //   const userId = currentUser.id;
+  //   const payload: any = {};
+  //   // ✅ Branch only
+  //   if (this.selectedBranchId) {
+  //     payload.branch_id = this.selectedBranchId;
+  //   }
+  //   // ✅ Date only OR Branch + Date
+  //   if (this.fromDate && this.toDate) {
+  //     payload.from_date = this.fromDate;
+  //     payload.to_date = this.toDate;
+  //   }
+  //   // ❌ Nothing selected
+  //   if (!payload.branch_id && !payload.from_date) {
+  //     this.toast.typeError('Please select Branch or Date range');
+  //     return;
+  //   }
+  //   console.log('Search Payload:', payload);
+  //   this.url.searchSalesReturnHistory(userId, payload)
+  //     .subscribe({
+  //       next: (res: any[]) => {
+  //         this.saleReturnList = res || [];
+  //         if (this.saleReturnList.length === 0) {
+  //           this.toast.typeWarning('No records found');
+  //         }
+  //       },
+  //       error: (err) => {
+  //         console.error('Search error', err);
+  //         this.toast.typeError('Failed to fetch sales return history');
+  //       }
+  //     });
+  // }
 
 
   editReturn(id: number) {

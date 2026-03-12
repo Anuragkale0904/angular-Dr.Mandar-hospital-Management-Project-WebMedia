@@ -377,6 +377,7 @@ export class DataservicesService {
       `${this.serverUrl}medicine-sales-return-history/get/${userId}`
     );
   }
+  
   getSaleReturnItems(returnId: number) {
     return this.http.get<any>(
       `${this.serverUrl}medicine-sales-return-history/getItems/${returnId}`
@@ -384,10 +385,10 @@ export class DataservicesService {
   }
 
 
-  searchSalesReturnHistory(payload: any) {
+  searchSalesReturnHistory(userId: number, payload: any) {
     return this.http.post<any[]>(
-      `${this.serverUrl}medicine-sales-return-history/search`,
-      payload
+      `${this.serverUrl}medicine-sales-return-history/search/${userId}`,
+      payload // 🔥 CRUCIAL: You must pass the payload here so the backend gets the dates/branch!
     );
   }
 

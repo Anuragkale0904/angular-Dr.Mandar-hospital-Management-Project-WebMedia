@@ -12,6 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 
 interface Batch {
   batch_no: string;
+  available_qty?: number;
+  expiry_date?: string;
+  mrp?: number;
+  gst?: number;
 }
 
 @Component({
@@ -412,11 +416,21 @@ export class PromotorSalesComponent implements OnInit {
 
 
   selectMedicine(med: any, row: any) {
-
     row.searchMedicine = med.name;
     row.medicine_id = med.id;
     row.medicine_name = med.name;
     row.isMedicineDropdownOpen = false;
+
+    // Clear previously selected batch & fields so old data doesn't linger
+    row.batch_no = '';
+    row.searchBatch = '';
+    row.available_qty = 0;
+    row.quantity = 0;
+    row.expiry_date = '';
+    row.mrp = 0;
+    row.gst = 0;
+    row.base_price = 0;
+    row.total = 0;
 
     const payload = {
       branch_id: this.medicineSale.branch_id,
@@ -424,20 +438,17 @@ export class PromotorSalesComponent implements OnInit {
     };
 
     this.url.getMedicineDetails(payload).subscribe((res: any) => {
+      // Assuming your backend returns an array of batches for this medicine.
+      // If it returns a single object, we wrap it in an array to prevent errors.
+      const batches = Array.isArray(res) ? res : [res];
 
-      row.batch_no = res.batch_no;
-      row.available_qty = res.available_qty;
-      row.expiry_date = res.expiry_date;
-      row.mrp = +res.mrp;
-      row.gst = +res.gst;
-      row.base_price = +res.mrp;
-
-      row.availableBatches = [{ batch_no: res.batch_no }];
+      row.availableBatches = batches;
       row.filteredBatches = [...row.availableBatches];
-      row.searchBatch = res.batch_no;
 
-
-      this.calculateRowTotal(row);
+      // Optional UX improvement: If there is only 1 batch available, auto-select it
+      if (row.availableBatches.length === 1) {
+        this.selectBatch(row.availableBatches[0], row);
+      }
     });
   }
 
@@ -469,14 +480,21 @@ export class PromotorSalesComponent implements OnInit {
 
 
   selectBatch(batch: any, row: any) {
-
+    // Set the selected batch details
     row.batch_no = batch.batch_no;
     row.searchBatch = batch.batch_no;
     row.isBatchDropdownOpen = false;
 
-    // If you want batch-specific details from API, call here
-  }
+    // Auto-fill the remaining fields based on the specifically selected batch
+    row.available_qty = batch.available_qty || 0;
+    row.expiry_date = batch.expiry_date || '';
+    row.mrp = +(batch.mrp || 0);
+    row.gst = +(batch.gst || 0);
+    row.base_price = +(batch.mrp || 0);
 
+    // Recalculate the row total just in case
+    this.calculateRowTotal(row);
+  }
 
 
   calculateRowTotal(row: any): void {

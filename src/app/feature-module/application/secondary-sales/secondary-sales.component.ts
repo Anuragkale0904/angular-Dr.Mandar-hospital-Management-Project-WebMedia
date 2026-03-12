@@ -308,6 +308,7 @@ export class SecondarySalesComponent {
     this.pageIndex = 0;
     this.updatePaginatedSaleHistory();
   }
+  
   printSale(sale: any) {
 
     this.url.getItemsBySaleId(sale.id).subscribe((res: any) => {
