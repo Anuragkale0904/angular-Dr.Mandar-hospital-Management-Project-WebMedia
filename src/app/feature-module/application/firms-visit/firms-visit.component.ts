@@ -169,6 +169,7 @@ export class FirmsVisitComponent {
     } else {
       this.filteredStockList = this.stockList.filter(item =>
         item.medicine_name?.toLowerCase().includes(value) ||
+        item.batch_no?.toLowerCase().includes(value) ||      // 👈 ADD THIS LINE
         item.inward_qty?.toString().includes(value) ||
         item.available_qty?.toString().includes(value) ||
         item.amount?.toString().includes(value)
@@ -179,37 +180,34 @@ export class FirmsVisitComponent {
   }
 
   exportStockPDF() {
-
     if (!this.filteredStockList || this.filteredStockList.length === 0) {
       this.toast.typeWarning('No data available to export');
       return;
     }
 
-    const doc = new jsPDF('landscape'); // landscape for better spacing
+    const doc = new jsPDF('landscape');
 
-    // Title
+    // Title & Filter Details...
     doc.setFontSize(14);
     doc.text('Available Stock Report', 14, 15);
-
-    // Filter Details
     doc.setFontSize(10);
     doc.text(`Branch: ${this.selectedBranchName || 'All'}`, 14, 22);
     doc.text(`From: ${this.fromDate}  To: ${this.toDate}`, 14, 28);
 
-    // Table Headers
+    // 👈 UPDATE HEADERS
     const headers = [[
       'Sr.No',
       'Medicine',
-      'Quantity',
+      'Batch No',
       'Available Qty',
       'Amount'
     ]];
 
-    // Table Data
+    // 👈 UPDATE DATA MAPPING
     const data = this.filteredStockList.map((item, index) => [
       index + 1,
       item.medicine_name || '',
-      item.inward_qty || '',
+      item.batch_no || '',
       item.available_qty || '',
       item.amount || ''
     ]);
@@ -218,54 +216,39 @@ export class FirmsVisitComponent {
       head: headers,
       body: data,
       startY: 35,
-      styles: {
-        fontSize: 10
-      },
-      headStyles: {
-        fillColor: [41, 128, 185]
-      }
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [41, 128, 185] }
     });
 
     doc.save('Available_Stock_Report.pdf');
   }
 
   exportStockExcel() {
-
     if (!this.filteredStockList || this.filteredStockList.length === 0) {
       this.toast.typeWarning('No data available to export');
       return;
     }
 
-    // Prepare Excel Data
+    // 👈 UPDATE EXCEL DATA MAPPING
     const excelData = this.filteredStockList.map((item, index) => ({
       'Sr.No': index + 1,
       'Medicine': item.medicine_name || '',
-      'Quantity': item.inward_qty || '',
+      'Batch No': item.batch_no || '',
       'Available Qty': item.available_qty || '',
       'Amount': item.amount || ''
     }));
 
-    // Convert JSON to worksheet
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(excelData);
-
-    // Create workbook
     const workbook: XLSX.WorkBook = {
       Sheets: { 'Available Stock Report': worksheet },
       SheetNames: ['Available Stock Report']
     };
 
-    // Generate Excel buffer
-    const excelBuffer: any = XLSX.write(workbook, {
-      bookType: 'xlsx',
-      type: 'array'
-    });
-
-    // Create Blob
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     const data: Blob = new Blob([excelBuffer], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
     });
 
-    // Save file
     FileSaver.saveAs(data, 'Available_Stock_Report.xlsx');
   }
 

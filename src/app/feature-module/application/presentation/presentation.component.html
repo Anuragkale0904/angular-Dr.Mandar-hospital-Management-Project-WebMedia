@@ -81,6 +81,7 @@
                 <tr>
                   <th>Select Type</th>
                   <th>Select Medicine</th>
+                  <th>Select Batch</th>
                   <th>Available Qty</th>
                   <th>Transfer Qty</th>
                   <th class="text-center">Action</th>
@@ -129,6 +130,24 @@
                     </div>
                   </td>
 
+                  <td>
+                    <div class="dropdown" (click)="$event.stopPropagation()">
+                      <input type="text" class="form-control form-control-sm dropdown-toggle" [value]="selectedBatchNo"
+                        placeholder="Select Batch" readonly [disabled]="!selectedMedicineId"
+                        (click)="openBatchDropdown()" />
+                      <div class="dropdown-menu w-100 p-2" [class.show]="isBatchDropdownOpen">
+                        <input type="text" class="form-control form-control-sm mb-2" [(ngModel)]="batchSearch"
+                          name="batchSearch" (input)="filterBatches()" placeholder="Search Batch" />
+                        <div class="dropdown-item" *ngFor="let batch of filteredBatches" (click)="selectBatch(batch)">
+                          {{ batch.batch_no }}
+                        </div>
+                        <div *ngIf="filteredBatches.length === 0" class="dropdown-item text-muted">
+                          No batches found
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
                   <td class="fw-semibold">
                     {{ availableQty || 0 }}
                   </td>
@@ -150,6 +169,7 @@
                 <tr *ngFor="let item of transferItems; let i = index" class="align-middle">
                   <td>{{ item.typeName }}</td>
                   <td>{{ item.medicineName }}</td>
+                  <td>{{ item.batch_no }}</td>
                   <td>{{ item.availableQty }}</td>
                   <td>{{ item.transfer_qty }}</td>
                   <td class="text-center">
@@ -323,6 +343,7 @@
               <tr>
                 <th>Select Type</th>
                 <th>Select Medicine</th>
+                <th>Select Batch</th>
                 <th>Available Qty</th>
                 <th>Transfer Qty</th>
                 <th class="text-center">Action</th>
@@ -335,6 +356,7 @@
               <tr *ngFor="let item of editTransferItems; let i = index" class="align-middle">
                 <td>{{ item.typeName }}</td>
                 <td>{{ item.medicineName }}</td>
+                <td>{{ item.batch_no }}</td>
                 <td>{{ item.availableQty }}</td>
 
                 <td>
@@ -383,6 +405,29 @@
                       <div class="dropdown-item" *ngFor="let med of editNewFilteredMedicines"
                         (click)="selectEditNewMedicine(med)">
                         {{ med.name }}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                
+                <!--BATCH-->
+                <td>
+                  <div class="dropdown" (click)="$event.stopPropagation()">
+                    <input type="text" class="form-control form-control-sm dropdown-toggle"
+                      [value]="editNewSelectedBatchNo" placeholder="Select Batch" readonly
+                      [disabled]="!editNewMedicineId" (click)="openEditNewBatchDropdown()" />
+                    
+                    <div class="dropdown-menu w-100 p-2" [class.show]="isEditNewBatchDropdownOpen">
+                      <input type="text" class="form-control form-control-sm mb-2" [(ngModel)]="editNewBatchSearch"
+                        (input)="filterEditNewBatches()" placeholder="Search Batch" />
+                        
+                      <div class="dropdown-item" *ngFor="let batch of editNewFilteredBatches"
+                        (click)="selectEditNewBatch(batch)">
+                        {{ batch.batch_no }}
+                      </div>
+                      
+                      <div *ngIf="editNewFilteredBatches.length === 0" class="dropdown-item text-muted">
+                        No batches found
                       </div>
                     </div>
                   </div>

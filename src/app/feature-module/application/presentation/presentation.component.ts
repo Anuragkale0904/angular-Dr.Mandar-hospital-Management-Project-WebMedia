@@ -116,6 +116,22 @@ export class PresentationComponent {
   editNewAvailableQty: number | null = null;
   editNewTransferQty: number | null = null;
 
+  // 🔹 BATCH DROPDOWN (MAIN)
+  isBatchDropdownOpen: boolean = false;
+  batchSearch: string = '';
+  batches: any[] = [];
+  filteredBatches: any[] = [];
+  selectedBatchNo: string = '';
+  selectedExpiryDate: string = '';
+
+  // 🔹 BATCH DROPDOWN (EDIT NEW ROW)
+  isEditNewBatchDropdownOpen: boolean = false;
+  editNewBatchSearch: string = '';
+  editNewBatches: any[] = [];
+  editNewFilteredBatches: any[] = [];
+  editNewSelectedBatchNo: string = '';
+  editNewSelectedExpiryDate: string = '';
+
   // 🔥 PAGINATION + SEARCH
   filteredStockTransfers: any[] = [];
   paginatedStockTransfers: any[] = [];
@@ -147,21 +163,17 @@ export class PresentationComponent {
 
   @HostListener('document:click')
   closeDropdowns() {
-
-    // 🔹 MAIN FORM
     this.isTransferFromDropdownOpen = false;
     this.isTransferToDropdownOpen = false;
     this.isTypeDropdownOpen = false;
     this.isMedicineDropdownOpen = false;
+    this.isBatchDropdownOpen = false;         // 👈 ADD THIS
 
-    // 🔹 EDIT MODAL (header dropdowns)
     this.isEditTransferFromDropdownOpen = false;
     this.isEditTransferToDropdownOpen = false;
-
-    // 🔹 EDIT MODAL (new row dropdowns)
     this.isEditNewTypeDropdownOpen = false;
     this.isEditNewMedicineDropdownOpen = false;
-
+    this.isEditNewBatchDropdownOpen = false;  // 👈 ADD THIS
   }
 
   openTransferFromDropdown() {
@@ -450,8 +462,10 @@ export class PresentationComponent {
   // }
 
   onMedicineChange() {
-
     this.availableQty = null;
+    this.batches = [];
+    this.selectedBatchNo = '';
+    this.selectedExpiryDate = '';
 
     if (!this.selectedMedicineId || !this.transferFromBranchId) {
       return;
@@ -462,26 +476,23 @@ export class PresentationComponent {
       branch_id: this.transferFromBranchId
     };
 
-    console.log('Calling Available Stock API with:', payload);
-
     this.url.getAvailableStockTransfer(payload).subscribe({
       next: (res: any) => {
-
-        console.log('Available Stock Response:', res);
-
-        this.availableQty = res?.available_stock ?? 0;
-
+        // Load the batches from the API response
+        this.batches = res.batches || [];
+        this.filteredBatches = [...this.batches];
+        this.availableQty = 0; // Wait for user to select a batch
       },
       error: (err) => {
-        console.error('Stock Fetch Error:', err);
+        this.batches = [];
         this.availableQty = 0;
       }
     });
   }
 
   addItem() {
-    if (!this.medicine_type_id || !this.selectedMedicineId || !this.transferQty) {
-      alert('Please select type, medicine and quantity');
+    if (!this.medicine_type_id || !this.selectedMedicineId || !this.selectedBatchNo || !this.transferQty) {
+      alert('Please select type, medicine, batch and quantity');
       return;
     }
 
@@ -501,6 +512,8 @@ export class PresentationComponent {
     this.transferItems.push({
       medicine_type_id: this.medicine_type_id,
       medicine_id: this.selectedMedicineId,
+      batch_no: this.selectedBatchNo,         // 👈 ADD
+      expiry_date: this.selectedExpiryDate,   // 👈 ADD
       transfer_qty: this.transferQty,
       typeName: selectedType?.name,
       medicineName: selectedMedicine?.name,
@@ -510,6 +523,8 @@ export class PresentationComponent {
     // RESET ENTRY ROW
     this.medicine_type_id = null;
     this.selectedMedicineId = null;
+    this.selectedBatchNo = '';                // 👈 ADD
+    this.selectedExpiryDate = '';             // 👈 ADD
     this.transferQty = null;
     this.availableQty = 0;
   }
@@ -735,6 +750,8 @@ export class PresentationComponent {
         typeName: item.type?.name ?? '',
         medicineName: item.medicine?.name ?? '',
         availableQty: 0,
+        batch_no: item.batch_no,                  // 👈 ADD
+  expiry_date: item.expiry_date,
         old_transfer_qty: item.transfer_qty, // 🔥 VERY IMPORTANT
         filteredMedicines: [],
       }));
@@ -801,7 +818,9 @@ export class PresentationComponent {
         stock_transfer_id: this.editTransferId,
         medicine_type_id: item.medicine_type_id,
         medicine_id: item.medicine_id,
-        transfer_qty: item.transfer_qty
+        transfer_qty: item.transfer_qty,
+        batch_no: item.batch_no,
+        expiry_date: item.expiry_date
 
       }))
     };
@@ -1052,25 +1071,24 @@ export class PresentationComponent {
     this.onEditTypeChange(type.id);
   }
 
-  openEditNewMedicineDropdown() {
-
+ openEditNewMedicineDropdown() {
     if (!this.editNewMedicineTypeId) return;
 
     this.isEditNewMedicineDropdownOpen = true;
+    this.editNewMedicineSearch = ''; // Reset search text
 
-    this.editNewFilteredMedicines =
-      this.medicines.filter(m =>
-        m.medicine_type_id === this.editNewMedicineTypeId
-      );
+    // 🐛 FIX: Do not filter by medicine_type_id here. 
+    // The API already filtered it in onEditTypeChange()!
+    this.editNewFilteredMedicines = [...this.medicines];
   }
 
   filterEditNewMedicines() {
     const search = this.editNewMedicineSearch?.toLowerCase() || '';
 
-    this.editNewFilteredMedicines =
-      this.medicines
-        .filter(m => m.medicine_type_id === this.editNewMedicineTypeId)
-        .filter(m => m.name.toLowerCase().includes(search));
+    // 🐛 FIX: Only filter by the medicine name
+    this.editNewFilteredMedicines = this.medicines.filter(m => 
+      m.name.toLowerCase().includes(search)
+    );
   }
 
   selectEditNewMedicine(med: any) {
@@ -1084,11 +1102,8 @@ export class PresentationComponent {
 
   addNewEditItem() {
 
-    if (!this.editNewMedicineTypeId ||
-      !this.editNewMedicineId ||
-      !this.editNewTransferQty) {
-
-      alert('Please fill all fields');
+    if (!this.editNewMedicineTypeId || !this.editNewMedicineId || !this.editNewSelectedBatchNo || !this.editNewTransferQty) {
+      alert('Please fill all fields, including batch');
       return;
     }
 
@@ -1100,6 +1115,8 @@ export class PresentationComponent {
     this.editTransferItems.push({
       medicine_type_id: this.editNewMedicineTypeId,
       medicine_id: this.editNewMedicineId,
+      batch_no: this.editNewSelectedBatchNo,        // 👈 ADD
+    expiry_date: this.editNewSelectedExpiryDate,  // 👈 ADD
       typeName: this.editNewTypeName,
       medicineName: this.editNewMedicineName,
       availableQty: this.editNewAvailableQty,
@@ -1111,6 +1128,8 @@ export class PresentationComponent {
     this.editNewTypeName = '';
     this.editNewMedicineId = null;
     this.editNewMedicineName = '';
+    this.editNewSelectedBatchNo = '';               // 👈 ADD
+  this.editNewSelectedExpiryDate = '';            // 👈 ADD
     this.editNewAvailableQty = null;
     this.editNewTransferQty = null;
   }
@@ -1162,9 +1181,11 @@ export class PresentationComponent {
   }
 
   onEditNewMedicineChange() {
-
     if (!this.editNewMedicineId || !this.editTransferFromBranchId) {
       this.editNewAvailableQty = null;
+      this.editNewBatches = [];
+      this.editNewSelectedBatchNo = '';
+      this.editNewSelectedExpiryDate = '';
       return;
     }
 
@@ -1175,10 +1196,14 @@ export class PresentationComponent {
 
     this.url.getAvailableStockTransfer(payload).subscribe({
       next: (res: any) => {
-        this.editNewAvailableQty = res?.available_stock ?? 0;
+        // Load batches for the edit modal
+        this.editNewBatches = res.batches || [];
+        this.editNewFilteredBatches = [...this.editNewBatches];
+        this.editNewAvailableQty = 0;
       },
       error: () => {
         this.editNewAvailableQty = 0;
+        this.editNewBatches = [];
       }
     });
   }
@@ -1214,6 +1239,68 @@ export class PresentationComponent {
     this.updatePaginatedStockTransfers();
   }
 
+  // ================= BATCH DROPDOWN (MAIN) =================
+  openBatchDropdown() {
+    if (!this.selectedMedicineId) return;
+    this.isBatchDropdownOpen = true;
+    this.batchSearch = '';
+    this.filteredBatches = [...this.batches];
+  }
+
+  filterBatches() {
+    const search = this.batchSearch?.toLowerCase().trim();
+    if (!search) {
+      this.filteredBatches = [...this.batches];
+      return;
+    }
+    this.filteredBatches = this.batches.filter(b =>
+      b.batch_no.toLowerCase().includes(search)
+    );
+  }
+
+  selectBatch(batch: any) {
+    this.selectedBatchNo = batch.batch_no;
+    this.selectedExpiryDate = batch.expiry_date;
+    this.isBatchDropdownOpen = false;
+
+    // Get stock for this specific batch
+    let apiStock = batch.available_qty || 0;
+
+    // Calculate already added quantity for this exact medicine AND batch
+    const alreadyAddedQty = this.transferItems
+      .filter(item => item.medicine_id === this.selectedMedicineId && item.batch_no === this.selectedBatchNo)
+      .reduce((sum, item) => sum + item.transfer_qty, 0);
+
+    // Final remaining stock
+    this.availableQty = Math.max(0, apiStock - alreadyAddedQty);
+  }
+
+  // ================= BATCH DROPDOWN (EDIT NEW ROW) =================
+  openEditNewBatchDropdown() {
+    if (!this.editNewMedicineId) return;
+    this.isEditNewBatchDropdownOpen = true;
+    this.editNewBatchSearch = '';
+    this.editNewFilteredBatches = [...this.editNewBatches];
+  }
+
+  filterEditNewBatches() {
+    const search = this.editNewBatchSearch?.toLowerCase().trim();
+    if (!search) {
+      this.editNewFilteredBatches = [...this.editNewBatches];
+      return;
+    }
+    this.editNewFilteredBatches = this.editNewBatches.filter(b =>
+      b.batch_no.toLowerCase().includes(search)
+    );
+  }
+
+  selectEditNewBatch(batch: any) {
+    this.editNewSelectedBatchNo = batch.batch_no;
+    this.editNewSelectedExpiryDate = batch.expiry_date;
+    this.isEditNewBatchDropdownOpen = false;
+
+    this.editNewAvailableQty = batch.available_qty || 0;
+  }
 
 
 }

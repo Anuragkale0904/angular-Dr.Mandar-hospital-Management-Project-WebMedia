@@ -438,9 +438,8 @@ export class PromotorSalesComponent implements OnInit {
     };
 
     this.url.getMedicineDetails(payload).subscribe((res: any) => {
-      // Assuming your backend returns an array of batches for this medicine.
-      // If it returns a single object, we wrap it in an array to prevent errors.
-      const batches = Array.isArray(res) ? res : [res];
+      // ✅ FIX: Safely extract the 'batches' array from the response object
+      const batches = res.batches && Array.isArray(res.batches) ? res.batches : [];
 
       row.availableBatches = batches;
       row.filteredBatches = [...row.availableBatches];
@@ -485,12 +484,16 @@ export class PromotorSalesComponent implements OnInit {
     row.searchBatch = batch.batch_no;
     row.isBatchDropdownOpen = false;
 
-    // Auto-fill the remaining fields based on the specifically selected batch
-    row.available_qty = batch.available_qty || 0;
+    // ✅ FIX: Use batch.quantity to get the stock limit for this specific batch, 
+    // and map it to row.available_qty.
+    row.available_qty = batch.quantity || batch.available_qty || 0;
     row.expiry_date = batch.expiry_date || '';
     row.mrp = +(batch.mrp || 0);
     row.gst = +(batch.gst || 0);
     row.base_price = +(batch.mrp || 0);
+
+    // Note: We are intentionally NOT touching row.quantity here, 
+    // so the user still has to input the sale quantity manually.
 
     // Recalculate the row total just in case
     this.calculateRowTotal(row);
@@ -639,7 +642,16 @@ export class PromotorSalesComponent implements OnInit {
       return;
     }
 
-    const saleItems = this.items
+    // 🐛 FIX: Slice the array to ignore the input row at index 0
+    const actualAddedItems = this.items.slice(1);
+
+    // 🐛 FIX: Show toast if the user hasn't clicked the Add (+) button
+    if (actualAddedItems.length === 0) {
+      this.toast.typeError('Please add at least one medicine item to the bill');
+      return;
+    }
+
+    const saleItems = actualAddedItems
       .filter(i => i.medicine_id && i.quantity)
       .map(i => {
 
@@ -660,6 +672,12 @@ export class PromotorSalesComponent implements OnInit {
           total: +(baseTotal + gstAmount).toFixed(2)
         };
       });
+
+    // Final safety check just in case added items had invalid quantities
+    if (saleItems.length === 0) {
+      this.toast.typeError('Please ensure added medicines have a valid quantity');
+      return;
+    }
 
     const payload = {
       ...this.medicineSale,
@@ -699,6 +717,7 @@ export class PromotorSalesComponent implements OnInit {
 
     }
   }
+
   resetForm(): void {
 
     this.medicineSale = {
@@ -724,8 +743,6 @@ export class PromotorSalesComponent implements OnInit {
     this.items = [];
     this.items.push(this.createEmptyRow());
   }
-
-
 
   addRowFromInput(): void {
     const inputRow = this.items[0];

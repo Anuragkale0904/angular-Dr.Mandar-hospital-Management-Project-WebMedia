@@ -95,6 +95,21 @@ export class CustomerListComponent {
   filteredEditMedicines: any[] = [];
   editSelectedMedicineId: number | null = null;
 
+  // 🔹 BATCH DROPDOWN (MAIN)
+  isBatchDropdownOpen: boolean = false;
+  batchSearch: string = '';
+  batches: any[] = []; // Populate this from your API when a medicine is selected
+  filteredBatches: any[] = [];
+  selectedBatchNo: string = '';
+  selectedExpiryDate: string = '';
+
+  // 🔹 EDIT BATCH DROPDOWN (EDIT MODAL)
+  isEditBatchDropdownOpen: boolean = false;
+  editBatchSearch: string = '';
+  editBatches: any[] = []; // Populate this from your API
+  filteredEditBatches: any[] = [];
+  editSelectedBatchNo: string = '';
+  editSelectedExpiryDate: string = '';
 
   constructor(private data: DataService, private toast: ToasterService, public url: DataservicesService, private pagination: PaginationService, private router: Router) { }
 
@@ -127,6 +142,8 @@ export class CustomerListComponent {
     this.isIssueToDropdownOpen = false;
     this.isTypeDropdownOpen = false;
     this.isMedicineDropdownOpen = false;
+    this.isBatchDropdownOpen = false;      // Add this
+    this.isEditBatchDropdownOpen = false;  // Add this
   }
 
   openIssueFromDropdown() {
@@ -307,9 +324,11 @@ export class CustomerListComponent {
 
 
   onMedicineChange() {
-
     if (!this.issueFromBranchId || !this.selectedMedicineId) {
       this.availableQty = 0;
+      this.batches = [];
+      this.selectedBatchNo = '';
+      this.selectedExpiryDate = '';
       return;
     }
 
@@ -318,30 +337,23 @@ export class CustomerListComponent {
       this.selectedMedicineId
     ).subscribe({
       next: (res: any) => {
-
-        let apiStock = 0;
-
         if (res.status) {
-          apiStock = res.available_qty;
+          // Load the batches from the API response
+          this.batches = res.batches || [];
+          this.filteredBatches = [...this.batches];
+        } else {
+          this.batches = [];
+          this.filteredBatches = [];
         }
 
-        // 🔥 Calculate already added quantity for this medicine
-        const alreadyAddedQty = this.issueItems
-          .filter(item => item.medicine_id === this.selectedMedicineId)
-          .reduce((sum, item) => sum + item.transfer_qty, 0);
-
-        // 🔥 Final remaining stock
-        this.availableQty = apiStock - alreadyAddedQty;
-
-        if (this.availableQty < 0) {
-          this.availableQty = 0;
-        }
-
-
-        console.log('Remaining Stock:', this.availableQty);
+        // Reset batch selection and quantity until a user selects a specific batch
+        this.selectedBatchNo = '';
+        this.selectedExpiryDate = '';
+        this.availableQty = 0;
       },
       error: (err) => {
         console.error('Stock Fetch Error:', err);
+        this.batches = [];
         this.availableQty = 0;
         this.toast.typeError('Failed to fetch available stock');
       }
@@ -377,6 +389,74 @@ export class CustomerListComponent {
     this.onMedicineChange(); // 🔥 keep your stock logic
   }
 
+  // ================= BATCH DROPDOWN (MAIN) =================
+  openBatchDropdown() {
+    if (!this.selectedMedicineId) return;
+    this.isBatchDropdownOpen = true;
+    this.batchSearch = '';
+    this.filteredBatches = [...this.batches];
+  }
+
+  filterBatches() {
+    const search = this.batchSearch?.toLowerCase().trim();
+    if (!search) {
+      this.filteredBatches = [...this.batches];
+      return;
+    }
+    this.filteredBatches = this.batches.filter(b =>
+      b.batch_no.toLowerCase().includes(search)
+    );
+  }
+
+  selectBatch(batch: any) {
+    this.selectedBatchNo = batch.batch_no;
+    this.selectedExpiryDate = batch.expiry_date;
+    this.isBatchDropdownOpen = false;
+
+    // Get stock for this specific batch
+    let apiStock = batch.available_qty;
+
+    // Calculate already added quantity for this exact medicine AND batch
+    const alreadyAddedQty = this.issueItems
+      .filter(item => item.medicine_id === this.selectedMedicineId && item.batch_no === this.selectedBatchNo)
+      .reduce((sum, item) => sum + item.transfer_qty, 0);
+
+    // Final remaining stock
+    this.availableQty = apiStock - alreadyAddedQty;
+
+    if (this.availableQty < 0) {
+      this.availableQty = 0;
+    }
+  }
+
+  // ================= BATCH DROPDOWN (EDIT) =================
+  openEditBatchDropdown() {
+    if (!this.editSelectedMedicineId) return;
+    this.isEditBatchDropdownOpen = true;
+    this.editBatchSearch = '';
+    this.filteredEditBatches = [...this.editBatches];
+  }
+
+  filterEditBatches() {
+    const search = this.editBatchSearch?.toLowerCase().trim();
+    if (!search) {
+      this.filteredEditBatches = [...this.editBatches];
+      return;
+    }
+    this.filteredEditBatches = this.editBatches.filter(b =>
+      b.batch_no.toLowerCase().includes(search)
+    );
+  }
+
+  selectEditBatch(batch: any) {
+    this.editSelectedBatchNo = batch.batch_no;
+    this.editSelectedExpiryDate = batch.expiry_date;
+    this.isEditBatchDropdownOpen = false;
+
+    // Set available quantity based on the selected batch
+    this.editAvailableQty = batch.available_qty;
+  }
+
 
   addRow() {
     this.issueRows.push({
@@ -399,6 +479,11 @@ export class CustomerListComponent {
       return;
     }
 
+    // Inside addItem():
+    if (!this.medicine_type_id || !this.selectedMedicineId || !this.selectedBatchNo || !this.issueQty) {
+      alert('Please select type, medicine, batch and quantity');
+      return;
+    }
 
     const selectedType = this.medicineTypes.find(
       t => t.id === this.medicine_type_id
@@ -412,6 +497,8 @@ export class CustomerListComponent {
     this.issueItems.push({
       medicine_type_id: this.medicine_type_id,
       medicine_id: this.selectedMedicineId,
+      batch_no: this.selectedBatchNo, // Add this
+      expiry_date: this.selectedExpiryDate,
       transfer_qty: this.issueQty,
       typeName: selectedType?.name,
       medicineName: selectedMedicine?.name,
@@ -423,6 +510,8 @@ export class CustomerListComponent {
     // RESET
     this.medicine_type_id = null;
     this.selectedMedicineId = null;
+    this.selectedBatchNo = '';
+    this.selectedExpiryDate = '';
     this.issueQty = null;
     this.availableQty = 0;
 
@@ -456,8 +545,8 @@ export class CustomerListComponent {
         medicine_id: item.medicine_id,
         medicine_type: item.typeName,
         medicine_type_id: item.medicine_type_id,
-        batch_no: "",
-        expiry_date: "",
+        batch_no: item.batch_no,
+        expiry_date: item.expiry_date,
         available_qty: item.availableQty,
         issue_qty: item.transfer_qty
       }))
@@ -658,6 +747,8 @@ export class CustomerListComponent {
           medicine_type_id: item.medicine_type_id,
           typeName: item.medicine_type,
           medicineName: item.medicine_name,
+          batch_no: item.batch_no, 
+          expiry_date: item.expiry_date, 
           transfer_qty: item.issue_qty,
           availableQty: item.available_qty
         }));
@@ -680,9 +771,16 @@ export class CustomerListComponent {
       return;
     }
 
+    if (!this.editMedicineTypeId || !this.editSelectedMedicineId || !this.editSelectedBatchNo || !this.editIssueQty) {
+      this.toast.typeError('Please select type, medicine, batch and quantity');
+      return;
+    }
+
     this.editIssueItems.push({
-      medicine_type_id: this.editMedicineTypeId,   // ✅ FIXED
-      medicine_id: this.editSelectedMedicineId,    // ✅ FIXED
+      medicine_type_id: this.editMedicineTypeId,
+      medicine_id: this.editSelectedMedicineId,
+      batch_no: this.editSelectedBatchNo, // Add this
+      expiry_date: this.editSelectedExpiryDate,
       transfer_qty: this.editIssueQty,
       typeName: this.editSelectedTypeName,
       medicineName: this.editSelectedMedicineName,
@@ -692,6 +790,8 @@ export class CustomerListComponent {
     // reset
     this.editSelectedTypeName = '';
     this.editSelectedMedicineName = '';
+    this.editSelectedBatchNo = '';
+    this.editSelectedExpiryDate = '';
     this.editIssueQty = null;
     this.editAvailableQty = 0;
   }
@@ -718,8 +818,8 @@ export class CustomerListComponent {
         medicine_id: item.medicine_id,
         medicine_type: item.typeName,
         medicine_type_id: item.medicine_type_id,
-        batch_no: "",
-        expiry_date: "",
+        batch_no: item.batch_no,
+        expiry_date: item.expiry_date,
         available_qty: item.availableQty,
         issue_qty: item.transfer_qty
       }))
@@ -819,10 +919,15 @@ export class CustomerListComponent {
   }
 
   selectEditMedicine(medicine: any) {
-
     this.editSelectedMedicineId = medicine.id;
     this.editSelectedMedicineName = medicine.name;
     this.isEditMedicineDropdownOpen = false;
+
+    // Reset batch and qty
+    this.editSelectedBatchNo = '';
+    this.editSelectedExpiryDate = '';
+    this.editAvailableQty = 0;
+    this.editBatches = [];
 
     // ✅ NULL SAFETY CHECK
     if (!this.issueFromBranchId || !this.editSelectedMedicineId) {
@@ -834,19 +939,16 @@ export class CustomerListComponent {
       this.editSelectedMedicineId
     ).subscribe({
       next: (res: any) => {
-
-        let apiStock = 0;
-
         if (res.status) {
-          apiStock = res.available_qty;
+          // Load the batches for the edit modal
+          this.editBatches = res.batches || [];
+          this.filteredEditBatches = [...this.editBatches];
         }
-
-        this.editAvailableQty = apiStock;
-
       },
       error: () => {
         this.toast.typeError('Failed to fetch available stock');
         this.editAvailableQty = 0;
+        this.editBatches = [];
       }
     });
   }
