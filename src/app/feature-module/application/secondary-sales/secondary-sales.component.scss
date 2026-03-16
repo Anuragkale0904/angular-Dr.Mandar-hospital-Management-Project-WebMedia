@@ -10,49 +10,6 @@
     margin-right: 5px;
 }
 
-@media print {
-
-    body * {
-        visibility: hidden;
-    }
-
-    #printSection,
-    #printSection * {
-        visibility: visible;
-    }
-
-    #printSection {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-    }
-
-}
-
-
-/* PRINT MODE */
-@media print {
-
-    body * {
-        visibility: hidden;
-    }
-
-    #printSection,
-    #printSection * {
-        visibility: visible;
-    }
-
-    #printSection {
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-    }
-
-}
-
 /* Hide print section outside screen view WITHOUT display:none */
 #printSection {
     position: fixed;
@@ -61,46 +18,10 @@
     width: 100%;
 }
 
-/* PRINT MODE */
 @media print {
-
-    body * {
-        visibility: hidden;
-    }
-
-    #printSection,
-    #printSection * {
-        visibility: visible;
-    }
-
     #printSection {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
+        left: 0 !important;
+        top: 0 !important;
+        position: absolute !important;
     }
-
-}
-
-// /* Hide bill normally */
-// .print-wrapper {
-//     display: none;
-// }
-
-// /* PRINT MODE */
-// @media print {
-
-//     .screen-content {
-//         display: none !important;
-//     }
-
-//     .print-wrapper {
-//         display: block !important;
-//         width: 100%;
-//     }
-
-//     body {
-//         margin: 0;
-//     }
-
-// }
+}

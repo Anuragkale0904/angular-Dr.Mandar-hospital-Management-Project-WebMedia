@@ -319,55 +319,7 @@ export class SecondarySalesComponent {
       this.cd.detectChanges();
 
       setTimeout(() => {
-
-        const printContents = document.getElementById('printSection')?.innerHTML;
-
-        const iframe = document.createElement('iframe');
-        iframe.style.position = 'fixed';
-        iframe.style.right = '0';
-        iframe.style.bottom = '0';
-        iframe.style.width = '0';
-        iframe.style.height = '0';
-        iframe.style.border = '0';
-
-        document.body.appendChild(iframe);
-
-        const iframeDoc = iframe.contentWindow?.document;
-
-        const styles = Array.from(document.querySelectorAll('style, link[rel="stylesheet"]'))
-          .map(style => style.outerHTML)
-          .join('');
-
-        const baseUrl = window.location.origin;
-
-        iframeDoc?.open();
-        iframeDoc?.write(`
-    <html>
-      <head>
-        <base href="${baseUrl}/">
-        <title>Print Bill</title>
-        ${styles}
-        <style>
-          body {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-        </style>
-      </head>
-      <body>
-        ${printContents}
-      </body>
-    </html>
-  `);
-        iframeDoc?.close();
-
-        iframe.contentWindow?.focus();
-        iframe.contentWindow?.print();
-
-        setTimeout(() => {
-          document.body.removeChild(iframe);
-        }, 1000);
-
+        window.print();
       }, 500);
 
     });

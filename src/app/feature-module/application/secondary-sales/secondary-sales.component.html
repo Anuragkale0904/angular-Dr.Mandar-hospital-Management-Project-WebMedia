@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-md-12">
           <form (ngSubmit)="searchSaleHistory()">
-            <div class="form-group-item">
+            <div class="form-group-item mb-4">
               <!-- 🔥 IMPORTANT: align-items-end -->
               <div class="row align-items-end g-3">
                 <div class="col-lg-3 col-md-4 col-sm-12">
@@ -77,9 +77,9 @@
 
 
       <div class="row">
-        <div class="col-sm-12 pt-1 pb-2">
+        <div class="col-sm-12 pt-0 pb-2">
           <div class="table-responsive">
-            <div class="d-flex justify-content-end mb-0 p-0">
+            <div class="d-flex justify-content-end mb-3 p-0">
               <input type="text" class="form-control form-control-sm w-auto" style="min-width:180px;height:30px;"
                 placeholder="Search" (input)="searchTable($event)">
             </div>
@@ -268,7 +268,7 @@
     <!-- /Delete Items Modal -->
   </div>
 
-  <div id="printSection">
+  <div id="printSection" class="print-section">
     <app-print-bill [sale]="selectedSale" [items]="selectedItems">
     </app-print-bill>
   </div>

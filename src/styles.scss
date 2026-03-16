@@ -882,26 +882,22 @@ ngx-editor .NgxEditor {
 
 /* ================= PRINT SETTINGS ================= */
 
-.print-wrapper {
-  display: none;
-}
-
 @media print {
-
   body * {
-    display: none !important;
+    visibility: hidden;
   }
-
-  .print-wrapper,
-  .print-wrapper * {
-    display: block !important;
+  
+  .print-section, 
+  .print-section * {
+    visibility: visible;
   }
-
-  .print-wrapper {
+  
+  .print-section {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    margin: 0;
+    padding: 0;
   }
-
 }

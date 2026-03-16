@@ -8,7 +8,6 @@ label {
 /* ===== Table Styling ===== */
 .table-responsive {
     overflow: visible !important;
-    /* allow dropdowns to escape */
 }
 
 #medicineTable {
@@ -179,11 +178,9 @@ label {
     cursor: pointer;
 }
 
-/* ===== Responsive Fix ===== */
-@media (max-width: 992px) {
-    .medicine-sale-table {
-        min-width: 950px;
-    }
+/* ===== Dropdown Minimum Width on Mobile ===== */
+.medicine-sale-table .dropdown-menu {
+    min-width: 200px;
 }
 
 /* ===== Ensure parent relative for dropdown positioning ===== */

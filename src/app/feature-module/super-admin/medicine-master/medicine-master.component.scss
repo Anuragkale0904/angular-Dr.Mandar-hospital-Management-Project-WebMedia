@@ -8,64 +8,50 @@
   border-spacing: 0;
 }
 
+#medicineInwardTable {
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-spacing: 0;
+}
+
 /* Prevent header text wrapping */
-#medicineInwardTable th,
-#medicineInwardTable td {
+table th,
+table td {
   white-space: nowrap;
   vertical-align: middle;
   font-size: 14px;
 }
 
 /* Column widths (IMPORTANT) */
-#medicineInwardTable th:nth-child(1),
-#medicineInwardTable td:nth-child(1) {
-  width: 70px;
-}
+table th:nth-child(1),
+table td:nth-child(1) { width: 70px; }
 
-#medicineInwardTable th:nth-child(2),
-#medicineInwardTable td:nth-child(2) {
-  width: 120px;
-}
+table th:nth-child(2),
+table td:nth-child(2) { width: 120px; }
 
-#medicineInwardTable th:nth-child(3),
-#medicineInwardTable td:nth-child(3) {
-  width: 140px;
-}
+table th:nth-child(3),
+table td:nth-child(3) { width: 140px; }
 
-#medicineInwardTable th:nth-child(4),
-#medicineInwardTable td:nth-child(4) {
-  width: 120px;
-}
+table th:nth-child(4),
+table td:nth-child(4) { width: 120px; }
 
-#medicineInwardTable th:nth-child(5),
-#medicineInwardTable td:nth-child(5) {
-  width: 110px;
-}
+table th:nth-child(5),
+table td:nth-child(5) { width: 110px; }
 
-#medicineInwardTable th:nth-child(6),
-#medicineInwardTable td:nth-child(6) {
-  width: 120px;
-}
+table th:nth-child(6),
+table td:nth-child(6) { width: 120px; }
 
-#medicineInwardTable th:nth-child(7),
-#medicineInwardTable td:nth-child(7) {
-  width: 90px;
-}
+table th:nth-child(7),
+table td:nth-child(7) { width: 90px; }
 
-#medicineInwardTable th:nth-child(8),
-#medicineInwardTable td:nth-child(8) {
-  width: 90px;
-}
+table th:nth-child(8),
+table td:nth-child(8) { width: 90px; }
 
-#medicineInwardTable th:nth-child(9),
-#medicineInwardTable td:nth-child(9) {
-  width: 80px;
-}
+table th:nth-child(9),
+table td:nth-child(9) { width: 80px; }
 
-#medicineInwardTable th:nth-child(10),
-#medicineInwardTable td:nth-child(10) {
-  width: 160px;
-}
+table th:nth-child(10),
+table td:nth-child(10) { width: 160px; }
 
 /* 
 #medicineInwardTable th:nth-child(11),
@@ -73,160 +59,29 @@
 
 
 /* ===== STICKY ACTION COLUMN – FINAL WORKING ===== */
-
-#medicineInwardTable th:last-child,
-#medicineInwardTable td:last-child {
-  position: sticky;
-  right: 0;
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
+table th:last-child,
+table td:last-child {
+  position: sticky !important;
+  right: 0 !important;
+  width: 120px !important;
+  min-width: 120px !important;
+  max-width: 120px !important;
   text-align: center;
   white-space: nowrap;
   background-color: #fff;
-  /* 🔥 REQUIRED */
   z-index: 5;
   border-left: 1px solid #dee2e6;
 }
 
-/* Header above body */
-#medicineInwardTable thead th:last-child {
-  z-index: 6;
-  background-color: #f8f9fa;
+table th:last-child {
+  background-color: #e4e2fd !important;
+  z-index: 10 !important;
 }
 
-/* Icons */
-#medicineInwardTable td:last-child i {
+table td:last-child i {
   margin: 0 6px;
   font-size: 15px;
   cursor: pointer;
-}
-
-
-/* ===============================
-   DATATABLE STICKY ACTION FIX
-================================ */
-
-/* Required for scrollX */
-#medicineInwardTable {
-  table-layout: fixed;
-  width: 100%;
-}
-
-
-/* #medicineInwardTable th:nth-child(12),
-#medicineInwardTable td:nth-child(12) {  /* Action */
-/* width: 120px;
-  min-width: 120px;
-  text-align: center;
-  white-space: nowrap;
-} */
-/* ===============================
-   STICKY ACTION COLUMN (HEADER + BODY)
-================================ */
-
-#medicineInwardTable th:last-child,
-#medicineInwardTable td:last-child {
-  position: sticky;
-  right: 0;
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #ffffff;
-  /* 🔥 REQUIRED */
-  border-left: 1px solid #dee2e6;
-}
-
-/* BODY */
-#medicineInwardTable td:last-child {
-  z-index: 5;
-}
-
-/* HEADER (MUST BE ABOVE BODY) */
-#medicineInwardTable thead th:last-child {
-  z-index: 10;
-  background-color: #f8f9fa;
-  /* solid header bg */
-}
-
-/* Icon spacing */
-#medicineInwardTable td:nth-child(12) i {
-  margin: 0 6px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-// /* Datatable footer alignment */
-// .dataTables_info {
-//   float: left;
-//   padding-top: 8px;
-// }
-
-// .dataTables_paginate {
-//   float: right;
-//   padding-top: 8px;
-// }
-
-// .dataTables_wrapper .row:last-child {
-//   margin-top: 10px;
-// }
-
-/* ===============================
-   DATATABLE STICKY ACTION COLUMN
-   (BODY + HEADER – FINAL)
-================================ */
-
-/* BODY (scroll body table) */
-#medicineInwardTable td:last-child {
-  position: sticky;
-  right: 0;
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #ffffff;
-  border-left: 1px solid #dee2e6;
-  z-index: 5;
-}
-
-// /* HEADER (DataTables cloned header table) */
-.dataTables_scrollHead thead th:last-child {
-  position: sticky;
-  right: 0;
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #f8f9fa;
-  /* REQUIRED */
-  border-left: 1px solid #dee2e6;
-  z-index: 20;
-  /* MUST be higher than body */
-}
-
-// /* Ensure sticky works */
-// .dataTables_scrollHead,
-// .dataTables_scrollBody {
-//   overflow: visible !important;
-// }
-
-/* MATCH ACTION HEADER WITH TABLE HEADER THEME */
-.dataTables_scrollHead thead th:last-child {
-  position: sticky;
-  right: 0;
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #e6e7ff;
-  /* ✅ MATCHED HEADER COLOR */
-  border-left: 1px solid #d0d3ff;
-  z-index: 20;
 }
 
 ::ng-deep .mat-mdc-form-field {
@@ -277,4 +132,3 @@
 .dropdown-item:hover {
   background-color: #f1f1f1;
 }
-
