@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataservicesService {
 
-  serverUrl = 'https://webmediaindia.in/dr_mandar/Dr_mandar_Api/public/api/';
+  serverUrl = 'https://paranjpeeyecare.in/Dr_mandar_Api/public/api/';
 
   constructor(@Inject(HttpClient) private http: HttpClient) { }
 
