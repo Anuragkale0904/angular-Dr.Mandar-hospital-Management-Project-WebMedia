@@ -823,7 +823,7 @@ export class DataService {
         },
 
         {
-          menuValue: 'Medicine Issue',
+          menuValue: 'Medicine Stock Transfer ',
           route: routes.customer,
           view: true,
           hasSubRoute: false,

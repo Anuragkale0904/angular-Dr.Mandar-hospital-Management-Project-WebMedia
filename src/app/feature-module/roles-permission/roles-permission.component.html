@@ -124,13 +124,13 @@
                     </div>
                   </div>
 
-                  <div class="col-lg-3 col-md-4 col-sm-6">
+                  <!-- <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="form-check mb-2">
                       <input class="form-check-input" type="checkbox" [value]="'stock_transfer'"
                         (change)="onRightChange($event)">
-                      <label class="form-check-label" for="customer">Medicine Stock Transfer</label>
+                      <label class="form-check-label" for="customer" >Medicine Stock Transfer</label>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="form-check mb-2">
@@ -319,11 +319,13 @@
           <div class="col-md-4 mb-2" *ngFor="let right of [
               'dashboard','add_branch','add_medicine_type',
               'add_medicine','medicine_inward','medicine_issue',
-              'medicine_received','stock_transfer','sale',
+              'medicine_received','sale',
               'sale_history','sale_return','sale_return_history',
               'total_collection','branch_wise','inventory_report',
               'stock_report','user_management','logout'
               ]">
+
+              <!-- 'stock_transfer' -->
 
             <div class="form-check">
               <input type="checkbox" class="form-check-input" [value]="right" [checked]="selectedRights.includes(right)"

@@ -48,7 +48,7 @@ export class MedicineMasterComponent implements OnInit {
   edit_expiry_date = '';
   edit_quantity: any;
   edit_mrp: any;
-  edit_gst: any;
+  edit_gst: any = '0';
 
   editSelectedBranchName = '';
   editSelectedTypeName = '';
@@ -78,7 +78,7 @@ export class MedicineMasterComponent implements OnInit {
   medicine_id: string = '';
   quantity: string = '';
   mrp: string = '';
-  gst: string = '';
+  gst: string = '0';
   batch_no: string = '';
   expiry_date: string = '';
   // holds selected id
@@ -250,9 +250,17 @@ export class MedicineMasterComponent implements OnInit {
     );
   }
 
+  onGstBlur() {
+    if (!this.gst || this.gst.toString().trim() === '') {
+      this.gst = '0';
+    }
+  }
 
-
-
+  onEditGstBlur() {
+    if (this.edit_gst === null || this.edit_gst === undefined || this.edit_gst.toString().trim() === '') {
+      this.edit_gst = '0';
+    }
+  }
 
   // ✅ API CALL  to get data in the datatable
   getMedicineInward() {
@@ -309,25 +317,28 @@ export class MedicineMasterComponent implements OnInit {
 
 
   addMedicineInward() {
-    // Basic validation
+    // 1. Force default to 0 if somehow empty before submit
+    if (!this.gst || this.gst.toString().trim() === '') {
+      this.gst = '0';
+    }
+
+    // 2. Removed !this.gst from validation
     if (
-      !this.branch_id ||   // ✅ ADD THIS
+      !this.branch_id ||
       !this.inward_date ||
       !this.medicine_type_id ||
       !this.medicine_id ||
       !this.batch_no.trim() ||
       !this.expiry_date ||
       !this.quantity ||
-      !this.mrp ||
-      !this.gst
+      !this.mrp
     ) {
       this.toast.typeError('All fields are required', 'Error');
       return;
     }
 
-
     const payload = {
-      branch_id: Number(this.branch_id), // ✅ ADD THIS
+      branch_id: Number(this.branch_id),
       inward_date: this.inward_date,
       medicine_type_id: this.medicine_type_id,
       medicine_id: this.medicine_id,
@@ -338,13 +349,11 @@ export class MedicineMasterComponent implements OnInit {
       gst: this.gst,
     };
 
-
     this.url.addMedicineInward(payload).subscribe({
       next: (res: any) => {
         this.toast.typeSuccess('Medicine inward added successfully!', 'Success');
 
-
-        // Clear form
+        // Clear form (Notice gst is set to '0' instead of '')
         this.inward_date = '';
         this.medicine_type_id = null;
         this.medicine_id = '';
@@ -352,7 +361,7 @@ export class MedicineMasterComponent implements OnInit {
         this.expiry_date = '';
         this.quantity = '';
         this.mrp = '';
-        this.gst = '';
+        this.gst = '0';
 
         // Reload table
         this.getMedicineInward();
@@ -362,7 +371,6 @@ export class MedicineMasterComponent implements OnInit {
       }
     });
   }
-
 
   // called when trash icon is clicked
   openDeleteModal(id: number) {
@@ -533,7 +541,13 @@ export class MedicineMasterComponent implements OnInit {
 
     if (!this.editId) return;
 
+    // 1. Force default to 0 if empty before submit
+    if (this.edit_gst === null || this.edit_gst === undefined || this.edit_gst.toString().trim() === '') {
+      this.edit_gst = '0';
+    }
+
     // Basic validation (recommended)
+    // 2. Removed !this.edit_gst from validation
     if (
       !this.edit_branch_id ||
       !this.edit_inward_date ||
@@ -542,8 +556,7 @@ export class MedicineMasterComponent implements OnInit {
       !this.edit_batch_no ||
       !this.edit_expiry_date ||
       !this.edit_quantity ||
-      !this.edit_mrp ||
-      !this.edit_gst
+      !this.edit_mrp
     ) {
       this.toast.typeError('All fields are required');
       return;

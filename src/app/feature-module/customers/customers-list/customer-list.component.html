@@ -3,7 +3,7 @@
     <!-- Page Header -->
     <div class="page-header">
       <div class="content-page-header">
-        <h6>Medicine Issue</h6>
+        <h6>Medicine Stock Transfer</h6>
       </div>
     </div>
     <!-- /Page Header -->
@@ -14,7 +14,7 @@
             <!-- Date -->
             <div class="col-lg-3 col-md-4 col-sm-12">
               <label class="form-label small mb-1 text-dark text-center d-block">
-                Date of Issue <span class="text-danger">*</span>
+                Date of Transfer <span class="text-danger">*</span>
               </label>
               <input type="date" class="form-control form-control-sm text-dark" [(ngModel)]="issueDate"
                 name="issueDate" />
@@ -23,7 +23,7 @@
             <!-- Issue From -->
             <div class="col-lg-3 col-md-4 col-sm-12">
               <label class="form-label small mb-1 text-dark text-center d-block">
-                Issue From <span class="text-danger">*</span>
+                Transfer From <span class="text-danger">*</span>
               </label>
               <div class="dropdown" (click)="$event.stopPropagation()">
                 <input type="text" class="form-control form-control-sm text-dark dropdown-toggle"
@@ -46,7 +46,7 @@
             <!-- Issue To -->
             <div class="col-lg-3 col-md-4 col-sm-12">
               <label class="form-label small mb-1 text-dark text-center d-block">
-                Issue To <span class="text-danger">*</span>
+                Transfer To <span class="text-danger">*</span>
               </label>
               <div class="dropdown" (click)="$event.stopPropagation()">
                 <input type="text" class="form-control form-control-sm text-dark dropdown-toggle"
@@ -80,7 +80,7 @@
                   <th>Select Medicine</th>
                   <th>Select Batch</th>
                   <th>Available Qty</th>
-                  <th>Issue Qty</th>
+                  <th>Transfer Qty</th>
                   <th class="text-center">Action</th>
                 </tr>
               </thead>
@@ -196,9 +196,9 @@
           <thead>
             <tr>
               <th>Sr.No</th>
-              <th>Date of Issue</th>
-              <th>Issue From</th>
-              <th>Issue To</th>
+              <th>Date of Transfer</th>
+              <th>Transfer From</th>
+              <th>Transfer To</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -243,7 +243,7 @@
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Issued Medicines</h5>
+        <h5 class="modal-title">Transfered Medicines</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
@@ -288,8 +288,8 @@
     <div class="modal-content">
       <div class="modal-body">
         <div class="form-header">
-          <h3>Delete Issued Medicines</h3>
-          <p>Are you sure you want to delete this issued medicines?</p>
+          <h3>Delete Transfered Medicines</h3>
+          <p>Are you sure you want to delete this Transfered medicines?</p>
 
         </div>
         <div class="modal-btn delete-action">
@@ -317,7 +317,7 @@
 
       <!-- Header -->
       <div class="modal-header">
-        <h5 class="modal-title">Edit Issued Medicines</h5>
+        <h5 class="modal-title">Edit Transfered Medicines</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
@@ -362,7 +362,7 @@
                 <th>Select Medicine</th>
                 <th>Select Batch</th>
                 <th>Available Qty</th>
-                <th>Issue Qty</th>
+                <th>Transfer Qty</th>
                 <th class="text-center">Action</th>
               </tr>
             </thead>

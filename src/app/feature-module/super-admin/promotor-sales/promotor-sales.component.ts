@@ -414,7 +414,6 @@ export class PromotorSalesComponent implements OnInit {
   }
 
 
-
   selectMedicine(med: any, row: any) {
     row.searchMedicine = med.name;
     row.medicine_id = med.id;
@@ -437,20 +436,39 @@ export class PromotorSalesComponent implements OnInit {
       medicine_id: med.id
     };
 
-    this.url.getMedicineDetails(payload).subscribe((res: any) => {
-      // ✅ FIX: Safely extract the 'batches' array from the response object
-      const batches = res.batches && Array.isArray(res.batches) ? res.batches : [];
+    this.url.getMedicineDetails(payload).subscribe(
+      (res: any) => {
+        // Handle case where backend returns HTTP 200 OK but status is false
+        if (res.status === false) {
+          this.toast.typeError(res.message || 'Medicine is expired or unavailable');
+          row.availableBatches = [];
+          row.filteredBatches = [];
+          return;
+        }
 
-      row.availableBatches = batches;
-      row.filteredBatches = [...row.availableBatches];
+        const batches = res.batches && Array.isArray(res.batches) ? res.batches : [];
+        row.availableBatches = batches;
+        row.filteredBatches = [...row.availableBatches];
 
-      // Optional UX improvement: If there is only 1 batch available, auto-select it
-      if (row.availableBatches.length === 1) {
-        this.selectBatch(row.availableBatches[0], row);
+        if (row.availableBatches.length === 1) {
+          this.selectBatch(row.availableBatches[0], row);
+        }
+      },
+      (error) => {
+        // ✅ FIX: Extract the message from the error payload
+        // Angular stores the backend's JSON response inside `error.error`
+        const errorMessage = error?.error?.message || error?.message || 'Failed to fetch medicine details';
+
+        this.toast.typeError(errorMessage);
+
+        // Ensure batches are empty so the user knows they can't proceed
+        row.availableBatches = [];
+        row.filteredBatches = [];
+
+        console.error('API Error:', error);
       }
-    });
+    );
   }
-
   openBatchDropdown(row: any) {
 
     if (!row.availableBatches?.length) return;
