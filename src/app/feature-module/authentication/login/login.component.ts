@@ -36,7 +36,7 @@ export class LoginComponent {
 
         if (res.status === true) {
 
-          localStorage.setItem('authenticated', 'true');
+          sessionStorage.setItem('authenticated', 'true');
           localStorage.setItem('currentUser', JSON.stringify(res.data));
           localStorage.setItem('userPermissions', JSON.stringify(res.data.rides || []));
           

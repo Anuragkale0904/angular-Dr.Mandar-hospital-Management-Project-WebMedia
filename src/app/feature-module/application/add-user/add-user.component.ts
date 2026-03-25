@@ -69,17 +69,10 @@ export class AddUserComponent {
 
 
 
-  addBranch() {
-    // Basic validation
-    if (
-      !this.branch_name.trim() ||
-      !this.address.trim() ||
-      !this.contact_person_name.trim() ||
-      !this.mobile_no.trim()
-      // !this.username.trim() ||
-      // !this.password.trim()
-    ) {
-      this.toast.typeError('All fields are required', 'Error');
+addBranch() {
+    // Basic validation: Only check Branch Name and Address
+    if (!this.branch_name.trim() || !this.address.trim()) {
+      this.toast.typeError('Please fill all required fields.', 'Error');
       return;
     }
 
@@ -170,17 +163,17 @@ export class AddUserComponent {
   //   }
   // }
 
-  sanitizeName(event: any) {
-    let value = event.target.value;
+  // sanitizeName(event: any) {
+  //   let value = event.target.value;
 
-    // Remove invalid characters
-    value = value.replace(/[^A-Za-z .-]/g, '');
+  //   // Remove invalid characters
+  //   value = value.replace(/[^A-Za-z .-]/g, '');
 
-    // Prevent multiple spaces/dots/hyphens together
-    value = value.replace(/[ .-]{2,}/g, ' ');
+  //   // Prevent multiple spaces/dots/hyphens together
+  //   value = value.replace(/[ .-]{2,}/g, ' ');
 
-    this.contact_person_name = value;
-  }
+  //   this.contact_person_name = value;
+  // }
 
   sanitizeUsername(event: any) {
     let value = event.target.value;

@@ -8,14 +8,14 @@ import { routes, SideBarService } from '../../core.index';
 })
 export class AuthService {
   public checkAuth: BehaviorSubject<string> = new BehaviorSubject<string>(
-    localStorage.getItem('authenticated') || "false"
+    sessionStorage.getItem('authenticated') || "false"
   );
 
   constructor(private router: Router, private sidebar: SideBarService) {}
 
   public login(): void {
     this.checkAuth.next('true');
-    localStorage.setItem('authenticated', 'true');
+    sessionStorage.setItem('authenticated', 'true');
     localStorage.setItem('timeOut', Date());
     this.router.navigate([routes.dashboard]);
     localStorage.setItem('layoutPosition', '1');

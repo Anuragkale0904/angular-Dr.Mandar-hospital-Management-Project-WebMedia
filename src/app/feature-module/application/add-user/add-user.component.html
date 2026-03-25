@@ -28,42 +28,16 @@
 
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="input-block mb-3">
-                  <label>
-                    Contact Person Name
-                    <span class="text-danger">*</span>
-                  </label>
-
+                  <label>Contact Person Name</label>
                   <input type="text" class="form-control" placeholder="Enter Contact Person"
-                    [(ngModel)]="contact_person_name" name="branchContactPerson" #branchContactPerson="ngModel" required
-                    minlength="3" maxlength="50" pattern="^[A-Za-z]+(?:[ .-][A-Za-z]+)*$"
-                    (input)="sanitizeName($event)" />
-
-                  <small class="text-danger" *ngIf="branchContactPerson.invalid && branchContactPerson.touched">
-
-                    <span *ngIf="branchContactPerson.errors?.['required']">
-                      Contact person name is required.
-                    </span>
-
-                    <span *ngIf="branchContactPerson.errors?.['pattern']">
-                      Only letters, spaces, dot (.) and hyphen (-) are allowed.
-                    </span>
-
-                    <span *ngIf="branchContactPerson.errors?.['minlength']">
-                      Minimum 3 characters required.
-                    </span>
-
-                    <span *ngIf="branchContactPerson.errors?.['maxlength']">
-                      Maximum 50 characters allowed.
-                    </span>
-
-                  </small>
+                    [(ngModel)]="contact_person_name" name="branchContactPerson" maxlength="50" />
                 </div>
               </div>
 
 
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="input-block mb-3">
-                  <label>Mobile No <span class="text-danger">*</span></label>
+                  <label>Mobile No </label>
                   <input type="text" class="form-control" placeholder="Enter Mobile No" [(ngModel)]="mobile_no"
                     name="branchMobileNo" maxlength="10" (keypress)="numbersOnly($event)" />
                 </div>

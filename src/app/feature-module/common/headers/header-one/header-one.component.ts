@@ -14,6 +14,8 @@ export class HeaderOneComponent  {
   public routes = routes;
   elem=document.documentElement
 
+  public userName: string = 'User';
+
   constructor(private auth: AuthService, private sideBar: SideBarService) {
     this.sideBar.toggleSideBar.subscribe((res: string) => {
       if (res == 'true') {
@@ -25,6 +27,9 @@ export class HeaderOneComponent  {
     this.sideBar.headerSidebarStyle.subscribe((res: string) => {
       this.headerSidebarStyle = res;
     });
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    this.userName = currentUser?.name || currentUser?.first_name || currentUser?.username || currentUser?.user_name || 'User';
   }
 
  
